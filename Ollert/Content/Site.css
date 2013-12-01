@@ -1,0 +1,313 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/***CARD***/
+.squarebadge.unread-notification {
+    background: none repeat scroll 0 0 #BD2828;
+    border-color: #BD2828;
+}
+
+.squarebadge.unread-notification .glyphicon, .badge.unread-notification .badge-text {
+    color:#FFFFFF;
+}
+
+.squarebadge {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #E6E6E6;
+    border-color: #D9D9D9 #D9D9D9 #D3D3D3;
+    border-image: none;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: default;
+    height: 16px;
+    margin: 0 2px 2px 0;
+    padding: 0 4px;
+    position: relative;
+    text-decoration: none;
+}
+
+.badges {
+    margin: 0;
+    padding: 0 0 2px;
+}
+
+.card-footer {
+    padding: 0 8px;
+}
+
+.card-body .card-labels {
+    margin: 0 6px;
+    position: relative;
+    z-index: 30;
+}
+
+.card-body .card-labels .card-label {
+    border-radius: 0;
+    float: left;
+    height: 4px;
+    margin-bottom: 1px;
+    padding: 0;
+    width: 40px;
+}
+.card-label.red-label {
+    background-color: #CB4D4D;
+}
+.card-label.green-label {
+    background-color: #34B27D;
+}
+.card-label.yellow-label {
+    background-color: #DBDB57;
+}
+.card-label.orange-label {
+    background-color: #E09952;
+}
+.card-label.purple-label {
+    background-color: #9933CC;
+}
+.card-label.blue-label {
+    background-color: #4D77CB;
+}
+.card-label {
+    border-radius: 3px;
+    color: #FFFFFF;
+    display: block;
+    font-weight: bold;
+    margin-right: 3px;
+    overflow: hidden;
+    padding: 3px 6px;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.4), 0 0 3px #000000;
+    white-space: nowrap;
+}
+
+.card-text {
+    display: inline-block;
+    font-size: 12px;
+    padding: 6px 9px;
+}
+
+.panel-body {
+    padding: 6px;
+}
+
+.panel-heading {
+    font-weight: bold;
+    padding: 6px 15px;
+}
+
+.glyphicon {
+    vertical-align: text-top;
+    color: #A9A9A9;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+.squarebadge .badge-text {
+    color: #737373;
+    margin-left:2px;
+    font-size:11px;
+}
+
+.modal-header {
+    padding: 6px 20px;
+}
+
+.modal-title .glyphicon
+{
+    padding: 0 29px 0 0;
+    vertical-align: text-top;
+}
+
+.editable-clear-x {
+    display: block;
+    height: 13px;
+    margin-top: -6px;
+    opacity: 0.6;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 13px;
+    z-index: 100;
+}
+
+.editable-input {
+    white-space: normal;
+}
+
+.editableform .control-group {
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+div.editable-buttons button.btn {
+    border-width: 3px;
+    font-size: 12px;
+    line-height: 19px;
+    margin: 0 -3px 0 0;
+    padding: 0;
+    width: 28px;
+}
+
+div.btn-group-vertical > button.btn, div.btn-group-vertical > button.btn + button.btn {
+    margin: 0 -1px;
+}
+
+.modal-body h4 {
+    margin-bottom: 22px;
+    margin-top: 20px;
+}
+
+.modal-body {
+    padding: 2px 17px;
+}
+
+.widget-box {
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+}
+
+.card-heading {
+    font-size:12px;
+    font-weight: bold;
+    padding: 1px 13px;
+}
+
+form.dropzone div.dz-preview div.dz-details img, .dropzone-previews div.dz-preview div.dz-details img {
+    height: 78px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 78px;
+}
+form.dropzone div.dz-preview div.dz-details, .dropzone-previews div.dz-preview .dz-details {
+    background: none repeat scroll 0 0 #EBEBEB;
+    height: 78px;
+    margin-bottom: 22px;
+    padding: 5px;
+    position: relative;
+    width: 78px;
+}
+form.dropzone div.dz-preview, .dropzone-previews div.dz-preview {
+    font-size: 12px;
+}
+form.dropzone div.dz-preview, .dropzone-previews div.dz-preview {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid #ACACAC;
+    display: inline-block;
+    margin: 3px;
+    padding: 6px;
+    position: relative;
+    vertical-align: top;
+}
+div.progress.progress-small {
+    height: 7px;
+}
+form.dropzone a.dz-remove, form.dropzone-previews a.dz-remove {    
+    margin-top: 8px;
+}
+form.dropzone div.dz-preview .dz-error-mark, .dropzone-previews div.dz-preview div.dz-error-mark, form.dropzone div.dz-preview div.dz-success-mark, .dropzone-previews div.dz-preview div.dz-success-mark {
+    line-height: 35px;
+}
+form.dropzone div.dz-preview div.dz-success-mark, .dropzone-previews div.dz-preview div.dz-success-mark, form.dropzone div.dz-preview div.dz-error-mark, .dropzone-previews div.dz-preview div.dz-error-mark {
+    height: 35px;
+    width: 35px;
+}
+form.dropzone {   
+    min-height: 136px;
+    padding: 5px;
+}
+form.dropzone div.dz-default.dz-message {
+    filter: none;
+    height: 123px;
+    left: 50%;
+    margin-left: -214px;
+    margin-top: 0;
+    opacity: 1;
+    position: absolute;
+    top: inherit;
+    transition: opacity 0.3s ease-in-out 0s;
+    width: 428px;
+}
+
+form.dropzone.dz-started .dz-message {
+    display: none;
+}
+
+form.dropzone div.dz-preview div.progress {
+    display: none;
+}
+
+form.dropzone div.dz-processing div.progress {
+    display: block;
+}
+
+.modal-dialog {
+    width: 626px;
+}
+
+/*span.msg-title {
+    white-space:normal;
+}
+
+ul.dropdown-navbar > li > a {
+    font-size: 11px;
+    padding: 7px 0;
+}
+ul.dropdown-navbar span.msg-title {
+    display: inline;
+    line-height: 14px;
+}*/
+
+ul.dropdown-navbar i.icontype {
+    display: inline-block;
+    font-size: 18px;
+    min-height: 19px;
+    min-width: 19px;
+    vertical-align: top;
+}
+ul.dropdown-navbar span.msg-body {
+    display: inline-block;
+    line-height: 20px;
+    max-width: 192px;
+    vertical-align: middle;
+    white-space: normal;
+}
+ul.dropdown-navbar span.msg-time {
+    text-align:right;
+}
+ul.dropdown-navbar > li > a {
+    padding: 7px 2px;
+}

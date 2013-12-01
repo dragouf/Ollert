@@ -1,0 +1,213 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ollert</title>
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-default" id="navbar">    
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <i class="icon-align-right"></i>
+                        Ollert
+                    </small>
+                </a><!-- /.brand -->
+            </div><!-- /.navbar-header -->
+
+            <div class="navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="grey">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-group"></i>
+                            <span class="badge badge-grey">0</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-ok"></i>
+                                0 Utilisateurs connectés
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Software Update</span>
+                                        <span class="pull-right">65%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini ">
+                                        <div style="width:65%" class="progress-bar "></div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Hardware Upgrade</span>
+                                        <span class="pull-right">35%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini ">
+                                        <div style="width:35%" class="progress-bar progress-bar-danger"></div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Unit Testing</span>
+                                        <span class="pull-right">15%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini ">
+                                        <div style="width:15%" class="progress-bar progress-bar-warning"></div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Bug Fixes</span>
+                                        <span class="pull-right">90%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini progress-striped active">
+                                        <div style="width:90%" class="progress-bar progress-bar-success"></div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    See tasks with details
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="purple">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-bell-alt icon-animated-bell"></i>
+                            <span class="badge badge-important" data-bind="text: notificationNumber">0</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-warning-sign"></i>
+                                <span data-bind="text: notificationNumber"></span> Notifications
+                            </li>
+
+                            <!-- ko foreach: sixNotifications -->
+                            <li>
+                                <a href="#">
+                                    <i class="icon-shopping-cart icontype pimk"></i>
+                                    <span class="msg-body">
+                                        <span class="msg-title">
+                                            <span data-bind="text: text"></span>
+                                        </span>
+
+                                        <span class="msg-time pink2">
+                                            <i class="icon-time"></i>
+                                            <span data-bind="text: formattedDate"></span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- /ko -->
+                            <li>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="green">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-comment icon-animated-vertical"></i>
+                            <span class="badge badge-success">0</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-envelope-alt"></i>
+                                0 Messages
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Répondre
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="/Board/AvatarImage/@User.Identity.GetUserId()" alt="User Photo" />
+                            <span class="user-info">
+                                <small>Bienvenue,</small>
+                                @User.Identity.GetUserName()
+                            </span>
+
+                            <i class="icon-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-cog"></i>
+                                    Parametres
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="icon-user"></i>
+                                    Profil
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <div style="display:none">
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                    }
+                                </div>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">
+                                    <i class="icon-off"></i>
+                                    Déconnexion
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul><!-- /.ace-nav -->
+            </div><!-- /.navbar-header -->
+        </div><!-- /.container -->
+    </div>
+
+
+    <div class="body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/libraries")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

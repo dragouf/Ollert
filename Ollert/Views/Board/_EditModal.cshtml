@@ -1,0 +1,26 @@
+﻿<div class="modal fade" id="modal-visualisation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- ko with: dialogCurrentCard -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-pencil"></span>Demande <span data-bind="text:demande"></span></h4>
+            </div>
+            <div class="modal-body">
+                <h4 class="blue smaller">
+                    <i class="icon-calendar"></i>
+                    Tache
+                </h4>
+                @Html.Partial("_CardDetails")
+
+
+                <h4 class="blue smaller">
+                    <i class="icon-comments-alt"></i>
+                    Conversation
+                </h4>
+                @Html.Partial("_MessagesList")
+            </div>            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    <!-- /ko -->
+</div><!-- /.modal -->

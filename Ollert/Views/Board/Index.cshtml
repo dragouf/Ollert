@@ -1,0 +1,598 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("_Tables")
+
+<!-- Modal Ajout -->
+@Html.Partial("_AddModal")
+
+<!-- Modal Visualisation -->
+@Html.Partial("_EditModal")
+
+@section Scripts {
+<script src="~/signalr/hubs"></script>
+<script type="text/javascript">
+    var File = function (id, name, date, type, size) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.type = type;
+        this.size = size;
+    };
+
+    var User = function (id, name) {
+        this.id = id;
+        this.name = name;
+
+        this.avatarPath = function () {
+            return "/Board/AvatarImage/" + this.id;
+        };
+    };
+
+    var Message = function (id, text, user, date) {
+        this.id = id;
+        this.text = ko.observable(text);
+        this.user = ko.observable(user);
+        this.date = ko.observable(date);
+
+        this.formattedDate = ko.computed(function () {
+            var formattedDate = null;
+            if (this.date() != null)
+            {
+                formattedDate = moment(this.date()).calendar();
+            }
+            return formattedDate;
+        }, this);
+    };
+
+    var Event = function (nbMessages, nbAttachments, nbNew, listDone, listMax, time) {
+        this.nombreMessages = nbMessages;
+        this.nombresAttachements = nbAttachments;
+        this.nombreNouveaux = nbNew;
+        this.listDone = listDone;
+        this.listMax = listMax;
+        this.time = ko.observable(time);
+
+        this.messagesText = ko.computed(function() {
+            return "Cette carte contient " + this.nombreMessages.toString() + " messages";
+        }, this);
+
+        this.attachementsText = ko.computed(function() {
+            return "Cette carte a " + this.nombresAttachements.toString() + " attachements";
+        }, this);
+
+        this.nouveauxText = ko.computed(function() {
+            return "Cette carte a " + this.nombreNouveaux.toString() + " nouvels evenements";
+        }, this);        
+
+        this.listText = ko.computed(function () {
+            return "Cette carte a " + this.listDone.toString() + " / " + this.listMax.toString() + " etapes terminées";
+        }, this);
+
+        this.hasUnread = ko.computed(function () {
+            return this.nombreNouveaux > 0;
+        }, this);
+
+        this.hasList = ko.computed(function () {
+            return this.listMax > 0;
+        }, this);
+
+        this.toReadableTime = function () {
+            var seconds = parseInt(this.time());
+            var numyears = Math.floor(seconds / 31536000);
+            var numdays = Math.floor((seconds % 31536000) / 86400);
+            var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+            var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+            var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+            var output = (numyears > 0 ? numyears + " y " : '') + (numdays > 0 ? numdays + " d" : '') + (numhours > 0 ? numhours + " h" : '') + (numminutes > 0 ? numminutes + " m" : '') + (numseconds > 0 ? numseconds + " s" : '');
+            return output.length == 0 ? '<non estimé>' : output;
+        };
+
+        this.hasTime = ko.computed(function () {
+            return parseInt(this.time()) > 0;
+        }, this);
+
+        this.timeText = ko.computed(function () {
+            return "Cette carte est éstimée a " + this.toReadableTime() + " de travail";
+        }, this);
+    };
+
+    var Card = function (id, demande, titre, description, user, events, messages, currentUser, files) {
+        var self = this;
+        self.id = id;
+        self.demande = demande;
+        self.titre = ko.observable(titre);
+        self.description = ko.observable(description);
+        self.user = user;
+        self.evenements = events;
+        self.currentUser = currentUser;
+        self.messages = ko.observableArray(messages);
+        self.files = ko.observableArray(files);
+
+        self.newMessage = ko.observable(new Message(1, "", self.currentUser, null));
+        
+        self.uploadFilePath = ko.computed(function () {
+            return '/Api/Fichier/' + self.id;
+        }, self);
+
+        self.uploadId = ko.computed(function () {
+            return 'dropzone-' + self.id;
+        }, self);
+            
+        self.addMessage = function (data) {
+            var currentDate = new Date();
+            self.newMessage().date(currentDate);
+                       
+
+            var messageServeur = {
+                Texte: self.newMessage().text(),
+                Carte: { Id: self.id }
+            };
+
+            // Sauvegarde le message
+            $.ajax({
+                url: '/api/Message',
+                type: 'POST',
+                dataType: 'json',
+                data: messageServeur,
+                success: function (jsonData) {
+                    // Envoi du nouveau message au serveur signalr
+
+                    // Met a jour l'id du message
+                    self.newMessage().id = jsonData.Id;
+                    // Ajoute a la liste
+                    self.messages.push(self.newMessage());
+
+                    // Rebind avec un nouveeau message
+                    self.newMessage(new Message(1, "", self.currentUser, currentDate));
+
+                    //$('.dialogs,.comments').slimScroll({
+                    //    height: '300px'
+                    //});
+                },
+                statusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
+        };
+
+        // inline edit estimation
+        self.editingEstimation = ko.observable(false);
+        self.previousEstimation = 0;
+        self.editEstimation = function () {
+            self.previousEstimation = self.evenements.time();
+            self.editingEstimation(true);
+        };
+        self.saveEstimation = function () {
+            self.editingEstimation(false);
+            self.saveEditedCard();
+        };
+        self.cancelEstimation = function () {
+            self.evenements.time(self.previousEstimation);
+            self.editingEstimation(false);
+        };
+        self.clearEstimation = function () {
+            self.evenements.time(null);
+            $('#edit-estimation').focus();
+        };
+
+        // inline edit titre
+        self.editingTitre = ko.observable(false);
+        self.previousTitre = '';
+        self.editTitre = function () {
+            self.previousTitre = self.evenements.time();
+            self.editingTitre(true);
+        };
+        self.saveTitre = function () {
+            self.editingTitre(false);
+            self.saveEditedCard();
+        };
+        self.cancelTitre = function () {
+            self.titre(self.previousTitre);
+            self.editingTitre(false);
+        };
+        self.clearTitre = function () {
+            self.titre(null);
+            $('#edit-titre').focus();
+        };
+
+        // inline edit description
+        self.editingDescription = ko.observable(false);
+        self.previousDescription = '';
+        self.editDescription = function () {
+            self.previousDescription = self.description();
+            self.editingDescription(true);
+        };
+        self.saveDescription = function () {
+            self.editingDescription(false);
+            self.saveEditedCard();
+        };
+        self.cancelDescription = function () {
+            self.description(self.previousDescription);
+            self.editingDescription(false);
+        };
+
+        self.saveEditedCard = function () {
+            // Sauvegarde le changement sur le serveur
+            var carteServeur = {
+                Id: self.id,
+                NumeroDemande: self.demande,
+                Titre: self.titre(),
+                Description: self.description(),
+                Estimation: self.evenements.time()
+            };
+            $.ajax({
+                url: '/api/Carte/' + self.id,
+                type: 'PUT',
+                dataType: 'json',
+                data: carteServeur,
+                success: function (jsonData) {
+                    // Envoi le changement au serveur signalr
+
+                },
+                statusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
+        };
+    };
+
+    var Table = function (id, name, cards) {
+        var self = this;
+        self.cards = ko.observableArray(cards);
+        self.name = name;
+        self.id = id;
+        self.cards.id = id;
+
+        self.hasCards = ko.computed(function () {
+            return self.cards().length > 0;
+        }, self);
+
+        self.totalTime = ko.computed(function () {
+            var total = 0;
+            $.each(self.cards(), function (index, el) {
+                total += parseInt(el.evenements.time());
+            });
+
+            var seconds = total;
+            var numyears = Math.floor(seconds / 31536000);
+            var numdays = Math.floor((seconds % 31536000) / 86400);
+            var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+            var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+            var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+            return (numyears > 0 ? numyears + " y " : '') + (numdays > 0 ? numdays + " d" : '') + (numhours > 0 ? numhours + " h" : '') + (numminutes > 0 ? numminutes + " m" : '') + (numseconds > 0 ? numseconds + " s" : '');
+        }, self);
+    };
+
+    var Notification = function (id, type, title, text, date) {
+        this.id = id;
+        this.type = type;
+        this.title = title;
+        this.text = text;
+        this.date = date;
+
+        this.formattedDate = ko.computed(function () {
+            return moment(this.date).calendar();
+        }, this);
+        this.notificationClass = ko.computed(function () {
+            var cssClass = '';
+            switch (this.type) {
+                case 'NouveauMessage': cssClass = 'icon-comment'; break;
+                case 'Mouvement': cssClass = 'icon-exchange'; break;
+                case 'NouvelleCarte': cssClass = ' icon-check'; break;
+                case 'EditionCarte': cssClass = 'icon-edit'; break;
+                case 'AjoutFichier': cssClass = 'icon-file-text-o'; break;
+                case 'SuppressionCarte': cssClass = 'icon-ban-circle'; break;
+                default:
+            }
+            console.log(cssClass);
+            return cssClass;
+        }, this);
+    };
+
+    var BoardModel = function (tables, currentUser, notifications) {
+        var self = this;
+        self.tables = ko.observableArray(tables);
+        self.lastAction = ko.observable();
+        self.lastError = ko.observable();
+        self.maximumCards = 100;
+        self.currentUser = currentUser;
+
+        self.notifications = ko.observableArray(notifications);
+        self.notificationNumber = ko.computed(function () {
+            return self.notifications != null ? self.notifications().length : 0;
+        }, self);
+        self.sixNotifications = ko.computed(function () {
+            return self.notifications.slice(0, 6);
+        }, self);
+
+        self.dialogNewCard = ko.observable(new Card(0, null, null, "", self.currentUser, new Event(0, 0, 0, 0, 0, null), null, self.currentUser));
+        self.dialogCurrentCard = ko.observable();
+        self.dialogCurrentTable = ko.observable();
+        
+
+        self.isTableFull = function (parent) {
+            return parent().length < self.maximumCards;
+        };
+
+        self.addCard = function () {
+            if (self.dialogNewCard().description() == '')
+            {
+                self.dialogNewCard().description('<pas de description>');
+            }
+
+            // sauvegarde la nouvelle carte
+            var carteServeur = {
+                NumeroDemande: self.dialogNewCard().demande,
+                Titre: self.dialogNewCard().titre(),
+                Description: self.dialogNewCard().description(),
+                Estimation: self.dialogNewCard().evenements.time(),
+                Tableau: { Id: self.dialogCurrentTable().id } 
+            };
+            $.ajax({
+                url: '/api/Carte',
+                type: 'POST',
+                dataType: 'json',
+                data: carteServeur,
+                success: function (jsonData) {
+                    // Envoi de la nouvelle carte au serveur signalr
+
+                    // Met a jour l'id de la carte
+                    self.dialogNewCard().id = jsonData.Id;
+                    // Ajoute a la liste
+                    self.dialogCurrentTable().cards.push(self.dialogNewCard());
+
+                    // Rebind avec une nouvelle carte
+                    self.dialogNewCard(new Card(0, null, null, "", self.currentUser, new Event(0, 0, 0, 0, 0, null), null, self.currentUser));
+
+                },
+                statusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
+
+            $('#modal-ajout').modal('hide');
+        };
+
+        self.openCardDetails = function (data) {
+            self.dialogCurrentTable(data);
+            $('#modal-ajout').modal('show');
+        };
+
+        self.editCard = function (data) {
+            self.dialogCurrentCard(data);
+            $('#modal-visualisation').modal('show');
+            //$('.dialogs,.comments').slimScroll({
+            //    height: '300px'
+            //});
+
+            try {                
+                var dropzoneObject = new Dropzone("#dropzone-" + data.id, {
+                    paramName: 'file',
+                    method: 'POST',
+                    maxFilesize: 50, // MB
+                    addRemoveLinks: true,
+                    dictDefaultMessage:
+                    '<span class="bolder"><i class="icon-caret-right red"></i> Drop files</span> to upload  <span class="smaller-80 grey">(or click)</span> <br />  <i class="upload-icon icon-cloud-upload blue icon-3x"></i>',
+                    dictResponseError: 'Erreur d\'upload!',
+                    dictRemoveFile: 'supprimer',
+                    dictCancelUpload: 'annuler',
+                    init: function () {
+                        this.on("removedfile", function (file) {
+                            $.ajax({
+                                url: '/api/Fichier/' + file.id,
+                                type: 'DELETE',
+                                dataType: 'json',
+                                statusCode: {
+                                    404: function () {
+                                        alert('Erreur');
+                                    }
+                                }
+                            });
+                            var fileIndex = 0;
+                            $.each(data.files(), function (index, f) {
+                                if (f.id == file.id)
+                                    fileIndex = index;
+                            });
+                            data.files.splice(fileIndex, fileIndex);
+                        });
+
+                        this.on("success", function (file, response) {
+                            file.id = response.id;
+                            data.files.push(new File(response.Id, response.Nom, response.DateEnvoi, response.Type, response.FileSize));
+                        });
+
+                        this.on("sending", function (file, xhr, formData) {
+                            formData.append('cardId', data.id);
+                        });
+                    },                   
+                    //change the previewTemplate to use Bootstrap progress bars
+                    previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n<div class=\"dz-details\">\n<div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
+                });
+                
+                // Add files
+                $.each(data.files(), function (index, f) {
+                    mockFile = {
+                        id: f.id,
+                        name: f.name,
+                        size: f.size
+                    };
+
+                    // Call the default addedfile event handler
+                    dropzoneObject.emit("addedfile", mockFile);
+
+                    // And optionally show the thumbnail of the file:
+                    dropzoneObject.emit("thumbnail", mockFile, "/Board/DownloadFile/" + f.id);
+                });
+
+                $('.dz-details').click(function () {
+                    var alt = $(this).find('img').attr('atlt');
+                    $(this).find('img').attr('title', alt);
+                    var url = $(this).find('img').attr('src') + '?download=true';
+                    window.open(url, "_blank")
+                });
+
+            } catch (e) {
+                alert('L\'upload de fichier ne supporte pas ce navigateur!');
+            }
+        };
+
+        self.updateLastAction = function (arg) {
+            // sauvegarde le deplacement sur el serveur
+            var deplacementServeur = {
+                    CarteId: arg.item.id,
+                    AncienTableauId: arg.sourceParent.id,
+                    NouveauTableauId: arg.targetParent.id
+            };
+            $.ajax({
+                url: '/api/Tableau/' + arg.item.id,
+                type: 'PUT',
+                dataType: 'json',
+                data: deplacementServeur,
+                success: function (jsonData) {
+                    // Envoi le deplacement au serveur signalr   
+
+                },
+                statusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
+        };
+
+        self.desktopNotification = function notify(titre, message) {
+            if (window.webkitNotifications != null) {
+                var havePermission = window.webkitNotifications.checkPermission();
+                if (havePermission == 0) {
+                    // 0 is PERMISSION_ALLOWED
+                    var notification = window.webkitNotifications.createNotification(
+                      '/Content/images/notifyIcon.png',
+                      titre,
+                      message
+                    );
+
+                    notification.onclick = function () {
+                        window.open("http://stackoverflow.com/a/13328397/1269037");
+                        notification.close();
+                    }
+                    notification.show();
+                } else {
+                    window.webkitNotifications.requestPermission();
+                }
+            }
+        }
+
+        $.connection.ollertHub.client.newNotification = function (note) {
+            self.notifications.push( new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date) );
+            self.desktopNotification(note.Titre, note.Texte);
+        }
+
+        $.connection.ollertHub.client.newMessage = function (message) {
+            self.notifications.push(new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date));
+            self.desktopNotification(note.Titre, note.Texte);
+        }
+    };
+
+
+    ///////////////////////////// INITIALIZATION
+    function initilize() {
+        moment.lang('fr');
+        $.get('/Board/CurrentUser', function (userJson) {
+            var currentUser = new User(userJson.Id, userJson.UserName);
+
+            $.ajax({
+                url: '/api/Tableau',
+                type: 'GET',
+                dataType: 'json',
+                success: function (json) { onLoadingSuccess(json, currentUser) },
+                statusCode: {
+                    404: function () {
+                        alert('impossible de se connecter au serveur');
+                    }
+                }
+            });
+
+        });
+    }
+
+    function onLoadingSuccess(jsonData, currentUser) {
+        var initialTables = new Array();
+        $.each(jsonData, function (index, tableau) {
+            var cartes = new Array();
+            $.each(tableau.Cartes, function (index, carte) {
+                var messages = new Array();
+                $.each(carte.Messages, function (index, message) {
+                    messages.push(new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), new Date(message.CreateOn)));
+                });
+
+                var evenement = new Event(messages.length, 0, 0, 0, 0, carte.Estimation);
+                if (carte.Notifications != null)
+                { }
+
+                var fichiers = new Array();
+                $.each(carte.Fichiers, function (index, fichier) {
+                    fichiers.push(new File(fichier.Id, fichier.Nom, fichier.DateEnvoi, fichier.Type, fichier.FileSize));
+                });
+
+                cartes.push(new Card(carte.Id, carte.NumeroDemande, carte.Titre, carte.Description, null, evenement, messages, currentUser, fichiers));
+            });
+
+            initialTables.push(new Table(
+                tableau.Id,
+                tableau.Nom,
+                cartes
+            ));
+        });
+
+        var notifications = new Array();
+        // Les notifications
+        $.ajax({
+            url: '/api/Notification',
+            type: 'GET',
+            dataType: 'json',
+            success: function (notif) {
+                $.each(notif, function (index, note) {
+                    notifications.push(new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date));
+                });
+
+                var vm = new BoardModel(initialTables, currentUser, notifications);
+
+                //ko.bindingHandlers.sortable.beforeMove = vm.verifyAssignments;
+                ko.bindingHandlers.sortable.afterMove = vm.updateLastAction;
+
+                ko.applyBindings(vm);
+
+                // Start the connection
+                $.connection.hub.start();
+            },
+            statusCode: {
+                404: function () {
+                    alert('Erreur');
+                }
+            }
+        });
+    }
+
+
+    ////////// CHARGEMENT
+    $(window).bind("load", function () {        
+        //$.connection.hub.logging = true;
+        // Start the connection
+        //$.connection.hub.start().done(function () {
+        //    $.connection.ollertHub.server.newMove();
+        //});
+        Dropzone.autoDiscover = false;
+        initilize();        
+    });
+
+    
+</script>
+}
