@@ -74,9 +74,10 @@ namespace Ollert.Controllers
                 await db.SaveChangesAsync();
 
                 // Ajoute une notification
-                await Ollert.Services.NotificationService.AddNotification(
+                await Ollert.Services.NotificationService.AddNotification<Fichier>(
                     "Fichier Ajouté", "{0} a ajouté un fichier a la carte : {1}".FormatWith(this.User.Identity.Name, carte.Titre), 
-                    TypeNotification.AjoutFichier);
+                    TypeNotification.AjoutFichier,
+                    fichier);
             }
 
             var result = await Newtonsoft.Json.JsonConvert.SerializeObjectAsync(fichier);

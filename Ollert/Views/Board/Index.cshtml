@@ -379,8 +379,7 @@
                     method: 'POST',
                     maxFilesize: 50, // MB
                     addRemoveLinks: true,
-                    dictDefaultMessage:
-                    '<span class="bolder"><i class="icon-caret-right red"></i> Drop files</span> to upload  <span class="smaller-80 grey">(or click)</span> <br />  <i class="upload-icon icon-cloud-upload blue icon-3x"></i>',
+                    dictDefaultMessage: '<span class="bolder"><i class="icon-caret-right red"></i> Drop files</span> to upload  <span class="smaller-80 grey">(or click)</span> <br />  <i class="upload-icon icon-cloud-upload blue icon-3x"></i>',
                     dictResponseError: 'Erreur d\'upload!',
                     dictRemoveFile: 'supprimer',
                     dictCancelUpload: 'annuler',
@@ -433,7 +432,7 @@
                 });
 
                 $('.dz-details').click(function () {
-                    var alt = $(this).find('img').attr('atlt');
+                    var alt = $(this).find('img').attr('alt');
                     $(this).find('img').attr('title', alt);
                     var url = $(this).find('img').attr('src') + '?download=true';
                     window.open(url, "_blank")
@@ -496,8 +495,8 @@
         }
 
         $.connection.ollertHub.client.newMessage = function (message) {
-            self.notifications.push(new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date));
-            self.desktopNotification(note.Titre, note.Texte);
+            self.notifications.push(new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), new Date(message.CreateOn)));
+            self.desktopNotification('Nouveau message', message.Texte);
         }
     };
 

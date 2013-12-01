@@ -99,10 +99,11 @@ namespace Ollert.Api
             await db.SaveChangesAsync();
 
             // Ajoute une notification
-            await Ollert.Services.NotificationService.AddNotification(
+            await Ollert.Services.NotificationService.AddNotification<DeplacementModelView>(
                 "Deplacement de carte",
                 "La carte '{0}' a été deplacée vers '{1}' par {2}".FormatWith(carte.Titre, nouveauTableau.Nom, this.User.Identity.Name),
-                TypeNotification.Mouvement);
+                TypeNotification.Mouvement,
+                deplacement);
 
             return StatusCode(HttpStatusCode.NoContent);
         }

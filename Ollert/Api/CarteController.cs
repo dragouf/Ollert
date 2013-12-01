@@ -65,9 +65,10 @@ namespace Ollert.Api
                 await db.SaveChangesAsync();
 
                 // Ajoute une notification
-                await Ollert.Services.NotificationService.AddNotification(
+                await Ollert.Services.NotificationService.AddNotification<Carte>(
                     "Carte Modifiée", "La carte '{0}' a été modifiée par {1}".FormatWith(carte.Titre, this.User.Identity.Name),
-                    TypeNotification.EditionCarte);
+                    TypeNotification.EditionCarte,
+                    carteBdd);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -106,9 +107,10 @@ namespace Ollert.Api
             await db.SaveChangesAsync();
 
             // Ajoute une notification
-            await Ollert.Services.NotificationService.AddNotification(
+            await Ollert.Services.NotificationService.AddNotification<Carte>(
                 "Carte Ajoutée", "La carte '{0}' a été ajouté par {1}".FormatWith(carte.Titre, this.User.Identity.Name),
-                TypeNotification.NouvelleCarte);
+                TypeNotification.NouvelleCarte,
+                carte);
 
             return CreatedAtRoute("DefaultApi", new { id = carte.Id }, carte);
         }
@@ -127,9 +129,10 @@ namespace Ollert.Api
             await db.SaveChangesAsync();
 
             // Ajoute une notification
-            await Ollert.Services.NotificationService.AddNotification(
+            await Ollert.Services.NotificationService.AddNotification<Carte>(
                 "Carte Ajoutée", "La carte '{0}' a été supprimée par {1}".FormatWith(carte.Titre, this.User.Identity.Name),
-                TypeNotification.SuppressionCarte);
+                TypeNotification.SuppressionCarte,
+                carte);
 
             return Ok(carte);
         }

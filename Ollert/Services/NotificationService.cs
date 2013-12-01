@@ -12,9 +12,9 @@ namespace Ollert.Services
 {
     public class NotificationService
     {
-        public static async Task AddNotification(string titre, string message, TypeNotification type) /*where T : IEntity*/
+        public static async Task AddNotification<T>(string titre, string message, TypeNotification type, T objetMessage) /*where T : IEntity*/
         {
-            var hub = new OllertHub();
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<OllertHub>();
             var db = new OllertDbContext();
 
             var notification = new Notification
@@ -28,8 +28,27 @@ namespace Ollert.Services
             db.Notifications.Add(notification);
             await db.SaveChangesAsync();
 
-            var context = GlobalHost.ConnectionManager.GetHubContext<OllertHub>();
-            context.Clients.All.newNotification(notification);
+
+            switch (type)
+            {
+                case TypeNotification.NouveauMessage: hubContext.Clients.All.newMessage(objetMessage);
+                    break;
+                case TypeNotification.Mouvement: hubContext.Clients.All.newMove(objetMessage);
+                    break;
+                case TypeNotification.NouvelleCarte: hubContext.Clients.All.newCard(objetMessage);
+                    break;
+                case TypeNotification.EditionCarte: hubContext.Clients.All.changeCard(objetMessage);
+                    break;
+                case TypeNotification.AjoutFichier: hubContext.Clients.All.addFile(objetMessage);
+                    break;
+                case TypeNotification.SuppressionCarte: hubContext.Clients.All.deleteCard(objetMessage);
+                    break;
+                default:
+                    break;
+            }
+            
+            // Notification globale
+            hubContext.Clients.All.newNotification(notification);
 
             db.Dispose();
         }

@@ -97,9 +97,10 @@ namespace Ollert.Api
             await db.SaveChangesAsync();
 
             // Ajoute une notification
-            await Ollert.Services.NotificationService.AddNotification(
+            await Ollert.Services.NotificationService.AddNotification<Message>(
                 "Message Ajouté", "Un message a été ajouté a la carte '{1}' par {0}".FormatWith(this.User.Identity.Name, carte.Titre),
-                TypeNotification.NouveauMessage);
+                TypeNotification.NouveauMessage,
+                message);
 
             return CreatedAtRoute("DefaultApi", new { id = message.Id }, message);
         }
