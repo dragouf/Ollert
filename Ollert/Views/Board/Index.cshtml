@@ -101,7 +101,7 @@
     var Card = function (id, demande, titre, description, user, events, messages, currentUser, files) {
         var self = this;
         self.id = id;
-        self.demande = demande;
+        self.demande = ko.observable(demande);
         self.titre = ko.observable(titre);
         self.description = ko.observable(description);
         self.user = user;
@@ -219,7 +219,7 @@
             // Sauvegarde le changement sur le serveur
             var carteServeur = {
                 Id: self.id,
-                NumeroDemande: self.demande,
+                NumeroDemande: self.demande(),
                 Titre: self.titre(),
                 Description: self.description(),
                 Estimation: self.evenements.time()
@@ -290,7 +290,7 @@
                 case 'SuppressionCarte': cssClass = 'icon-ban-circle'; break;
                 default:
             }
-            console.log(cssClass);
+
             return cssClass;
         }, this);
     };
@@ -302,6 +302,8 @@
         self.lastError = ko.observable();
         self.maximumCards = 100;
         self.currentUser = currentUser;
+
+        self.newMessages = ko.observableArray();
 
         self.notifications = ko.observableArray(notifications);
         self.notificationNumber = ko.computed(function () {
@@ -328,7 +330,7 @@
 
             // sauvegarde la nouvelle carte
             var carteServeur = {
-                NumeroDemande: self.dialogNewCard().demande,
+                NumeroDemande: self.dialogNewCard().demande(),
                 Titre: self.dialogNewCard().titre(),
                 Description: self.dialogNewCard().description(),
                 Estimation: self.dialogNewCard().evenements.time(),
@@ -400,7 +402,7 @@
                                 if (f.id == file.id)
                                     fileIndex = index;
                             });
-                            data.files.splice(fileIndex, fileIndex);
+                            data.files.splice(fileIndex, 1);
                         });
 
                         this.on("success", function (file, response) {
@@ -487,17 +489,114 @@
                     window.webkitNotifications.requestPermission();
                 }
             }
-        }
+            else
+            {
+                // Standard html notification
+                var unique_id = $.gritter.add({
+                    title: titre,
+                    text: message,
+                    image: 'Content/images/notifyIcon.png',
+                    sticky: false,
+                    //time: '',
+                    class_name: 'gritter-info'
+                });
+
+                return false;
+            }
+        };
 
         $.connection.ollertHub.client.newNotification = function (note) {
-            self.notifications.push( new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date) );
+            self.notifications.push(new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date));
             self.desktopNotification(note.Titre, note.Texte);
-        }
+        };
 
         $.connection.ollertHub.client.newMessage = function (message) {
-            self.notifications.push(new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), new Date(message.CreateOn)));
+            var newMessage = new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), new Date(message.CreateOn))
+            self.newMessages.push(newMessage);
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    if (message.CarteId == card.id) {
+                        card.messages.push(newMessage);
+                    }
+                });
+            });
+
             self.desktopNotification('Nouveau message', message.Texte);
-        }
+        };
+
+        $.connection.ollertHub.client.newMove = function (move) {
+            var carte = null;
+            var carteIndex = null;
+            $.each(self.tables(), function (indexTable, table) {
+                if (table.id == move.AncienTableauId) {
+                    $.each(table.cards(), function (indexCard, card) {
+                        if (card.id == move.CarteId) {
+                            carte = card;
+                            carteIndex = indexCard;
+                        }
+                    });
+
+                    // Retire la carte de son ancien emplacement
+                    table.cards.splice(carteIndex, 1);
+                }
+
+            });
+
+            $.each(self.tables(), function (indexTable, table) {
+                if (table.id == move.NouveauTableauId) {
+                    table.cards.push(carte);
+                }
+            });
+        };
+
+        $.connection.ollertHub.client.newCard = function (card) {
+            $.each(self.tables(), function (indexTable, table) {
+                if (table.id == card.TableauId) {
+                    table.cards.push(new Card(carte.Id, carte.NumeroDemande, carte.Titre, carte.Description, null, null, null, self.currentUser, null));
+                }
+            });
+        };
+
+        $.connection.ollertHub.client.changeCard = function (carte) {
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    if(card.id == carte.Id)
+                    {
+                        card.demande(carte.NumeroDemande);
+                        card.evenements.time(carte.Estimation);
+                        card.titre(carte.Titre);
+                        card.description(carte.Description);
+                    }
+                });
+            });
+        };
+
+        $.connection.ollertHub.client.addFile = function (fichier) {
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    if (card.id == fichier.CarteId) {
+                        card.files.push(new File(fichier.Id, fichier.Nom, fichier.DateEnvoi, fichier.Type, fichier.FileSize));
+                    }
+                });
+            });
+        };
+
+        $.connection.ollertHub.client.deleteFile = function (fichier) {
+            var indexFichier = null;
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    if (card.id == fichier.CarteId) {
+                        $.each(card.files(), function (indexFile, file) {
+                            if (file.id == fichier.Id)
+                                indexFichier = indexFile;
+                        });
+
+                        if (indexFichier != null)
+                            card.files.splice(indexFichier, 1);
+                    }
+                });
+            });
+        };
     };
 
 
@@ -570,7 +669,9 @@
                 ko.applyBindings(vm);
 
                 // Start the connection
-                $.connection.hub.start();
+                $.connection.hub.start().done(function () {
+                    $.cookie("signalr-conn-id", $.connection.hub.id);
+                });
             },
             statusCode: {
                 404: function () {
@@ -589,7 +690,7 @@
         //    $.connection.ollertHub.server.newMove();
         //});
         Dropzone.autoDiscover = false;
-        initilize();        
+        initilize();
     });
 
     

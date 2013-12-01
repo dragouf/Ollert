@@ -28,14 +28,17 @@ namespace Ollert
                       "~/Scripts/knockout-sortable.js",
                       "~/Scripts/jquery.slimscroll.js",
                       "~/Scripts/jquery.signalR-2.0.0.js",
+                      "~/Scripts/jquery.cookie.js",
                       "~/Scripts/moment-with-langs.js",
                       "~/Scripts/dropzone.js",
+                      "~/Scripts/jquery.gritter.js",                      
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
                       "~/Content/font-awesome.css",
                        "~/Content/dropzone.css",
+                       "~/Content/jquery.gritter.css",                       
                         "~/Content/ace.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(

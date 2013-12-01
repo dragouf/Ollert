@@ -24,5 +24,18 @@ namespace Ollert.Models
         [DataMember]
         public int FileSize { get { return this.Data.Length; } }
         public byte[] Data { get; set; }
+        public virtual Carte Carte { get; set; }
+        [NotMapped]
+        [DataMember]
+        public int CarteId
+        {
+            get
+            {
+                if (Carte != null)
+                    return Carte.Id;
+                else
+                    return -1;
+            }
+        }
     }
 }

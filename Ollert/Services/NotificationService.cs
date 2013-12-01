@@ -28,27 +28,37 @@ namespace Ollert.Services
             db.Notifications.Add(notification);
             await db.SaveChangesAsync();
 
+            var cookie = HttpContext.Current.Request.Cookies["signalr-conn-id"];
+            var connectionID = "";
+            if (cookie != null)
+            {
+                connectionID = HttpContext.Current.Request.Cookies["signalr-conn-id"].Value;
+            }
 
             switch (type)
             {
-                case TypeNotification.NouveauMessage: hubContext.Clients.All.newMessage(objetMessage);
+                case TypeNotification.NouveauMessage: hubContext.Clients.AllExcept(connectionID).newMessage(objetMessage);
                     break;
-                case TypeNotification.Mouvement: hubContext.Clients.All.newMove(objetMessage);
+                case TypeNotification.Mouvement: hubContext.Clients.AllExcept(connectionID).newMove(objetMessage);
                     break;
-                case TypeNotification.NouvelleCarte: hubContext.Clients.All.newCard(objetMessage);
+                case TypeNotification.NouvelleCarte: hubContext.Clients.AllExcept(connectionID).newCard(objetMessage);
                     break;
-                case TypeNotification.EditionCarte: hubContext.Clients.All.changeCard(objetMessage);
+                case TypeNotification.EditionCarte: hubContext.Clients.AllExcept(connectionID).changeCard(objetMessage);
                     break;
-                case TypeNotification.AjoutFichier: hubContext.Clients.All.addFile(objetMessage);
+                case TypeNotification.AjoutFichier: hubContext.Clients.AllExcept(connectionID).addFile(objetMessage);
                     break;
-                case TypeNotification.SuppressionCarte: hubContext.Clients.All.deleteCard(objetMessage);
+                case TypeNotification.SuppressionCarte: hubContext.Clients.AllExcept(connectionID).deleteCard(objetMessage); // TODO
+                    break;
+                case TypeNotification.SuppressionFichier: hubContext.Clients.AllExcept(connectionID).deleteFile(objetMessage);
+                    break;
+                case TypeNotification.SuppressionMessage: hubContext.Clients.AllExcept(connectionID).deleteMessage(objetMessage); // TODO
                     break;
                 default:
                     break;
             }
             
             // Notification globale
-            hubContext.Clients.All.newNotification(notification);
+            hubContext.Clients.AllExcept(connectionID).newNotification(notification);
 
             db.Dispose();
         }

@@ -92,11 +92,16 @@ namespace Ollert.Api
         [ResponseType(typeof(Fichier))]
         public async Task<IHttpActionResult> DeleteFichier(int id)
         {
-            Fichier fichier = await db.Fichiers.FindAsync(id);
+            Fichier fichier = await db.Fichiers.Include(f => f.Carte).FirstAsync(f => f.Id == id);
             if (fichier == null)
             {
                 return NotFound();
             }
+
+            await Ollert.Services.NotificationService.AddNotification<Fichier>(
+                   "Fichier Supprimé", "Le fichier '{0}' a été supprimé par {1}".FormatWith(fichier.Nom, this.User.Identity.Name),
+                   TypeNotification.SuppressionFichier,
+                   fichier);
 
             db.Fichiers.Remove(fichier);
             await db.SaveChangesAsync();

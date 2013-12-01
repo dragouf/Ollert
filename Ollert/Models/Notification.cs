@@ -16,7 +16,9 @@ namespace Ollert.Models
         NouvelleCarte = 3,
         EditionCarte = 4,
         AjoutFichier = 5,
-        SuppressionCarte = 6
+        SuppressionCarte = 6,
+        SuppressionFichier = 7,
+        SuppressionMessage = 8
     }
     public class Notification : Ollert.Models.IEntity
     {

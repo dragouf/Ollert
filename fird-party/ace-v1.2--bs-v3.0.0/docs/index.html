@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ace Admin Template - Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+	
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<!--[if IE 7]>
+	  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+		
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="../assets/css/prettify.css" rel="stylesheet">
+
+	<link href="../assets/css/ace.min.css" rel="stylesheet">
+
+	<style>
+
+	body {
+	 background-color:#FFF;
+	 font-size:14px;
+	 line-height:22px;
+	}
+	body > .navbar .brand {
+	 float:left;
+	 color:#FFF;
+	 padding:0;
+	 line-height:34px;
+	 font-size:18px;
+	 padding-bottom:2px;
+	 margin-left:24px;
+	}
+	.navbar .navbar-inner {
+	 min-height:0;
+	}
+	.bs-docs-sidenav {
+	 margin-top:16px;
+	}
+	
+	.bs-docs-sidenav > li.active:after {
+	 display:none;
+	}
+	
+	.bs-docs-sidenav > li > a {
+	 border-radius:0 !important;
+	}
+	.bs-docs-sidenav > li > a:hover:before {
+	 top:1px;
+	}
+	
+	.bs-docs-sidenav > .active > a {
+	 padding:0 8px;
+	 border:1px solid #E5E5E5;
+	}
+	.bs-docs-sidenav > li > a > [class*="icon-"] {
+	 position:absolute;
+	 right:10px;
+	 top:6px;
+	 display:none;
+	}
+	
+	</style>
+  </head>
+
+  <body data-spy="scroll">	
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand pull-left" href="./index.html">Ace Admin Docs</a>
+        </div>
+      </div>
+    </div>
+
+<!-- Subhead
+================================================== -->
+
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="col-xs-3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav ">
+          <li><a href="#introduction">Introduction</a></li>
+		  <li><a href="#changes">Changes</a></li>
+          <li><a href="#files">Files</a></li>
+		  <li><a href="#basics">Basics</a></li>
+		  <li><a href="#pages">Pages</a></li>
+          <li><a href="#forms">Forms & Elements</a></li>
+		  <li><a href="#settings">Settings</a></li>
+		  <li><a href="#examples">Examples</a></li>
+          <li><a href="#plugins">Plugins</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-9">
+
+
+		  
+        <!-- Typography
+        ================================================== -->
+        <section id="introduction">
+          <h1 class="blue"><i class="icon-leaf green"></i> Introduction</h1>
+		  <hr />
+
+		  
+	  		  
+		<div class="alert alert-success alert-block">
+			<span class="bigger-110">
+			Please make sure to follow me on 
+			<a href="http://www.twitter.com/responsiweb" class="blue">
+				<i class="icon-twitter"></i> Twitter
+			</a>
+			or subscribe to <a href="http://feeds.feedburner.com/responsiweb">http://feeds.feedburner.com/responsiweb</a>,
+			to be informed of updates when available.
+			</span>
+			
+			<button class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+		</div>
+		
+          <p>
+			First of all I would like to thank you for purchasing Ace admin template.
+			I hope you like it and find it easy to work with.
+  
+		  <p>
+			This is the 4th release <i>(v1.2)</i> and there may be bugs and missing features which will be targeted in next updates.
+
+		  <p>
+			Also, this documentation is brief and may be lacking in some parts. If you think more explanations or examples are needed, just let me know.
+		  
+		  <p>
+			Please send your questions, comments, suggestions and bug reports to me at <a href="mailto:ace.support@live.com">ace.support@live.com</a> and I will do my best to reply as soon as possible.
+		  
+		  <div class="hr hr-dotted hr12"></div>
+
+		  <p>
+			Best Wishes
+			<br />
+			Mohsen Hosseini
+		  
+		  <div class="hr hr-double hr32"></div>
+		  
+		  <h2 class="header blue lighter"><i class="icon-coffee green"></i> Features</h2>
+		  <p>
+			Ace is a lightweight and feature rich admin template which is clean and easy to use.
+			<br />
+			Current release comes with the following features:
+		  </p>
+		  <ul class="list-unstyled">
+            <li> <i class="icon-hand-right"></i> 4 different theme colors</li>
+			<li> <i class="icon-hand-right"></i> Responsive design based on Bootstrap 3 & 2.3.x</li>
+			<li><i class="icon-hand-right"></i> Custom elements and plugins including:
+				<ul class="list-unstyled margin-5">
+					<li> <i class="icon-ok green"></i> Pure CSS3 checkbox, radio and On/Off switch elements (not available in IE8)</li>
+					<li> <i class="icon-ok green"></i> File input control</li>
+					<li> <i class="icon-ok green"></i> Simple color picker</li>
+					<li> <i class="icon-ok green"></i> Customizable widgets in different colors and styles</li>
+					<li> <i class="icon-ok green"></i> Client side saving of user settings such as collapsed sidebar,etc</li>
+				</ul>
+			</li>
+			<li> <i class="icon-hand-right"></i> Bootstrap, jQuery UI and third party plugins and elements including:
+				<ul class="list-unstyled margin-5">
+					<li> <i class="icon-ok green"></i> Charts</li>
+					<li> <i class="icon-ok green"></i> Dynamic tables & grids</li>
+					
+					<li> <i class="icon-ok green"></i> Inline editable feature</li>
+					<li> <i class="icon-ok green"></i> Slider</li>
+					<li> <i class="icon-ok green"></i> Spinner</li>
+					<li> <i class="icon-ok green"></i> Treeview</li>
+					<li> <i class="icon-ok green"></i> Wizard</li>
+					<li> <i class="icon-ok green"></i> Form validation</li>
+					<li> <i class="icon-ok green"></i> Wysiwyg & Markdown editor</li>
+					<li> <i class="icon-ok green"></i> Drag & drop file upload</li>
+					
+					<li> <i class="icon-ok green"></i> Color picker</li>
+					<li> <i class="icon-ok green"></i> Date picker</li>
+					<li> <i class="icon-ok green"></i> DateRange picker</li>
+					<li> <i class="icon-ok green"></i> Time picker</li>
+					
+					<li> <i class="icon-ok green"></i> Colorbox for gallery</li>
+					
+					<li> <i class="icon-ok green"></i> Full calendar</li>
+					
+					<li> <i class="icon-ok green"></i> Tag input</li>
+					<li> <i class="icon-ok green"></i> Chosen selects</li>
+					<li> <i class="icon-ok green"></i> Select2 selects</li>
+					<li> <i class="icon-ok green"></i> Textarea input limiter</li>
+					<li> <i class="icon-ok green"></i> Textarea auto resize</li>
+					<li> <i class="icon-ok green"></i> Masked input</li>
+					
+					<li> <i class="icon-ok green"></i> Nestable hierarchical list</li>
+					
+					<li> <i class="icon-ok green"></i> Growl like notifications</li>
+					<li> <i class="icon-ok green"></i> Imageless spinner</li>
+				</ul>
+			</li>
+          </ul>
+		  
+		  <div class="well">
+			<span class="label label-info arrowed-right">Note</span> Stylings of most third party elements have been modified to replace external images and icons with CSS and FontAwesome.
+		 
+		    <div class="space-6"></div>
+		    <p>
+			This has benefits such as better view on Retina displays as almost no pixel graphics are used  and it also means fewer network file requests resulting in faster page load time.
+		    </p>
+		  </div>
+
+
+
+		  <h2 class="header lighter blue"><i class="icon-compass orange"></i> Planned Features</h2>
+		  <p>
+			The following list will be added to the template on next updates:
+		  </p>
+		  <ul class="list-unstyled spaced">
+			<li> <i class="icon-hand-right"></i>  New features & elements such as :
+				<ul class="list-unstyled margin-5">
+					<li> <i class="icon-ok green"></i> Search results </li>
+					<li> <i class="icon-ok green"></i> Tables with details </li>
+					<li> <i class="icon-ok green"></i> File upload and management </li>
+					<li> <i class="icon-ok green"></i> Email template </li>
+					<li> <i class="icon-ok green"></i> Frontend page templates </li>
+				</ul>
+			</li>
+			
+			<li> <i class="icon-hand-right"></i> Adding more examples </li>
+		  </ul>
+		  If you also have a recommendation or feature request, please let me know.
+      </section>
+
+	  
+	  <div class="hr hr-double hr32"></div>
+	  
+	  
+	   <section id="changes">
+          <h1 class="blue"><i class="icon-magic purple"></i> Changes and updates</h1>
+		  <hr />
+		  
+		  <p>
+		  Some elements have been enhanced and some bugs fixed.
+		  <br />
+		  Please take a look at the <b>changelog</b> file for a quick overview.
+
+
+		  <div class="alert alert-block alert-danger">
+			<i class="icon-warning-sign"></i> Make sure you have a copy of your application files before making changes.
+		  </div>
+		  
+		  <p>
+		  <h4 class="blue">v1.2 Changes</h4>
+		  The major change is upgrading the template to Bootstrap 3.
+		  <br />
+		  So you may want to take a look at the following guides for migrating to BS3:
+		  <br />
+		  <a href="http://bootply.com/bootstrap-3-migration-guide">http://bootply.com/bootstrap-3-migration-guide</a>
+		  <br />
+		  or Bootstrap's documentation:
+		  <br />
+		  <a href="http://getbootstrap.com/getting-started">http://getbootstrap.com/getting-started</a>
+		  
+		  
+		  <hr />
+		  Here are a few quick tips:
+		  <br />
+		  <ul class="list-unstyled spaced2">
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Use <code>.row</code> instead of <code>.row-fluid</code>
+			</li>
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Use
+				<code>.col-xs-*</code>
+				<code>.col-sm-*</code>
+				<code>.col-md-*</code>
+				<code>.col-lg-*</code>
+				instead of
+				<code>.span*</code>
+				
+				<p>
+				<span class="label label-info arrowed-right">Note</span>
+				With bootstrap 2.3.x it was alright to randomly have <code>.row-fluid</code> elements without <code>.span*</code>
+				children.
+				<br />
+				But with BS3, you should remove those <code>.row</code> (<small>previously</small> <code>.row-fluid</code>) elements that don't need <code>.col-*-*</code> inside them and use no class name or <code>.clearfix</code> if it has floating elements inside it.
+				</p>
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Use <code>.btn-xs</code> <code>.btn-sm</code> <code>.btn-lg</code> instead of 
+					<code>.btn-mini</code> <code>.btn-small</code> <code>.btn-large</code>
+				
+				<br />
+				Use <code>.well-sm</code> <code>.well-lg</code> instead of 
+					<code>.well-small</code> <code>.well-large</code>
+				
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Use <code>.input-group</code> instead of 
+					<code>.input-append</code> and <code>.input-prepend</code>
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Update Bootstrap Modal HTML structure:
+				<br />
+				Now needs <code>.modal-dialog</code> <code>.modal-content</code> classes and the <code>.modal</code> doesn't need <code>.hide</code> class.
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Bootstrap event names have been namespaced, so for example instead of
+				<code>on('shown' , ...)</code> we now have <code>on('shown.bs.modal' , ...)</code>
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				No need for <b>bootstrap-responsive.css</b> or <b>ace-responsive.css</b> now.
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				No need for
+				<code>&lt;span class="divider"&gt;&lt;i class="icon-angle-right arrow-icon"&gt;&lt;/i&gt;</code>
+				in breadcrumbs;
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Images were responsive by default, i.e. they were limited to their container's size.
+				<br />
+				Now you should use <code>.img-responsive</code> class.
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				User <code>.dropdown-header</code> instead of <code>.nav-header</code>.
+			</li>
+	
+		  </ul>
+		  
+		  
+
+		  <br />
+		  Some notes:
+		  <div class="well">
+			  <span class="label label-danger arrowed-right">Note</span>
+			  Bootstrap 3 is now setting the CSS rule <code>box-sizing:border-box</code> on all HTML elements.
+			  <br />
+			  It means that if you had custom elements with specific dimensions and paddings and borders that relied on default browser value of
+			  <code>box-sizing:contet-box</code>,
+			  you may now want to recalculate dimensions etc.
+			  <br />
+			  Also many third party plugin stylings which rely on the default browser value <b>content-box</b>.
+			  <br />
+			  Some of them are reset in <code>bs3-reset.less</code>
+		  </div>
+		  <ul class="list-unstyled spaced2">
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Navbar structure and classes are now slightly different. Please see:
+				<code>
+				  mustache/app/views/layouts/partials/_shared/topbar.mustache
+				</code>
+			</li>
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Document structure and classes are now slightly different. Please see:
+				<code>
+				  mustache/app/views/layouts/default.mustache
+				</code>
+			</li>
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Default typeahead plugin in Bootstrap 2 has been remove in BS3. <br />
+				I've put that in the <code>typeahead-bs2.js</code> file and use it for search box in demo.
+				<br />
+				It is also used in <b>Tag Input</b> plugin.
+			</li>
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Use <code>data-icon-show</code> <code>data-icon-hide</code> attributes inside <code>.accordion-toggle</code> elements
+				to specify icons used when toggling panels.
+				<br />
+				<i class="icon-hand-right purple"></i> See FAQ page for some examples
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Some changes should be made to form elements inside <code>.form-horizontal</code>.
+				<br />
+				An example could be like this:
+<pre class="prettyprint linenums">
+&lt;div class="form-group"&gt;
+  &lt;label for="id-username" class="col-sm-3 control-label no-padding-right"&gt;
+    Text Field
+  &lt;/label&gt;
+  &lt;div class="col-sm-9"&gt;
+    &lt;input type="text" class="col-xs-10 col-sm-5" placeholder="Username" id="id-username"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				The wizard steps container doesn't need <code>.hide</code> class
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Gallery tags should be wrapped inside <code>.label-holder</code>
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				User <code>.dropdown-only-icon</code>
+				instead of
+				<code>.dropdown-icon-only</code>
+			</li>
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				Use <code>.vspace-xs-*</code>
+				<code>.vspace-sm-*</code>
+				<code>.vspace-md-*</code>
+				<code>.vspace-lg-*</code>
+					instead of <code>.vspace-*</code>
+				for spacing that is only visible on specific sizes.
+			</li>
+			
+			
+			<li>
+				<i class="icon-hand-right blue"></i>
+				RTL styles has now been separated into <b>ace-rtl.css</b> file.
+				<br />
+				You can't add or remove it as needed.
+			</li>
+
+		  </ul>
+		  
+		  <hr />
+		   <hr />
+		  
+		  <p>
+		  <h4 class="blue">v1.1.3 Changes</h4>
+		  
+		  <p>
+		  <b>Styled checkboxes</b>
+		  <br />
+		  Previously, browser checkboxes and radio buttons were hidden by default and you needed to insert an <code>.lbl</code>
+		   element after them to be displayed correctly.
+		   <br />
+		   This caused some issues with environments or libraries that created checkboxes that were difficult to add an
+		   <code>.lbl</code> element after them.
+		   <br />
+		   So now, default checkboxes are shown without change and you can style them by adding <code>.ace</code> class
+		   to checkboxes and inserting an <code>.lbl</code> element after them.
+		   <p>
+		   <div class="well well-sm">
+			<i class="icon-hand-right blue"></i> Please see <b>Forms & Elements</b> section for more info.
+		   </div>
+
+		   You can also use the previous method by removing <code>.ace</code> class name from 
+		   <code>assets/css/less/form-checkbox.less</code>
+		   and recompiling <code>ace.less</code>
+		   
+		   <br />
+		  <hr />
+		  
+			To fix sidebar you now should add <code>.sidebar-fixed</code> class to <code>.sidebar</code> element
+			and to fix breadcrumbs you should add <code>.breadcrumbs-fixed</code>
+			class to <code>.breadcrumbs</code> element.
+			 <br />
+			  <br />
+			
+		 
+			You should now use <code>assets/js/ace-extra.js</code> inside <code>head</code> element, to be able to enable and save some user settings
+			using Javascript.
+			<p>
+			 <div class="well well-sm">
+			  <i class="icon-hand-right blue"></i> Please see <b>Settings</b> section for more info.
+		     </div>
+			
+			<br />
+			<hr />
+			
+			The <code>#sidebar-collapse</code> element's icon has two attributes <code>data-icon1</code> and 
+			<code>data-icon2</code> which determine the button's icon in expanded/collapsed state.
+			
+			<br />
+			<br />
+			<code>#ace-settings-header</code> has been changed to <code>#ace-settings-navbar</code>
+			
+			<br />
+			<hr />
+		 
+			Thirdparty Chosen plugin now uses <b>chosen-</b> prefix rather than <b>chzn-</b> for its classes.
+			<br />
+			If you have defined custom CSS rules or used <b>chzn-*</b> selectors inside your scripts, you may need to modify them accordingly.
+		  
+		  <hr />
+		  
+		  <p>		  
+		  <h4 class="blue">v1.1.2 Changes</h4>
+		  There are a few things you may need to change in your HTML code.
+
+		  <p>
+		  First of all, CSS "ID"s have been replaced with classes. It seems to be the preferred approach.
+		  
+		  <p>
+		  So for example in CSS files where we had:
+		  <br />
+		  <code>
+		  #main-content {
+		   ...
+		  }
+		  </code>
+		  </p>
+		  <p>
+		  It has been changed to:
+		   <br />
+		  <code>
+		  .main-content {
+		   ...
+		  }
+		  </code>
+		  </p>
+		  The element in HTML code still keeps the ID attribute, so previous Javascript code should work as expected.
+		  </p>
+		  <div class="bs-docs-example" data-text="Example">
+<pre class="prettyprint linenums">
+&lt;div class="main-container" id="main-container"&gt;
+  ...
+&lt;/div&gt;
+
+...
+
+&lt;a class="menu-toggler" id="menu-toggler"&gt;
+  &lt;span&gt;&lt;/span&gt;
+&lt;/a&gt;
+</pre>
+		  </div>
+		  
+		  <p>
+		  You just need to add a class with the same ID value to HTML elements.
+		  
+		  <p>
+		  The specific changes are:
+		  <ul>
+			<li><code>#user_info</code> <i class="icon-hand-right"></i> <code>.user-info</code> (Topright user menu)</li>
+			<li><code>#user_menu</code> <i class="icon-hand-right"></i> <code>.user-menu</code></li>
+			
+			<li class="divider"></li>
+			<li class="divider"></li>
+
+			<li><code>#menu-toggler</code> <i class="icon-hand-right"></i> <code>.menu-toggler</code></li>
+			<li><code>#sidebar</code> <i class="icon-hand-right"></i> <code>.sidebar</code></li>
+			<li><code>#sidebar-shortcuts</code> <i class="icon-hand-right"></i> <code>.sidebar-shortcuts</code></li>
+			<li><code>#sidebar-shortcuts-large</code> <i class="icon-hand-right"></i> <code>.sidebar-shortcuts-large</code></li>
+			<li><code>#sidebar-shortcuts-mini</code> <i class="icon-hand-right"></i> <code>.sidebar-shortcuts-mini</code></li>
+			<li><code>#sidebar-collapse</code> <i class="icon-hand-right"></i> <code>.sidebar-collapse</code></li>
+			
+			<li class="divider"></li>
+			<li class="divider"></li>
+			<li class="divider"></li>
+			
+			<li><code>#main-container</code> <i class="icon-hand-right"></i> <code>.main-container</code></li>
+			<li><code>#main-content</code> <i class="icon-hand-right"></i> <code>.main-content</code></li>
+			<li><code>#page-content</code> <i class="icon-hand-right"></i> <code>.page-content</code></li>
+			
+			<li class="divider"></li>
+			<li class="divider"></li>
+			<li class="divider"></li>
+			
+			<li><code>#breadcrumbs</code> <i class="icon-hand-right"></i> <code>.breadcrumbs</code></li>
+			<li><code>#nav-search</code> <i class="icon-hand-right"></i> <code>.nav-search</code></li>
+			<li><code>#nav-search-input</code> <i class="icon-hand-right"></i> <code>.nav-search-input</code></li>
+			<li><code>#nav-search-icon</code> <i class="icon-hand-right"></i> <code>.nav-search-icon</code></li>
+
+			<li class="divider"></li>
+			<li class="divider"></li>
+			<li class="divider"></li>
+
+			<li><code>#ace-settings-container</code> <i class="icon-hand-right"></i> <code>.ace-settings-container</code></li>
+			<li><code>#ace-settings-btn</code> <i class="icon-hand-right"></i> <code>.ace-settings-btn</code></li>
+			<li><code>#ace-settings-box</code> <i class="icon-hand-right"></i> <code>.ace-settings-box</code></li>
+			<li><code>#btn-scroll-up</code> <i class="icon-hand-right"></i> <code>.btn-scroll-up</code></li>
+		   </ul>
+		 
+		 <br />
+          <p>
+		   <i class="icon-hand-right"></i> The text on first level links of side navigation which were <code>SPAN</code> elements, should have the <code>.menu-text</code> class now:
+		   <pre class="prettyprint linenums">
+&lt;li&gt;
+  &lt;a href="index.html"&gt;
+    &lt;i class="icon-dashboard"&gt;&lt;/i&gt;
+    &lt;span class="menu-text"&gt;Dashboard&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/li&gt;</pre>
+
+
+		  <p>
+		   Same applies to <code>#menu-toggler</code> element:
+		   <pre class="prettyprint linenums">
+&lt;a href="#" class="menu-toggler" id="menu-toggler"&gt;
+  &lt;span class="menu-text"&gt;&lt;/span&gt;
+&lt;/li&gt;</pre>
+
+
+		  <p>
+		  The default size of icons inside buttons have been removed.
+		  <br />
+		  You may specify icon sizes using <code>.bigger-110</code> ... <code>.bigger-300</code> as described later.
+		   <pre class="prettyprint linenums">
+&lt;a href="#" class="btn btn-app btn-primary"&gt;
+  &lt;i class="icon-envelope bigger-200"&gt;&lt;/i&gt;
+  Email
+&lt;/li&gt;</pre>
+		  
+		  
+		  <p>
+		  For easier changing of icons inside breadcrumbs, add <code>.home-icon</code> to the first icon (the one indicating homepage) and add <code>.arrow-icon</code> to other icons.
+		  
+		  <div class="space-16"></div>
+		  
+		  <div class="well">	  
+			<i class="icon-hand-right blue bigger-125"></i> To see what changes have been made to other controls and plugins please check the relevant sections below.
+		  </div>
+		  
+		  
+	   </section>
+
+	   
+	  <div class="hr hr-double hr32"></div>
+	  
+        <!-- Basics
+        ================================================== -->
+        <section id="files">
+          <div class="page-header">
+            <h1><i class="icon-file-alt green"></i> Files</h1>
+          </div>
+
+		    <p>
+			HTML files are located on the main directory as you can see.
+			<p>
+			They are automatically generated from the Mustache template files.
+			<p>
+			There is more details about Mustache files in this section.
+			
+			<div class="well well-sm">
+				<span class="label label-success arrowed-right">Note</span>
+				You don't need Mustache files for your application.
+				<p>
+
+				But you can see how different sections of Ace admin template
+				are structured by looking at Mustache template files.
+				<p>
+				Otherwise you may have to dig through lots of static HTML code to figure out things.
+				<p>
+				Template files are inside <b>mustache/app/views</b> folder.
+			</div>
+		
+			
+			<ul>
+				<li>
+					<b>assets</b> folder containing
+					<ul>
+						<li>css</li>
+						<li>css/less</li>
+						<li>js</li>
+						<li>images and fonts</li>
+					</ul>
+				</li>
+				<li>
+					<b>docs</b> folder containing this documentation file.
+				</li>
+				<li>
+					<b>examples</b> folder which has a few example files such as uploading files.
+				</li>
+				<li>
+					<b>mustache</b> folder containing
+					<ul>
+						<li>
+							<b>app</b> folder containing <b>views</b>(mustache templates) and <b>data</b> files used to generate the HTML output.
+						</li>
+						<li>
+							<b>js</b> folder containing the necessary Javascript compilers and classes to generate the HTML output.
+							<br />
+							Use the following command to generate HTML output inside:<br />
+							<code>node index.js</code>							
+							<br />
+							The result files will be saved to <b>output_folder</b>.
+						</li>
+						<li>
+							<b>php</b> folder containing PHP Mustache compiler and some demo classes to generate the HTML output on the fly.
+							<br />
+							You can view it like this:<br />
+							<code>http://server_address/path_to_ace/mustache/php/</code>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			
+			<div class="hr hr-16"></div>
+
+		  <p>
+			<b>CSS</b> files consist of:
+			<ul class="list-unstyled">
+				<li> <i class="icon-file-alt"></i> ace.min.css </li>
+				<li> <i class="icon-file-alt"></i> ace-responsive.min.css </li>
+				<li> <i class="icon-file-alt"></i> ace-skins.min.css </li>
+				<li> <i class="icon-file-alt"></i> ace-ie.min.css (for ie8) </li>
+			</ul>
+			The uncompressed css files are put in the "uncompressed" folder.
+		  </p>
+
+		  <br />
+		   <p>
+			<b>LESS</b> files are located under the <code>assets/css/less</code> directory.
+		   <p>
+			You can compile and generate your own CSS if you want to remove some parts.
+		   <p>
+			For example if you don't need <b>RTL</b> (right to left) style, comment that line and compile it.
+		   <p>
+			At this time, the latest stable version of LESS which is <b>1.4.1</b> has been used to compile and generate the output.
+
+		   <hr />
+
+		   <p>
+			<b>Javascript</b> files are:
+			<ul class="list-unstyled">
+				<li> <i class="icon-file-alt"></i> ace.min.js </li>
+				<li> <i class="icon-file-alt"></i> ace-elemenets.min.js </li>
+				<li> <i class="icon-file-alt"></i> ace-extra.min.js </li>
+			</ul>
+			The uncompressed js files are put in the "uncompressed" folder.
+		  </p>
+		  
+		  <hr />
+		  
+		  <p><b>HTML</b> pages are the following:</p>
+		  <ol>
+		    <li> Empty (empty.html) </li>
+			<li> Blank HTML Page (blank.html) </li>
+			<li> Buttons & Icons (buttons.html) </li>
+			<li> Full Calendar (calendar.html) </li>
+			<li> UI Elements (elements.html) </li>
+			<li> Error 404 (error-404.html) </li>
+			<li> Error 500 (error-500.html) </li>
+			<li> FAQ (faq.html) </li>
+			<li> Form Elements (form-elements.html) </li>
+			<li> Form Wizard (form-wizard.html) </li>
+			<li> Gallery (gallery.html) </li>
+			<li> Grid (grid.html) </li>
+			<li> Inbox & Messages (inbox.html) </li>
+			<li> Dashboard (index.html) </li>
+			<li> Invoice (invoice.html) </li>
+			<li> jQuery Grid Plugin (jqgrid.html) </li>
+			<li> jQuery UI (jquery-ui.html) </li>
+			<li> Login, Registration and Password Retrieval Page (login.html) </li>
+			<li> Nestable List (nestable.html) </li>
+			<li> Pricing Boxes (pricing.html) </li>
+			<li> Profile (profile.html) </li>
+			<li> Tables (tables.html) </li>
+			<li> Timeline (timeline.html) </li>
+			<li> Treeview (treeview.html) </li>
+			<li> Typography (typography.html) </li>
+			<li> Widget Boxes (widgets.html) </li>
+			<li> Wysiwyg (wysiwyg.html) </li>
+		  </ol>
+		  
+		  <hr />
+		  <p><b>Mustache</b> files are the following:</p>
+		  <ul class="space2">
+		  <li> <b><code>mustache/app</code></b> folder which has the following:
+		  <br />
+		  
+		  <ul class="spaced2">
+			<li>
+				<b>Mustache</b> templates inside <code>mustache/app/views</code> folder:
+				<ol class="spaced">
+					<li>					
+						<b>layouts</b> folder containing the 3 layouts used:
+						<ol>
+							<li>
+								<code>default.mustache</code> which is the layout for most pages
+							</li>
+							<li>
+								<code>login.mustache</code> which is the layout for the login page.
+							</li>
+							<li>
+								<code>empty.mustache</code> which is the layout for the empty.html page.
+							</li>
+						</ol>
+						<br />
+						<p>
+						The <b>partials</b> folder contains different parts of each layout.
+						<p>
+						The <b>_shared</b> folder inside <b>partials</b>, contains partial templates that are used by more than one layout.
+						<p>
+						For example the partial templates
+						<code>mustache/app/views/layouts/partials/_shared/sidenav.mustache</code>
+						<br />
+						and
+						<br />
+						<code>mustache/app/views/layouts/partials/_shared/sidenav/items.mustache</code>
+						<p>
+						are used to generate the side navigation menu.
+					</li>
+					
+					<li>					
+						<b>pages</b> folder containing the page templates:<br />
+						<code>index.mustache</code>, <code>typography.mustache</code> and so on.
+						<p>
+						Inside it, is the <b>partials</b> folder which contains sections of some pages.
+						<p>
+						For examples <code>mustache/app/views/pages/index</code> folder contains the following partial templates:
+						<br />
+						<code>infobox.mustache</code>
+						<code>domains.mustache</code>
+						<code>tasks.mustache</code>
+						<code>members.mustache</code>
+						<code>comments.mustache</code>					
+						<code>conversations.mustache</code>
+						<br />
+						which together with the <code>index.mustache</code> page template and <code>default.mustache</code> layout template, constitute up the index(dashboard) page.
+					</li>
+					
+					<li>
+						<b>assets</b> folder containg inline scripts and styles for each page.
+						<br />
+						Putting them in separate files makes it easier to read and edit.
+						<br />
+						In some (server side programming language) frameworks, this is usually done by
+						registering files and snippets during application run and inserting them in the output at the right spot.
+					</li>
+				</ol>
+				
+				I have overridden a function of <b>Hogan.js</b> and <b>Mustache.js</b> compiler to automatically load a partial template as needed without preloading them.
+				<br />
+				They are located at <code>mustache/js/classes/autoload-hogan.js</code>
+				<code>mustache/js/classes/autoload-mustache.js</code>.
+				<br />
+				Inside templates a partial is loaded like this: <code>{{> layout.breadcrumbs}}</code> or <code>{{> page.comments}}</code>
+			</li>
+			
+			<li class="divider"></li>
+
+			
+			<li>
+				<b>data</b> folder containing data files used inside templates which are JSON and CSV files.
+				<br />
+				This is for demo only and in your app you usually want to use databases to store and retrieve data.
+				<br />
+				The folder consists of:
+				<ol class="spaced">
+					<li>
+						<b>layouts</b> folder containing data for each layout.<br />
+						The <b>partials</b> folder contain data such as "navigation menu items", top notifications and messages, etc.
+						<br />
+						For example <code>mustache/app/data/layouts/partials/default/sidenav_navList.json</code> contains the side navigaiton items for the default layout.
+					</li>
+					<li>
+						<b>pages</b> folder containing data for each page.<br />
+						<code>index.json</code> <code>typography.json</code> etc, contain the basic page data such as its title, scripts and styles.
+						<br />
+
+						The <b>partials</b> folder contain data for some pages such as the list of tasks, domains, comments for "index" or recent activity for "profile" page.
+					</li>
+					
+					<li>
+						<b>common</b> folder contains some data such as <code>site.json</code> which is the general setting & variables.
+						<br />
+						We use <code>script-mapping.json</code> inside our custom Mustache classes to map a script name to a file name.
+						<br />
+						This way a file name can be modified and the changes will be reflected on all pages using that script or style, in future updates.
+					</li>
+				</ol>
+				
+				All page data is loaded in the mustache helper class and accessed inside templates like this:
+				<br />
+				<p>
+				<code>{{#layout.topbar_tasks.latest}} ... {{/layout.topbar_tasks.latest}}</code>
+				<br />
+				<code>{{#page.comments}} ... {{/page.comments}}</code>
+				<br />
+				<code>{{#site.title}} ... {{/site.title}}</code>
+				<br />
+				etc ...
+			</li>
+		  </ul>
+		  </li>
+		  
+		  <li>
+			<b><code>mustache/js</code></b> folder which consists of a few classes to generate the HTML output as well as the Mustache compilers.
+			<br />
+			You can use the <code>node index.js</code> command to generate output inside the <b>output_folder</b>.
+		  </li>
+		  
+		  <li>
+			<b><code>mustache/php</code></b> folder which consists of a few PHP classes to generate the HTML output as well as the Mustache compilers.
+			<br />
+			View the PHP version by pointing your browser to this address: <code>http://server_address/path_to_ace/mustache/php/</code>
+		  </li>
+		  
+		  </ul>
+		  
+		  <br />
+		  <br />
+		  		
+		  <div class="well">
+			<span class="label arrowed-right label-important">Note</span>
+			Refer to <code>mustache/app/views/layouts/default.mustache</code> file as a starting point to figure out the general structure of HTML elements and sections.
+		  </div>
+		  
+		  
+		 </section>
+		 
+	  <div class="hr hr-double hr32"></div>
+
+        <!-- Basics
+        ================================================== -->
+        <section id="basics">
+          <div class="page-header">
+            <h1><i class="icon-umbrella red"></i> Basics</h1>
+          </div>
+		  
+		  Ace admin template uses the same elements and classes of Bootstrap with addition of a few elements and classes to add some customization:
+		  <p>
+		  <br />
+		  
+		  Some <i>".ace-nav"</i> colors to change the top bar elements color:
+<pre class="prettyprint linenums">
+&lt;ul class="nav ace-nav"&gt;
+  &lt;li class="purple"&gt;
+	...
+  &lt;/li&gt;
+  &lt;li&gt;
+	...
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+The following colors are defined:
+<p>
+<div class="well well-sm">
+ 	<code>grey</code>
+	<code>purple</code>
+	<code>green</code>
+	<code>light-blue</code>
+	<code>light-blue2</code>
+	<code>red</code>
+	<code>light-green</code>
+	<code>light-purple</code>
+	<code>light-orange</code>
+	<code>light-pink</code>
+	<code>dark</code>
+	<code>white-opaque</code>
+	<code>dark-opaque</code>
+</div>
+<p>
+As well as the following:
+<br />
+	<code>.no-border</code>
+	<code>.margin-4</code> <code>.margin-3</code> <code>.margin-2</code>
+<p>
+You can find them inside the <b>ace-nav.less</b> file. The colors are defined in <b>variables.less</b>.
+
+<div class="alert alert-info">
+ <i class="icon-hand-right green bigger-125"></i>
+ When you change a skin using the settings button, some of the topbar buttons <code>.ace-nav > li</code> may change color.
+ <div class="space-4"></div>
+ The color is dynamically changed by switching to one of the above mentioned color classes using Javascript and is not dependent on that specific skin.
+</div>
+
+<br />
+<p>
+
+A few additional classes have been defined in <b>utility.less</b> that may be useful at times.
+<br />
+<div class="well well-sm">
+<code>.lighter</code>
+<code>.bolder</code>
+<br />
+<code>.inline</code>
+<code>.block</code>
+<br />
+<code>.center & .align-center</code>
+<code>.align-left</code>
+<code>.align-right</code>
+<br />
+<code>.middle & .align-middle</code>
+<code>.align-top</code>
+<code>.align-bottom</code>
+<br />
+<code>.position-relative</code>
+<code>.position-absolute</code>
+<br />
+<code>.no-underline</code>
+<code>.no-hover-underline</code>
+<br />
+<code>.no-shadow</code>
+</div>
+
+<p>
+For example <b>.inline</b> and <b>.position-relative</b> can be used to add a dropdown inside a "DIV" element without the need to define a new class:
+<pre class="prettyprint linenums">
+&lt;div class="inline position-relative"&gt;
+  &lt;a href="#" data-toggle="dropdown" class="dropdown-toggle"&gt;Show Menu&lt;/a&gt;
+  &lt;ul class="dropdown-menu"&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+<br />
+The following color classes have been defined (the values can be changed inside <b>variables.less</b>):
+<p>
+<div class="well">
+<code>.dark</code>
+<code>.white</code>
+<code>.red</code>
+<code>.light-red</code>
+<code>.blue</code>
+<code>.light-blue</code>
+<code>.green</code>
+<code>.light-green</code>
+<code>.orange</code>
+<code>.orange2</code>
+<code>.light-orange</code>
+<code>.purple</code>
+<code>.pink</code>
+<code>.pink2</code>
+<code>.brown</code>
+<code>.grey</code>
+<code>.light-grey</code>
+</div>
+
+The following font sizing classes have been defined:
+<p>
+<div class="well well-sm">
+ <code>.bigger-110</code>
+ <code>.bigger-120</code>
+ &nbsp; ... &nbsp;
+ <code>.bigger-290</code>
+ <code>.bigger-300</code>
+ <br />
+ <br />
+ <code>.bigger-125</code>
+ <code>.bigger-175</code>
+ <code>.bigger-225</code>
+ <code>.bigger-275</code>
+</div>
+and smaller font classes:
+<div class="well well-sm">
+ <code>.smaller-20</code>
+ <code>.bigger-30</code>
+ &nbsp; ... &nbsp;
+ <code>.smaller-90</code>
+ <br />
+ <br />
+ <code>.smaller-25</code>
+ <code>.smaller-75</code>
+</div>
+
+<pre class="prettyprint linenums">
+&lt;i class="icon-twitter blue bigger-150"&gt;&lt;/i&gt;
+&lt;i class="icon-user smaller-75"&gt;&lt;/i&gt;
+</pre>
+
+<br />
+<p>
+The following classes specify a percentage of the parent element's width:
+<div class="well well-sm">
+ <code>.width-20</code>
+ <code>.width-25</code>
+ &nbsp; ... &nbsp;
+ <code>.width-95</code>
+ <code>.width-100</code>
+</div>
+<pre class="prettyprint linenums">
+&lt;div class="clearfix"&gt;
+  &lt;a href="#" class="pull-left btn btn-sm width-45"&gt;Button 1&lt;/a&gt;
+  &lt;a href="#" class="pull-right btn btn-sm width-45"&gt;Button 2&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+<br />
+<p>
+Some spacing classes to add horizontal space:
+<br />
+<div class="well well-sm">
+ <code>.space-2</code>
+ <code>.space-4</code>
+ &nbsp; ... &nbsp;
+ <code>.space-30</code>
+ <code>.space-32</code>
+</div>
+
+The same classes are availabe with the <code>.vspace-xs-2</code> ... <code>.vspace-xs-32</code> ,
+<code>.vspace-sm-2</code> ... <code>.vspace-sm-32</code> ,
+<code>.vspace-md-2</code> ... <code>.vspace-md-32</code> ,
+<code>.vspace-lg-2</code> ... <code>.vspace-lg-32</code>.
+
+<br />
+They are hidden in larger screens and visible in smaller devices where blocks are stacked on top of each other and some space between them would be nice.
+
+<pre class="prettyprint linenums">
+&lt;div class="space-16"&gt;&lt;/div&gt;
+...
+&lt;div class="col-sm-6"&gt;&lt;/div&gt;
+ &lt;div class="vspace-sm-16"&gt;&lt;/div&gt; &lt;!-- space visible on smaller devices --&gt;
+&lt;div class="col-sm-6"&gt;&lt;/div&gt;
+</pre>
+<br />
+<p>
+Similar classes are defined for horizontal lines:
+<br />
+<div class="well well-sm">
+ <code>.hr-2</code>
+ <code>.hr-4</code>
+ ...
+ <code>.hr-30</code>
+ <code>.hr-32</code>
+</div>
+<pre class="prettyprint linenums">
+&lt;div class="hr-10"&gt;&lt;/div&gt;
+&lt;div class="hr-16 hr-double dotted"&gt;&lt;/div&gt;
+</pre>
+
+
+
+<br />
+<p>
+Some other classes are:
+<div class="well well-sm">
+ <code>.overflow-visible</code>
+ <code>.overflow-hidden</code>
+ <code>.overflow-scroll</code>
+ <code>.overflow-auto</code>
+</div>
+
+<p>
+For example the default CSS "overflow" property of "tab-content" in Bootstrap is set to auto.
+<br />
+That doesn't look nice in the homepage's "Recent Tasks" tab when dragging and sorting tasks around.
+<br />
+Using the "overflow-visible" class makes it better, without the need to define new CSS rules for that specific item or using inline styles.
+<pre class="prettyprint linenums">
+&lt;div class="tab-content overflow-visible"&gt;
+  &lt;!-- Tab Content Here --&gt;
+&lt;/div&gt;
+</pre>
+
+<br />
+<p>
+More classes that may be handing at times:
+<div class="well well-sm">
+ <code>.no-margin</code>
+ <code>.no-padding</code>
+ <code>.no-border</code>
+</div>
+
+
+There are also <code>.header</code> classes with same above text colors:
+<pre class="prettyprint linenums">
+&lt;h3 class="header blue lighter smaller"&gt;
+  Header Text
+&lt;/h3&gt;
+</pre>
+
+
+
+<br />
+
+<h3 class="header blue lighter smaller">A few additional classes for elements</h3>
+
+<p>
+For bootstrap tabs some extra classes have been defined.
+<br />
+For the <code>.tab-content</code> element:
+<div class="well well-sm">
+  <code>.no-border</code>
+  <code>.no-padding</code>
+  <br />
+  <code>.padding-2</code> <code>.padding-4</code> &nbsp; ... &nbsp; <code>.padding-32</code>
+</div>
+
+For the <code>.nav-tabs</code> element:
+<div class="well well-sm">
+  <code>.padding-2</code> <code>.padding-4</code> &nbsp; ... &nbsp; <code>.padding-32</code>
+   <div class="space-4"></div>
+  
+  <code>.tab-space-1</code> <code>tab-space-2</code> &nbsp; ... &nbsp; <code>.tab-space-4</code>
+   <div class="space-4"></div>
+  
+  <code>.tab-size-bigger</code>
+   <div class="space-4"></div>
+  
+  <code>.tab-color-blue</code>
+</div>
+<div class="bs-docs-example" data-text="Tabs">
+<pre class="prettyprint linenums">
+
+&lt;ul class="nav nav-tabs tab-space-2"&gt;
+&lt;/ul&gt;
+
+&lt;ul class="nav nav-tabs tab-color-blue"&gt;
+&lt;/ul&gt;
+
+&lt;ul class="nav nav-tabs tab-size-bigger"&gt;
+&lt;/ul&gt;
+
+</pre>
+</div>
+
+
+
+For accordions you can use <code>.accordion-style2</code> for alternative style:
+<div class="bs-docs-example" data-text="Accordion">
+<pre class="prettyprint linenums">
+&lt;div class="accordion accordion-style2"&gt;
+  ...
+&lt;/div&gt;
+</pre>
+</div>
+
+
+
+<div class="hr hr-8"></div>
+<br />
+<p>
+Progress bars come with some extra colors and sizes:
+<div class="well well-sm">
+  <code>.progress-purple</code> <code>.progress-pink</code>
+  <code>.progress-yellow</code> <code>.progress-inverse</code>
+  <br />
+  <code>.progress-small</code> <code>.progress-mini</code>
+</div>
+
+<div class="bs-docs-example" data-text="Progress Bar">
+<pre class="prettyprint linenums">
+&lt;div data-percent="70%" class="progress progress-small progress-purple progress-striped active"&gt;
+  &lt;div class="bar" style="width:70%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<div class="center">
+ <div data-percent="70%" class="width-50 inline progress progress-small progress-purple progress-striped active">
+   <div class="bar" style="width:70%;"></div>
+ </div>
+</div>
+</div>
+
+<div class="hr hr-8"></div>
+<br />
+<p>
+Buttons come with some extra classes:
+<div class="well well-sm">
+  <code>.btn-purple</code> <code>.btn-pink</code>
+  <code>.btn-yellow</code> <code>.btn-grey</code>
+  <code>.btn-light</code>
+  <br />
+  <code>.no-hover</code>
+  <code>.no-border</code>
+  <br />
+  <code>.btn-app</code>
+</div>
+<div class="bs-docs-example" data-text="Buttons">
+<pre class="prettyprint linenums">
+&lt;a href="#" class="btn btn-sm btn-purple"&gt;
+  Print
+  &lt;i class="icon-print icon-on-right bigger-110"&gt;&lt;/i&gt;
+&lt;/a&gt;
+
+&lt;a href="#" class="btn btn-app btn-sm btn-primary"&gt;
+  &lt;i class="icon-edit bigger-175"&gt;&lt;/i&gt;
+  &lt;span class="bigger-110"&gt;Edit&lt;/span&gt;
+&lt;/a&gt;
+</pre>
+<div class="center">
+    <a href="#" class="btn btn-sm btn-purple">
+		Print <i class="icon-print icon-on-right bigger-110"></i>
+    </a>
+	
+	<a href="#" class="btn btn-app btn-sm btn-primary">
+		<i class="icon-edit bigger-175"></i>
+		<span class="bigger-110">Edit</span>
+	</a>
+</div>
+</div>
+
+<div class="hr hr-8"></div>
+<br />
+<p>
+Similar extra classes are available for badges and labels:
+<div class="well well-sm">
+  <code>.label-purple</code> <code>.badge-pink</code>
+  <code>.label-yellow</code> <code>.badge-grey</code>
+  <code>.label-light</code> <code>.badge-primary</code>
+</div>
+The following options are defined for labels:
+<div class="well well-sm">
+  <code>.label-large</code>
+  <code>.arrowed</code>
+  <code>.arrowed-in</code>
+  <code>.arrowed-right</code>
+  <code>.arrowed-in-right</code>
+</div>
+<div class="bs-docs-example" data-text="Buttons">
+<pre class="prettyprint linenums">
+&lt;span href="#" class="label label-large label-primary arrowed-in arrowed-right"&gt;
+  Label Text
+&lt;/span&gt;
+</pre>
+
+<span href="#" class="label label-large label-primary arrowed-in arrowed-right">
+	Label Text
+</span>
+</div>
+
+<div class="hr hr-8"></div>
+<br />
+<p>
+Dropdown menu extra options:
+<div class="well well-sm">
+  <code>.dropdown-info</code> <code>.dropdown-primary</code>
+  <code>.dropdown-danger</code> <code>.dropdown-warning</code>
+  <code>.dropdown-inverse</code> <code>.dropdown-success</code>
+  <code>.dropdown-purple</code> <code>.dropdown-pink</code>
+  <code>.dropdown-yellow</code> <code>.dropdown-grey</code>
+  <code>.dropdown-light</code> <code>.dropdown-lighter</code>
+  <br /> <br />
+  <code>.dropdown-caret</code>
+  <br />
+  <code>.dropdown-close</code>
+  <code>.dropdown-closer</code>
+</div>
+
+<div class="hr hr-8"></div>
+<br />
+<p>
+Tooltip and popover extra options:
+<div class="well well-sm">
+  <code>.tooltip-error</code> <code>.tooltip-warning</code>
+  <code>.tooltip-info</code> <code>.tooltip-success</code>
+</div>
+<pre class="prettyprint linenums">
+&lt;a href="#" title="error message" class="my-tooltip-link tooltip-error"&gt;
+ Show Tooltip
+&lt;/a&gt;
+</pre>
+Please note that when enabling tooltips for an element, if you want to use the above mentioned colors, 
+the <code>container</code> option should not be used.
+<pre class="prettyprint linenums">
+//This won't work with '.tooltip-error', etc
+$('.my-tooltip-link').tooltip({ container:'body' , placement:'top' });
+
+//Don't specify the 'container' so that tooltip gets inserted after our element
+$('.my-tooltip-link').tooltip({ placement:'top' });
+</pre>
+
+<div class="well">
+ <span class="label label-important arrowed-right middle"> Note </span>
+ If you want to use a tooltip inside a modal dialog, again you shouldn't use the <code>container</code> option of the tooltip.
+ <br />
+ Because it will appear below our modal box as the CSS <code>z-index</code> value of "tooltips" is defined less than that of "modals".
+</div>
+<div class="well">
+ <span class="label label-success arrowed-right middle"> On the other hand </span>
+ If for example you want to show a tooltip inside a tab or accordion, and the tooltip text is long and doesn't fit the container's width or height, it may be hidden or cause scrollbars on the container.
+ <br />
+ In this case, it's better to use the <code>container</code> option and set it to <code>body</code> so the tooltip is not a child of that tab or accordion and will be shown with no problems for the container.
+</div>
+
+
+<div class="hr hr-8"></div>
+<br />
+<p>
+jQuery UI slider also come with some extra classes:
+<div class="well well-sm">
+  <code>.slider-green</code> <code>.slider-red</code>
+  <code>.slider-purple</code> <code>.slider-orange</code>
+  <code>.slider-dark</code> <code>.slider-pink</code>
+  <br />
+  <code>.ui-slider-small</code>
+</div>
+<pre class="prettyprint linenums">
+&lt;span class="ui-slider-green"&gt;&lt;/span&gt;
+</pre>
+
+</section>
+
+
+<div class="hr hr-double hr32"></div>
+		
+		
+<section id="pages">
+  <div class="page-header">
+	<h1><i class="icon-copy blue"></i> Pages</h1>
+  </div>
+
+          <h2 class="header blue lighter">Dashboard Elements</h2>
+		  <h4 class="grey">Info and Stats</h4>
+		  
+		  	<div class="bs-docs-example" data-text="Infobox Example">
+<pre class="prettyprint linenums">
+&lt;div class="infobox infobox-green"&gt;
+	&lt;div class="infobox-icon"&gt;&lt;i class="icon-comments"&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="infobox-data"&gt;
+		&lt;span class="infobox-data-number"&gt;32&lt;/span&gt;
+		&lt;span class="infobox-content"&gt;comments + 2 reviews&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div class="stat stat-success"&gt;8%&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+
+
+    <div class="infobox infobox-green">
+		<div class="infobox-icon"><i class="icon-comments"></i></div>
+		<div class="infobox-data">
+			<span class="infobox-data-number">32</span>
+			<span class="infobox-content">comments + 2 reviews</span>
+		</div>
+		<div class="stat stat-success">8%</div>
+    </div>
+	
+	<div class="infobox infobox-blue infobox-dark">
+		<div class="infobox-icon"><i class="icon-comments"></i></div>
+		<div class="infobox-data">
+			<span class="infobox-data-number">32</span>
+			<span class="infobox-content">comments + 2 reviews</span>
+		</div>
+		<div class="badge badge-success">8% <i class="icon-arrow-up"></i></div>
+    </div>
+</div>
+			
+			<p>
+				It can have the following color classes: (Please see <code>assets/css/less/infobox.less</code>)
+				<ul class="inline">
+					<li><code>.infobox-green</code></li>
+					<li><code>.infobox-green2</code></li>
+					<li><code>.infobox-purple</code></li>
+					<li><code>.infobox-purple2</code></li>
+					<li><code>.infobox-pink</code></li>
+					<li><code>.infobox-blue</code></li>
+					<li><code>.infobox-blue2</code></li>
+					<li><code>.infobox-blue3</code></li>
+					<li><code>.infobox-brown</code></li>
+					<li><code>.infobox-wood</code></li>
+					<li><code>.infobox-lightbrown</code></li>
+					<li><code>.infobox-orange</code></li>
+					<li><code>.infobox-orange2</code></li>
+					<li><code>.infobox-grey</code></li>
+					<li><code>.infobox-black</code></li>
+				</ul>
+			</p>
+			<p>
+				You can use <code>.infobox-dark</code> for a darker box and <code>.infobox-small</code> for a smaller box.
+			</p>
+			
+			<p>
+				<code>.infobox-icon</code> <code>.infobox-chart</code> <code>.infobox-progress</code> 
+				containers are for placing icons and charts.
+			</p>
+			
+			<p>
+				<code>.infobox-data-number</code> <code>.infobox-text</code> are for title and <code>.infobox-content</code> is for extra explanation.
+			</p>
+			
+			<p>
+				<code>.stat</code> and <code>.badge</code> is for the small stats and arrows.
+			</p>
+			
+			<div class="space"></div>
+			
+			<div class="well">
+				<span class="label label-important arrowed-right">Note</span>
+				View <code>mustache/app/views/pages/partials/index/infobox.mustache</code> for more info.
+			</div>
+			
+			<div class="hr hr-16"></div>
+			
+			<h4 class="grey">Conversations, Tasks and Members</h4>
+			For more info please check the relevant mustache templates in here:
+			<code>mustache/app/views/pages/partials/index</code>
+
+	
+		<div class="hr hr-double hr-32"></div>
+
+
+		  <h2 class="blue lighter header">Widgets</h2>
+		  		  	<div class="bs-docs-example" data-text="Default Widget Example">
+<pre class="prettyprint linenums">
+&lt;div class="widget-box"&gt;
+
+ &lt;div class="widget-header"&gt;
+   &lt;h5&gt;Default Widget Box&lt;/h5&gt;
+   &lt;div class="widget-toolbar"&gt;
+	  &lt;a data-action="settings" href="#"&gt;&lt;i class="icon-cog"&gt;&lt;/i&gt;&lt;/a&gt;
+	  &lt;a data-action="reload" href="#"&gt;&lt;i class="icon-refresh"&gt;&lt;/i&gt;&lt;/a&gt;
+	  &lt;a data-action="collapse" href="#"&gt;&lt;i class="icon-chevron-up"&gt;&lt;/i&gt;&lt;/a&gt;
+	  &lt;a data-action="close" href="#"&gt;&lt;i class="icon-remove"&gt;&lt;/i&gt;&lt;/a&gt;
+   &lt;/div&gt;
+ &lt;/div&gt;&lt;!--/.widget-header --&gt;
+
+ &lt;div class="widget-body"&gt;
+  &lt;div class="widget-main"&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;&lt;!--/.widget-body --&gt;
+
+&lt;/div&gt;&lt;!--/.widget-box --&gt;
+</pre>
+
+
+			</div>
+		  
+			<code>.widget-header"</code> comes with following classes:
+			<div class="space-2"></div>
+			<div class="well well-sm">
+			<code>.widget-header-small</code> <code>.widget-header-large</code>
+			<code>.widget-header-flat</code>
+			<code>.header-color-blue</code> <code>.header-color-blue2</code> <code>.header-color-blue3</code>
+			<code>.header-color-green</code> <code>.header-color-green2</code> <code>.header-color-green3</code>
+			<code>.header-color-red</code> <code>.header-color-red2</code> <code>.header-color-red3</code>
+			<code>.header-color-orange</code> <code>.header-color-purple</code> <code>.header-color-pink</code>
+			<code>.header-color-dark</code> <code>.header-color-grey</code>
+		    </div>
+		  
+		  
+		  <code>.widget-box</code> can come with following classes:
+		  <div class="space-2"></div>
+		  <div class="well well-sm">
+		   <code>.transparent</code> <code>.light-border</code> <code>.no-border</code>
+		  </div>
+		  
+		  <code>.widget-main</code> can come with following paddings:
+		  <div class="space-2"></div>
+		  <div class="well well-sm">
+			<code>.no-padding</code> <code>.padding-2</code> <code>.padding-4</code> &nbsp; ... &nbsp; <code>.padding-32</code>
+		  </div>
+		   For example when putting a table inside the widget you may want to use <code>.no-padding</code>
+		  
+		  <hr />
+		  <br />
+		   <p>
+			<code>.widget-toolbar</code> example:
+			<div class="bs-docs-example" data-text="Widget Toolbar With Tabs">
+<pre class="prettyprint linenums">
+
+&lt;div class="widget-header header-color-pink"&gt;
+   &lt;h5&gt;With Tabs&lt;/h5&gt;
+   &lt;div class="widget-toolbar no-border"&gt;
+	&lt;ul class="nav nav-tabs"&gt;
+	  &lt;li class="active"&gt;&lt;a href="#tab1" data-toggle="tab"&gt;Tab 1&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href="#tab2" data-toggle="tab"&gt;Tab 2&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href="#tab3" data-toggle="tab"&gt;Tab 3&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+   &lt;/div&gt;
+&lt;/div&gt;&lt;!-- .widget-header --&gt;
+
+</pre>
+			</div>
+		   </p>
+		   
+		<div class="hr hr-32"></div>
+		   
+		<h2 class="blue lighter header">Gallery</h2>
+		 <p>
+			Gallery items can have tags (inside <code>li</code> or <code>a</code>), captions (inside <code>a</code> or stand alone) and a toolbar.
+			<div class="bs-docs-example" data-text="Sample Gallery Item">
+<pre class="prettyprint linenums">
+&lt;ul class="ace-thumbnails"&gt;
+
+&lt;li&gt;
+ &lt;a href="image-1.jpg" title="title" data-rel="gallery1"&gt;
+    &lt;img alt="150" src="thumb-1.jpg" /&gt;
+ &lt;/a&gt;
+ &lt;div class="tags"&gt;
+    &lt;span class="label label-info"&gt;breakfast&lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div class="tools"&gt;
+    &lt;a href="#"&gt;&lt;i class="icon-link"&gt;&lt;/i&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;i class="icon-remove"&gt;&lt;/i&gt;&lt;/a&gt;
+ &lt;/div&gt;
+&lt;/li&gt;
+
+
+&lt;li&gt;
+ &lt;a href="image-2.jpg" data-rel="gallery1"&gt;
+   &lt;img alt="150" src="{thumb-2.jpg"&gt;
+   &lt;div class="text"&gt;
+	&lt;div class="inner"&gt;Sample Caption on Hover&lt;/div&gt;
+   &lt;/div&gt;
+ &lt;/a&gt;
+&lt;/li&gt;
+.
+.
+.
+
+&lt;/ul&gt;
+</pre>
+			
+			</div>
+
+		 </p>
+
+		<div class="hr hr-32"></div>
+		 
+		 <h2 class="header lighter blue">Pricing Tables</h2>
+		 <p> Pricing Tables come in two sizes, small and large and are based on widget boxes:
+		 </p>
+		 <div class="bs-docs-example" data-text="Large Pricing Box">
+<pre class="prettyprint linenums">
+&lt;div class="widget-box <b class="bigger-125">pricing-box</b>"&gt;
+&lt;/div&gt;
+</pre>
+		 </div>
+		 
+		 <div class="bs-docs-example" data-text="Small Pricing Box">
+
+
+For more info please check the relevant mustache templates at:
+<code>mustache/app/views/pages/pricing.mustache</code>
+<br />
+<code>mustache/app/views/pages/partials/pricing</code>
+
+
+		 </div>
+		 
+		<div class="hr hr-32"></div>
+		 
+		 <h2 class="header lighter blue">Invoice</h2>
+		 <p>
+			Invoice page also basically consistes of a <code>.widget-box</code>.
+			<br />
+			The following classes are used:
+			<code>.invoice-box</code>  <code>.invoice-info</code> <code>.invoice-info-label</code>
+			<br />
+			<p>
+			For more info please check the relevant mustache at:
+			<br />
+			<code>mustache/app/views/pages/invoice.mustache</code>
+		 </p>
+		 
+		<div class="hr hr-32"></div>
+		 
+		<h2 class="header lighter blue">Login & Register</h2>
+		 <p>
+			It also is based on <code>.widget-box</code> and you can see the following template for more info:
+			<code>mustache/app/views/pages/partials/login</code>
+		 </p>
+	
+        </section>
+
+
+		<div class="hr hr-32"></div>
+
+	   <h2 class="header lighter blue">User Profile Page</h2> 
+	   There are 3 profile pages included which mostly use the general elements with some extra additions.
+	   For more info take a look at:<br />
+	   <code>mustache/app/views/pages/partials/profile/style_1.mustache</code>
+	   <p>
+	   <code>mustache/app/views/pages/partials/profile/style_2.mustache</code>
+	   <br />
+	   <code>mustache/app/views/pages/partials/profile/style_3.mustache</code>
+	   <br />
+	   
+	  
+ 	   <p>
+	   The general container for profile has the class name <code>.user-profile</code>
+	   <br />
+	   The profile photo is <code>.profile-picture</code>
+	   <br />
+	   The user info container is <code>.profile-contact-info</code> and when striped it has <code>.profile-user-info-striped</code> as well.
+	   <br />
+	   Each user info row is <code>.profile-info-row</code>, each info name is <code>.profile-info-name</code> and info value is <code>.profile-info-value</code>
+	   <br />
+	   
+	   <p>
+	   The recent profile activity container is <code>.profile-feed</code> and each item is <code>.profile-activity</code> as you can see in:
+	   <code>mustache/app/views/pages/partials/profile/activity.mustache</code>
+	   
+	   <p>
+		In the second profile style, there are also user skills,
+		which are contained by <code>.profile-skills</code> and also the <code>.profile-users</code> container which is the friends section.
+		<p>
+		
+		The third profile style in inside a <code>.tab-content</code> with the extra <code>.profile-edit-tab-content</code> class.
+		
+		<p>
+		Please check the relevant templates at <br />
+		<code>mustache/app/views/pages/partials/profile</code>
+		and LESS file at <code>assets/css/less/page.profile.less</code> for more info.
+		
+		
+		
+		
+		
+		<div class="hr hr-32"></div>
+
+	   <h2 class="header lighter blue">Inbox & Messages</h2> 
+		Please check the relevant templates at <br />
+		<code>mustache/app/views/pages/partials/inbox</code>
+		and LESS file at <code>assets/css/less/page.inbox.less</code> for more info.
+	   
+	  
+ 	   <p>
+	   You can use smaller tabs by removing <code>.tab-size-larger</code> class from the relevant <code>.nav-tabs</code>.
+	   <br />
+	   Or you can remove tabs and use inbox menus like this:
+	   
+	   		 <div class="bs-docs-example" data-text="Inbox menu without tabs">
+<pre class="prettyprint linenums">
+&lt;div class="col-xs-2 inbox-menu"&gt;
+
+ &lt;div class="center"&gt;
+    &lt;a href="#" class="btn btn-sm btn-purple btn-new-mail"&gt;
+       &lt;i class="icon-envelope"&gt;&lt;/i&gt;
+       Write Mail
+    &lt;/a&gt;
+ &lt;/div&gt;
+
+ &lt;div class="space-6"&gt;&lt;/div&gt;
+ 
+ &lt;div class="inbox-folders responsive"&gt;
+
+  &lt;a href="#" class="align-left btn btn-sm btn-block no-border btn-lighter active"&gt;
+      &lt;i class="icon-inbox blue bigger-110"&gt;&lt;/i&gt;
+      &lt;span class="bigger-110"&gt;Inbox&lt;/span&gt;
+      &lt;span class="badge badge-primary counter"&gt;2&lt;/span&gt;
+  &lt;/a&gt;
+  
+  &lt;a href="#" class="align-left btn btn-sm btn-block no-border btn-lighter active"&gt;
+      &lt;i class="icon-inbox blue bigger-110"&gt;&lt;/i&gt;
+      &lt;span class="bigger-110"&gt;Sent&lt;/span&gt;
+      &lt;span class="badge badge-primary counter"&gt;2&lt;/span&gt;
+  &lt;/a&gt;
+
+ &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="col-xs-10"&gt;
+ &lt;!-- messages --&gt;
+&lt;/div&gt;
+</pre>
+
+	 </div>
+
+<hr />
+
+<i class="icon-hand-right blue bigger-120"></i> You can also make inbox messages more compact by adding <code>.message-condensed</code> class to <code>.message-container</code> element.
+
+
+	 
+	 
+		<div class="hr hr-32"></div>
+
+	   <h2 class="header lighter blue">Timeline</h2> 
+		Widget boxes are used for timelines. <br />
+		Default timeline items use <code>.transparent.widget-box</code> elements.
+		<br />
+		Please see <code>mustache/app/views/pages/partials/timeline</code> for more details.
+</section>
+
+
+
+<div class="hr hr-32 hr-double"></div>
+
+
+		  
+<section id="forms">
+  <div class="page-header">
+	<h1><i class="icon-edit green"></i> Forms & Elements</h1>
+  </div>
+	
+          <h2 class="header lighter blue">CSS3 Checkbox, Radio and On/Off Switches</h2>
+		  <p>
+			Ace comes with Pure CSS3 styled checkbox without any javascript. Switches are also animated on supported browsers such as Firefox and Chrome.
+			It also falls back to default browser style on IE8.
+		  </p>
+		  
+		  <div class="alert alert-danger alert-block">
+			<span class="dark">
+				<i class="icon-hand-right bigger-110 blue"></i> Please note that, from v1.1.3, you should add <b class="green">".ace"</b> class to input/radio elements to have them styled.
+			</span>
+		  </div>
+		  
+		  <p>
+		 <div class="bs-docs-example" data-text="Checkbox Sample">
+<pre class="prettyprint linenums">
+&lt;input type="checkbox" id="checkbox1" class="ace" /&gt;
+&lt;label class="lbl" for="checkbox1"&gt; check me&lt;/label&gt;
+
+&lt;label&gt;
+  &lt;input type="checkbox" class="ace" /&gt;
+  &lt;span class="lbl"&gt; check me&lt;/span&gt;
+&lt;/label&gt;
+
+
+&lt;input type="radio" name="radio_field[]" value="1" class="ace" /&gt;
+&lt;label class="lbl" for="checkbox1"&gt; radio option 1&lt;/label&gt;
+
+&lt;input type="radio" name="radio_field[]" value="2" class="ace" /&gt;
+&lt;label class="lbl" for="checkbox1"&gt; radio option 2&lt;/label&gt;
+
+&lt;input type="radio" name="radio_field[]" value="3" class="ace" /&gt;
+&lt;label class="lbl" for="checkbox1"&gt; radio option 3&lt;/label&gt;
+</pre>
+<input type="checkbox" id="checkbox1" class="ace" /> <label class="lbl" for="checkbox1"> check me</label>
+
+<div class="space-4"></div>
+<span class="label label-important arrowed-right">Note</span> You must include an element with <code>.lbl</code> class right after the checkbox or radio. It may or may not contain text.
+<br />
+Checkboxes have a second style which you should add <code>.ace-checkbox-2</code> class to the input element.
+		 </div>
+		 
+		 <div class="well">
+			If you've been using a function inside a server side script to produce the HTML for checkboxes, you may need to change them a bit to output an element with <code>.lbl</code> class after it.
+		 </div>
+		 
+		 
+		  <div class="bs-docs-example" data-text="Switch Sample">
+<pre class="prettyprint linenums">
+&lt;input type="checkbox" id="switch1" class="ace ace-switch" /&gt;
+&lt;label class="lbl" for="switch1"&gt;&lt;/label&gt;
+
+&lt;label&gt;
+  &lt;input type="checkbox" class="ace ace-switch ace-switch-6" /&gt;
+  &lt;span class="lbl"&gt; check me&lt;/span&gt;
+&lt;/label&gt;
+</pre>
+<input type="checkbox" class="ace ace-switch ace-switch-6" /> <label class="lbl">&nbsp;<code>.ace-switch.ace-switch-6</code></label>
+<br />
+Currently switches come in 7 styles: <code>.ace-switch</code> , <code>.ace-switch.ace-switch-2</code>, ... <code>.ace-switch-.ace-switch-7</code>
+		 </div>
+		 
+		  </p>
+		  
+		  <hr />
+		  <br />
+		  
+		  <h2 class="header lighter blue">Custom File Inputs</h2>
+		  <p>File input come in 2 different formats, small and large with drag & drop ability with some methods and callbacks.
+		  
+		  <p>
+		  The following options are available
+		  <ul class="spaced">
+		   <li>
+			<b>style</b> which is either <code>false</code> (the default one) or <code>well</code>
+			which is the larger one with preview and multiple file display.
+		   </li>
+		   <li>
+		    <b>no_file</b>, with default value <code>No File ...</code>
+		   </li>
+		   <li>
+		    <b>no_icon</b>, with default value <code>icon-upload-alt</code>
+		   </li>
+		   <li>
+		    <b>btn_choose</b>, with default value <code>Choose</code>
+		   </li>
+		   <li>
+		    <b>btn_change</b>, with default value <code>Change</code> (preferably set to <code>null</code> for <code>well</code> style)
+		   </li>
+		   <li>
+		    <b>icon_remove</b>, with default value <code>icon-remove</code>. Set to <code>null</code> if you don't want a remove/reset button.
+		   </li>
+		   <li>
+		    <b>droppable</b>. Default values <code>false</code>. Disable or enable drag & drop feature on the control.
+		   </li>
+		   <li>
+		    <b>thumbnail</b>. Determines how preview thumbnails are displayed. Default value is <code>small</code> with <code>large</code> and <code>fit</code> options.
+		   </li>
+		   
+		   
+		   <li>
+		    <b>before_remove</b>. Called before user clicks on remove/reset button. Return false to cancel remove or reset.
+		   </li>
+		   <li>
+		    <b>before_change</b>. Called after user selects or drops files and before <code>onchange</code> event is fired.
+			<br />
+			Returning <code>false</code> will cancel it and no files will be added to the control.
+			<br />
+			Returning a <code>FileList</code> object or an array containing <code>File</code> objects will change the control's file list accordingly.
+			<br />
+			See an example below.
+			<br />
+			<div class="well well-sm">
+				<span class="label label-important arrowed-right">Note</span> It's not possible to change the HTML file input control's value because of browser's security policies.
+				<br />
+				We can only reset it.
+				<br />
+				But when when change the file list inside <code>before_change</code> function, the new list will be saved to <b>ace_input_files</b> data object as described below.
+				<br />
+				See <code>form-elements.html</code> for an example as how to change & limit the selected files to images only.
+			</div>
+			
+		   </li>
+		   <li>
+		    <b>preview_error</b> will be called when making thumbnail preview of an image fails.
+			<br />
+			It takes two arguements, first is the file name and second is the error code specifying the type of error. (See example below)
+		   </li>
+		   </ul>
+		   
+		   <br />
+		   <p>
+		   The following methods are also supported:
+		   <ul class="spaced">
+		   <li>
+		    <b>reset_input</b> which resets the input and clears all previews and data inside it.
+		   </li>
+		   <li>
+		    <b>reset_input_field</b> which only resets the file input element.
+		   </li>
+		   <li>
+		    <b>disable</b>
+		   </li>
+		   <li>
+		    <b>enable</b>
+		   </li>
+		   <li>
+		    <b>update_settings</b>. You can use to change the input's settings, such as no_file, no_icon, btn_change, its callbacks, etc...
+		   </li>
+		   <li>
+		    <b>show_file_list</b>. It will redraw the list of files selected. Can be used after update_settings.
+		   </li>
+		   <li>
+		    <b>enable_reset</b>. Which takes either "false" or "true" and disables or enables "reset/remove" button functionality. Useful for disabling reset/remove during a file upload.
+		   </li>
+		   
+		   <li>
+		    <b>files</b>. Retrieve a list of selected files.
+		   </li>
+		   <li>
+		    <b> method</b>. Returns the method used to select files which is either "drop" or "select".
+		   </li>
+		   
+		  
+		   <div class="bs-docs-example" data-text="Simple File Input">
+			<pre class="prettyprint linenums">
+&lt;input type="file" id="file-input-1" /&gt;
+&lt;script&gt;
+$('#file-input-1').ace_file_input({
+   no_file:'No File ...',
+   btn_choose:'Choose',
+   btn_change:'Change'
+}).on('change', function(){
+	var files = $(this).data('ace_input_files');
+	//or
+	//var files = $(this).ace_file_input('files');
+
+	var method = $(this).data('ace_input_method');
+	//method will be either 'drop' or 'select'
+	//or
+	//var method = $(this).ace_file_input('method');
+};
+&lt;/script&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+  //after creating the ace input, you can use the following methods:
+  $('#file-input-1').ace_file_input('disable');
+  $('#file-input-1').ace_file_input('enable');
+  $('#file-input-1').ace_file_input('reset_input');
+  //etc
+</pre>
+</div>
+
+<div class="bs-docs-example" data-text="File Input With more options">
+<span class="label label-important arrowed-right">Note</span> Check <code>examples/file-upload.html</code> for a working example.
+<div class="space-2"></div>
+<pre class="prettyprint linenums">
+&lt;input type="file" multiple /&gt;
+&lt;script&gt;
+$('input[type=file][multiple]').ace_file_input({
+   style:'well',
+   btn_choose:'Drop images here or click to choose',
+   btn_change:null,/* we don't need it */
+   no_icon:'icon-cloud-upload',
+   droppable:true,
+   thumbnail:'large',
+   before_change:function(files, dropped) {
+     var file = files[0];
+     if(typeof file == "string") {
+     //file is just a file name here (in browsers that don't support FileReader API such as IE8)
+       if(! (/\.(jpe?g|png|gif)$/i).test(file) ) {
+        //not an image extension?
+        //alert user
+        return false;
+       }
+     }
+     else {
+       var type = $.trim(file.type);
+       if(
+          ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
+          || 
+          //for android's default browser!
+          ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )
+         )
+         {
+            //alert user
+            return false;
+         }
+
+         if( file.size > 1024*100 ) {
+            //is the file size larger than 100KB?
+            //alert user
+            return false;
+         }
+    }
+
+    return true;
+   },
+
+   before_remove:function() {
+     //if(upload_in_progress) return false;//don't allow resetting the file input while upload in progress
+     return true;
+   },
+
+   preview_error : function(filename, error_code) {
+     //name of the file that failed
+     //error_code values
+     //1 = 'FILE_LOAD_FAILED',
+     //2 = 'IMAGE_LOAD_FAILED',//the loaded file is not an image
+     //3 = 'THUMBNAIL_FAILED'//somehow creating the thumbnail failed.
+     //notify user?!
+   }
+
+});
+&lt;/script&gt;
+</pre>
+</div>
+					
+			<p>
+			When you want to upload the files you can use <code>ace_input_files</code> and <code>ace_input_method</code> data of the file element.
+			</p>
+			<p>
+			You can retrieve them like this:
+			<br />
+			<pre class="prettyprint linenums">
+var files = $('file input element').data('ace_input_files');
+// which is an Array or FileList containing the selected files.
+var method = $('file input element').data('ace_input_method');
+// which is either "drop" or "select" depending on how the user selected files.
+
+//OR
+
+var files = $('file input element').ace_file_input('files');
+var method = $('file input element').ace_file_input('method');
+</pre>
+			</p>
+			
+			<div class="well well-sm">
+				<span class="label label-important arrowed-right">Hint</span> For an example see the <code>examples/file-upload.html</code>
+			</div>
+			
+			<div class="well well-sm">
+				A working PHP example for handling the uploaded file from the file control in "file-upload.html" is available at
+				<code>examples/file-upload.php</code>
+			</div>
+
+
+			<hr />
+			<br />
+			
+			<h2 class="header blue lighter">Custom Color Picker</h2>
+
+<pre class="prettyprint linenums">
+&lt;select id="colorpicker" class="hidden"&gt;
+  &lt;option data-custom="val1" value="#AC725E"&gt;#AC725E&lt;/option&gt;
+  &lt;option data-custom="val2" value="#D06B64"&gt;#D06B64&lt;/option&gt;
+  .
+  .
+  .
+&lt;/select&gt;
+</pre>
+<pre class="prettyprint linenums">
+$('#colorpicker').ace_colorpicker({pull_right:false|true , caret:false|true})
+.on('change', function(){
+   /**
+    $(this).val();
+    $(this).data('custom');
+    etc ...
+   */
+});
+</pre>
+			
+
+<hr />
+<br />
+			
+<h2 class="header blue lighter">Inline Editable Plugin</h2>
+There are 4 custom additions to the editable plugin, including Image, Wysiwyg, Spinner and Slider editables.
+<p>
+They are defined inside <code>assets/js/x-editable/ace.editables.js</code>
+<p>
+Please check the <code>profile.html</code> or <code>mustache/app/views/assets/scripts/profile.js</code> for usage examples.
+<p>
+For the image editable plugin you can specify all ace file input options, as well as some extra options that you can see in the example file:
+<ul>
+	<li><b>name</b>: The name of the file input field is put here</li>
+	<li><b>max_size</b>: The maximum size of a file user can choose</li>
+	<li><b>on_error</b>: callback function called when an error occurs</li>
+	<li><b>on_success</b>: callback function called when a file is successfully selected</li>
+</ul>
+The <code>before_change</code> callback for this input has already been defined to accept images only, but you can override it:
+<pre class="prettyprint linenums">
+$('#avatar').editable({
+    type: 'image',
+    name: 'avatar',
+    value: null,
+    image: {
+        //specify ace file input options here
+        before_change: function(files, dropped) {
+         //this will override the one already defined which only accepts images.
+        },
+        //no_icon:'icon-picture',
+        //no_icon:'icon-picture',
+
+        //some additional parameteres
+        name : 'avatar',//put the field name here as well
+        max_size: 102400,//in byes
+        on_error: function(error_code) {
+            if(error_code == 1) {
+                //file format error
+            }
+            else if(error_code == 2) {
+                //file size error
+            } else {
+                //other error
+            }			
+        },
+        on_success: function() {
+           //a valid image selected
+        }
+
+    },
+    url: function(params) {
+       //user clicked "OK" and we are ready to upload
+       //Please see the example file here: examples/profile-avatar-update.js
+    }
+
+});
+</pre>
+			
+<hr />
+<br />
+			
+			<h2 class="header blue lighter">Wysiwyg editor</h2>
+			<div class="alert alert-info">
+				<i class="icon-hand-right"></i>
+				Please see <b>examples/wysiwyg.html</b> for an example customizing wysiwyg element.
+			</div>
+			
+			Mindmup wysiwyg editor is a lightweight plugin taking advantage of HTML5, jQuery and Bootstrap
+			and is quite good in most cases, but it's not 
+			as feature rich as other well known plugins such as CKEditor or TinyMCE.
+			<br />
+			So I will add support for another plugin in upcoming updates.
+			<p>
+			<br />
+			You can use the following wrapper function to create a wysiwyg plugin:
+			<div class="bs-docs-example" data-text="Wizard Example">
+<pre class="prettyprint linenums">
+&lt;div id="editor-1"&gt;&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+$('#editor-1').ace_wysiwyg()
+</pre>
+This will create the default editor will all options available.
+</div>
+
+<br />
+You can choose to have a limited set of buttons with different icons, tooltips or button classes:
+<pre class="prettyprint linenums">
+$('#editor-1').ace_wysiwyg(
+ {
+  toolbar:
+   [
+    'bold',
+    {name:'italic', title:'Custom Title!', className:'btn-info'},//customize
+    'strikethrough',
+    'underline',
+    null,//null value creates some spacing between buttons (grouping)
+    'foreColor',
+    null,
+    'insertImage',
+    null,
+    {name:'createLink', placeholder:'Add a link', button_text:'Custom Button Text'}
+   ]
+   ,
+   speech_button : false//don't show the speech input button on Chrome
+   //,
+   //wysiwyg:{}//Specify the options to be passed to the plugin. Refer to plugin docs to see what parameteres it takes.
+   //,
+   //toolbar_place : function(toolbar) {}//see below
+ }
+)
+.prev().addClass('wysiwyg-style2');//use the second wyswiyg toolbar style here
+</pre>
+<p>
+By default the created toolbar will be inserted right before the editor element,
+but you can choose a different place.
+<br />
+For example you may want to put it inside the header of a widget box:
+<pre class="prettyprint linenums">
+toolbar_place: function(toolbar) {
+    return $(this).closest('.widget-box').find('.widget-header').prepend(toolbar);
+}
+</pre>
+Now the toolbar for this instance of wysiwyg editor will be inside the specifed widget header.
+
+<div class="well">
+ When you insert an image inside the editor, Firefox allows resizing of it. But Webkit based browsers don't
+ show such ability.
+ <br />
+ Using jQuery UI Resizable feature, you can add resize ability.
+ <br />
+ I've put an example on wysiwyg page which you can see on bottom of wysiwyg.html page or the relevant inline script file
+ <code>mustache/app/views/assets/scripts/wysiwyg.js</code>.
+</div>
+
+<div class="well">
+ Add <code>.wysiwyg-style1</code> or <code>.wysiwyg-style2</code> to <code>.wyswiyg-toolbar</code> element, for other toolbar styles.
+ <p>
+ <code>.wyswiyg-toolbar</code> is dynamically created and inserted before our editor element:
+<pre class="prettyprint linenums">
+ $('#editor-1').prev().addClass('wysiwyg-style2');
+</pre>
+</div>
+
+<hr />
+<br />
+
+			
+			<h2 class="header blue lighter">FuelUX Spinner</h2>
+			FuelUX Spinner is used with a little extra wrapping for easier use and customiztion.
+			<div class="bs-docs-example" data-text="Spinner Example">
+<pre class="prettyprint linenums">
+&lt;input type="text" id="spinner" /&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+$('text field element').ace_spinner({
+  //FUEL_UX SPINNER options
+  // + custom ones
+  icon_up:'icon-plus',//default : 'icon-chevron-up'
+  icon_down:'icon-minus',// default : 'icon-chevron-down'
+  btn_up_class:'btn-success',//default : ''
+  btn_down_class:'btn-danger',//default : ''
+  
+  on_sides: true,//will show decrement button on left and the other one on right
+  touch_spinner: true// will use larger buttons by default
+}).on('change', function(){
+	//alert($(this).val());
+});
+</pre>
+			</div>
+			
+		
+	<hr />
+	<br />
+			
+			<h2 class="header blue lighter">FuelUX Wizard</h2>
+			FuelUX Wizard is used with a little extra wrapping for easier use and customiztion.
+			<div class="well">
+				<span class="label label-important arrowed-right">Please Note</span>
+				You should add a selector to the steps indicator element:
+				<br />
+				<code>data-target="#step-container"</code>
+				<br /> and add the relevant data to the steps container:
+				<br />
+				<code>id="step-container"</code> 
+			</div>			
+			
+			<div class="bs-docs-example" data-text="Wizard Example">
+<pre class="prettyprint linenums">
+&lt;div data-target="#step-container" id="fuelux-wizard"&gt;
+  &lt;ul class="wizard-steps"&gt;
+    &lt;li data-target="#step1" class="active"&gt;
+      &lt;span class="step"&gt;1&lt;/span&gt;
+      &lt;span class="title"&gt;Step # 1&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li data-target="#step2"&gt;
+      &lt;span class="step"&gt;2&lt;/span&gt;
+      &lt;span class="title"&gt;Step # 2&lt;/span&gt;
+    &lt;/li&gt;
+    .
+    .
+    .
+  &lt;/ul&gt;
+&lt;/div&gt;&lt;!--/.row--&gt;
+
+&lt;div id="step-container" class="step-content position-relative"&gt;
+  &lt;div class="step-pane active" id="step1"&gt;
+    &lt;form id="form-1"&gt;
+    &lt/form&gt;
+  &lt;/div&gt;&lt;!--#step1--&gt;
+  
+  &lt;div class="step-pane active" id="step2"&gt;
+  &lt;/div&gt;&lt;!--#step2--&gt;
+    .
+    .
+    .
+&lt;/div&gt;&lt;!--/.step-content--&gt;
+
+&lt;div class="wizard-actions"&gt;
+  &lt;button class="btn btn-prev"&gt;
+    &lt;i class="icon-arrow-left"&gt;&lt;/i&gt;
+	Prev
+  &lt;/button&gt;
+  &lt;button class="btn btn-success btn-next" data-last="Finish "&gt;
+    Next
+    &lt;i class="icon-arrow-right icon-on-right"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+&lt;/div&gt;&lt;!--/.wizard-actions--&gt;
+</pre>
+
+
+<pre class="prettyprint linenums">
+$('#fuelux-wizard').ace_wizard().on('change', function(e, info){
+	if(info.step == 1 && !$('#form-1').valid()) return false;
+}).on('finished', function(){
+	alert('Success!');
+}).on('stepclick', function(){
+	//return false;//if you don't want users click on backward steps
+});
+</pre>
+			</div>
+
+			
+			
+  <hr />
+  <br />
+			
+			<h2 class="header lighter blue">FuelUX Treeview</h2>
+			FuelUX tree is used with a little extra wrapping and some extra options for easier use and customiztion.
+			<div class="bs-docs-example" data-text="Spinner Example">
+<pre class="prettyprint linenums">
+&lt;div id="tree1" class="tree"&gt;&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+$('#tree1').ace_tree({
+   dataSource: treeDataSource ,
+   multiSelect:true,
+   loadingHTML:'&lt;div class="tree-loading"&gt;&lt;i class="icon-refresh icon-spin blue"&gt;&lt;/i&gt;&lt;/div&gt;',
+   'open-icon' : 'icon-minus',
+   'close-icon' : 'icon-plus',
+   'selectable' : true,//or false
+   'selected-icon' : 'icon-ok',
+   'unselected-icon' : 'icon-remove'
+});
+</pre>
+<div class="well well-sm">
+ Check out <code>examples/treeview.html</code> for an example.
+</div>
+
+			</div>
+			
+			
+			
+			<hr />
+			<br />
+			
+			<h2 class="header lighter blue">Bootstrap Tag Input</h2>
+			Not working in IE8. Can be replaced by a textarea on IE8. <br />
+			Please check the 
+			 <code>mustache/app/views/assets/scripts/form-elements.js</code> to see an example.
+
+        </section>
+
+
+			<div class="hr hr-32 hr-double"></div>
+		
+		  
+		  <section id="settings">
+		  
+		  <h1 class="grey"><i class="icon-cog pink"></i> Settings</h1>
+		  
+		  <h2 class="header lighter blue">Cookies & localStorage</h2> 
+		  Cookie and localStorage functionality has been added to save/load variables and settings.
+		  <br />
+		  The functions are defined in <code>ace-extra.js</code>
+		  <br />
+<pre class="prettyprint linenums">
+//cookie functions
+ace.cookie.set(name, value, expires, path, domain, secure);
+ace.cookie.get(name);
+ace.cookie.remove(name, path);
+
+//localStorage functions
+ace.storage.set(key, value);
+ace.storage.get(key);
+ace.storage.remove(key);
+</pre>
+
+		<code>ace.data_storage</code> is a wrapper which by default chooses localStorage if available.
+		Otherwise it will use cookies for saving data.
+		<br />
+		But you can change that by specifying an arguement.
+		<br />
+		Inside <code>ace-extra.js</code>, <code>ace.data</code> is initiated and used to save and retrieve settings.
+
+<pre class="prettyprint linenums">
+ace.data = new ace.data_storage(2);//use cookies
+ace.data = new ace.data_storage(1);//or use localStorage
+ace.data = new ace.data_storage();//or use localStorage if available otherwise use cookies
+
+ace.data.set(namespace, key, value);
+//for example
+ace.data.set('settings', 'sidebar-collapsed', 1);
+ace.data.get('settings', 'sidebar-collapsed');
+
+//without namespace
+ace.data.set('username', 'alex');
+ace.data.get('username');
+
+//remove
+ace.data.remove('settings', 'sidebar-collapsed');
+ace.data.remove('username');
+</pre>
+
+<p>
+Currently 4 settings are saved:
+<ol>
+ <li><code>#navbar</code> fixed status</li>
+ <li><code>#sidebar</code> fixed status</li>
+ <li><code>#sidebar</code> collapsed status</li>
+ <li><code>#breadcrumbs</code> fixed status</li>
+</ol>
+
+The script to restore user saved settings is placed immediately after the relevant element's HTML code.
+<br />
+This will cause the element's status be restored as soon as it is inserted into DOM.
+<br />
+If you call the functions after the page is loaded, for example in jQuery's document ready event, there may be a delay between the initial state and the saved state.
+<br />
+It may not be noticeable for fixed navbar, etc, but for collapsed sidebar or other settings, it can be noticeable.
+<br />
+Currently it's done like this:
+<div class="bs-docs-example" data-text="Navbar Settings">
+<pre class="prettyprint linenums">
+&lt;div class="navbar" id="navbar"&gt;
+ &lt;script type="text/javascript"&gt;
+    try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+ &lt;/script&gt;
+ ...
+&lt;/div&gt;
+</pre>
+
+The code is put inside <b>try/catch</b> block, so that there are no problems in case you don't want to include and use <code>ace-extra.js</code>.
+</div>
+
+<div class="bs-docs-example" data-text="Sidebar Settings">
+<pre class="prettyprint linenums">
+&lt;div class="sidebar" id="sidebar"&gt;
+  &lt;script type="text/javascript"&gt;
+    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+  &lt;/script&gt;
+  
+  ...
+  //sidenav items here
+
+  &lt;div class="sidebar-collapse" id="sidebar-collapse"&gt;
+    &lt;i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+
+  &lt;script type="text/javascript"&gt;
+    try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+  &lt;/script&gt;
+&lt;/div&gt;
+</pre>
+
+Please note that the <code>#sidebar-collapse</code> icon, has two attributes <code>data-icon1</code> and <code>data-icon2</code>,
+which determine the button's icon in expanded/collapsed state.
+</div>
+
+<div class="bs-docs-example" data-text="Breadcrumbs Settings">
+<pre class="prettyprint linenums">
+&lt;div class="breadcrumbs" id="breadcrumbs"&gt;
+  &lt;script type="text/javascript"&gt;
+    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+  &lt;/script&gt;
+  ...
+&lt;/div&gt;
+</pre>
+</div>		  
+		  
+		  
+		  <hr />
+		  <h2 class="blue">Hard coding settings inside HTML</h2>
+		  <p>
+		   In your application you can set some settings in a static way:
+		   
+		   <ul class="spaced">
+		   <li>
+			<i>For fixed navbar:</i>
+			<br />
+			Add <code>.navbar-fixed-top</code> class to <code>#navbar</code> (.navbar) element.
+			<br />
+			Add <code>.navbar-fixed</code> class to <code>body</code>element.
+		   </li>
+		   
+		    <li>
+			<i>For fixed sidebar:</i>
+			<br />
+			Add <code>.sidebar-fixed</code> class to <code>#sidebar</code>.
+		   </li>
+		   
+		    <li>
+			<i>For collapsed sidebar:</i>
+			<br />
+			Add <code>.menu-min</code> class to <code>#sidebar</code>.
+		   </li>
+		   
+		    <li>
+			<i>For fixed breadcrumbs:</i>
+			<br />
+			Add <code>.breadcrumbs-fixed</code> class to <code>#breadcrumbs</code> element.
+			<br />
+			Add <code>.breadcrumbs-fixed</code> class to <code>body</code>element.
+		   </li>
+		   
+		   
+		    <li>
+			<i>For skins:</i>
+			<br />
+			Add <code>.skin-1</code> <code>.skin-2</code> <code>.skin-3</code> class to <code>body</code> element.
+		   </li>
+		   
+		   </ul>
+
+		  
+		  <p>
+		  You may notice when you choose a skin, the top user menu buttons (<code>.ace-nav > li</code>) change their color.
+		  <br />
+		  This is not dependent on the skin. The color class of the buttons is changed via Javascript.
+		   </p>
+		   
+		   <div class="well">
+			<span class="label label-important arrowed-right">Note</span>
+			You can also use server side solutions to save/load user settings across browsers and devices using sessions and databases.
+		   </div>
+
+		  
+		  <hr />
+		  <br />
+		  
+		  
+		 <h2 class="header lighter blue">RTL</h2> 
+		 RTL support is for Right to Left Languages such as Hebrew, Arabic and Persian.
+		 <p>
+		 If you don't need it, you can comment the "rtl.less" line in "ace.less" and compile to generate CSS without RTL for a smaller file size.
+		 <p>
+		 Clicking the setting button makes the changes dynamically.
+		 <div class="well well-sm">
+			<span class="label label-important arrowed-right">Note</span>
+			To see what changes should be made for RTL support, please see the <code><b>switch_direction</b></code> function inside <code>assets/js/uncompressed/ace.js</code>
+		 </div>
+		 
+		 <p>
+		 But to hardcode in your application, in order to use RTL feature you should add the <code>.rtl</code> class to your body tag element:
+<pre class="prettyprint linenums">
+&lt;body class="rtl"&gt;
+</pre>
+Inside your HTML code you should also make the following changes:
+<ul class="spaced2">
+ <li>
+  For every <code>.dropdown-menu</code> toggle the <code>.pull-right</code> class.
+  <br />
+  That is, use the <code>.pull-right</code> whenever you don't in LTR mode and remove <code>.pull-right</code> when you normally use it in LTR mode.
+ </li>
+ 
+ <li>Use <code>.pull-right</code> whenever you used <code>.pull-left</code> for an LTR document, except for the following:
+	<ul>
+		<li>
+			<code>.dropdown-menu</code> <code>blockquote</code>
+			<code>.dropdown-submenu</code>
+			<code>.profile-skills .pull-right</code>
+		</li>
+	</ul>
+ </li>
+ 
+ <li>Use <code>.pull-left</code> instead of <code>pull-right</code> elements</li>
+
+ 
+ <li>When drawing charts using flot charts library you may need to choose a different "position" parameter for better display.</li>
+ <li>Add <code>.chosen-rtl</code> to select elements when using Chosen plugin</li>
+ 
+ <li>For <b>FullCalendar</b> plugin set the <code>isRTL</code> option to <code>true</code></li>
+ <li>For <b>jqGrid</b> plugin set the <code>direction</code> option to <code>rtl</code></li>
+ 
+ <li>
+	You may swap the following classes in your code:
+	<br />
+	<code>.align-left</code> <i class="icon-retweet"></i> <code>.align-right</code>
+	<br />
+	<code>.arrowed</code> <i class="icon-retweet"></i> <code>.arrowed-right</code>
+	<br />
+	<code>.arrowed-in</code> <i class="icon-retweet"></i> <code>.arrowed-in-right</code>
+	<br />
+	<code>.messagebar-item-left</code> <i class="icon-retweet"></i> <code>.messagebar-item-right</code> for inbox page.
+ </li>
+ 
+ <li>Use <code>.pull-right</code> for the first <code>[class*="span"]</code> block inside <code>.control-group .controls</code>
+ <br />
+Example:
+<pre class="prettyprint linenums">
+&lt;div class="control-group"&gt;
+  &lt;div class="controls"&gt;
+    &lt;span class="span6 input-icon pull-right"&gt;
+        &lt;input type="text" class="span12"&gt;
+        &lt;i class="icon-warning-sign"&gt;&lt;/i&gt;
+    &lt;/span&gt;
+    &lt;span class="help-inline"&gt; message &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+ </li>
+ 
+</ul>
+</section>
+
+
+		 <div class="hr hr-double hr32"></div>
+
+
+		<section id="examples">
+          <div class="page-header">
+            <h1><i class="icon-book blue"></i> Examples</h1>
+          </div>
+		  
+		  I've included a few examples in the <b>examples</b> folder.
+		  <br />
+		  I will also add more in the future.
+		  <br />
+		  Please let me know if you think other examples could be useful.
+		
+		</section>
+		
+
+		 <div class="hr hr-double hr32"></div>
+		
+
+        <!-- Images
+        ================================================== -->
+        <section id="plugins">
+          <div class="page-header">
+            <h1><i class="icon-paper-clip"></i> Plugins</h1>
+          </div>
+		  
+		  The following libraries and plugins have been used to power different parts of Ace admin template.
+		  <br />
+		  You can find documentation and examples for each one on their respective pages or you may want to check out Ace html files for examples.
+		  <br />
+		  
+		  
+		  <ul class="list-unstyled spaced">
+			<li><i class="icon-angle-right"></i> jQuery 2.0.3 <a href="http://www.jquery.com/" target="_blank"><i class="icon-external-link"></i></a> </li>
+			<li><i class="icon-angle-right"></i> jQuery UI 1.10.3 (Custom Build) <a href="http://www.jqueryui.com/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Twitter Bootstrap 3.0.0 <a href="http://getbootstrap.com/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> FontAwesome 3.2.1 <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> LESS 1.4.1 <a href="http://lesscss.org/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Mustache <a href="http://mustache.github.io/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Twitter Hogan.js <a href="http://twitter.github.io/hogan.js/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Mustache.js <a href="https://github.com/janl/mustache.js/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Mustache for PHP <a href="https://github.com/bobthecow/mustache.php" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Google Fonts "Open Sans" <a href="http://www.google.com/fonts#UsePlace:use/Collection:Open+Sans" target="_blank"><i class="icon-external-link"></i></a></li>
+			
+			<li class="divider"></li>
+			
+			<li><i class="icon-angle-right"></i> jQuery Flot Charts 0.8.1 <a href="http://www.flotcharts.org/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery Sparklines 2.1.2 <a href="http://omnipotent.net/jquery.sparkline/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Easy Pie Chart 1.2.5 <a href="http://rendro.github.io/easy-pie-chart/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery Knob 1.2.0 <a href="http://anthonyterrien.com/knob/" target="_blank"><i class="icon-external-link"></i></a></li>
+
+			<li class="divider"></li>
+
+			<li><i class="icon-angle-right"></i> Mindmup Wysiwyg Editor <a href="http://mindmup.github.io/bootstrap-wysiwyg/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Toopay Markdown Editor 1.1.4 <a href="http://toopay.github.io/bootstrap-markdown/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery Validate 1.11.1 <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> FuelUX 2.3.0 (Spinner, Wizard & Treeview) <a href="http://exacttarget.github.io/fuelux/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Dropzone.js 3.0 <a href="http://www.dropzonejs.com/" target="_blank"><i class="icon-external-link"></i></a></li>
+
+			<li class="divider"></li>
+
+			<li><i class="icon-angle-right"></i> FullCalendar 1.6.4 <a href="http://arshaw.com/fullcalendar/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery ColorBox 1.4.27 <a href="http://www.jacklmoore.com/colorbox/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery dataTables 1.9.4 <a href="http://datatables.net/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery jqGrid 4.5.2 <a href="http://www.trirand.com/" target="_blank"><i class="icon-external-link"></i></a></li>
+
+			<li class="divider"></li>
+
+			<li><i class="icon-angle-right"></i> X-editable 1.4.6 <a href="http://vitalets.github.io/x-editable" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Select2 3.4.2 <a href="http://ivaynberg.github.io/select2/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery Chosen 1.0.0 <a href="http://harvesthq.github.io/chosen/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery Masked Input 1.3.1 <a href="http://digitalbush.com/projects/masked-input-plugin/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery Input Limiter 1.3.1 <a href="http://rustyjeans.com/jquery-plugins/input-limiter" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery AutoSize 1.17.7 <a href="http://www.jacklmoore.com/autosize/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Bootstrap Tags 2.2.5 <a href="https://github.com/fdeschenes/bootstrap-tag" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Nestable Lists <a href="http://dbushell.github.io/Nestable/" target="_blank"><i class="icon-external-link"></i></a></li>
+			
+			<li class="divider"></li>
+			
+			<li><i class="icon-angle-right"></i> Bootstrap Colorpicker <a href="http://www.eyecon.ro/bootstrap-colorpicker" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Bootstrap Datepicker <a href="http://eternicode.github.io/bootstrap-datepicker/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Bootstrap Timepicker v0.2.3 <a href="http://jdewit.github.io/bootstrap-timepicker/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Bootstrap DateRange Picker 1.2 <a href="https://github.com/dangrossman/bootstrap-daterangepicker" target="_blank"><i class="icon-external-link"></i></a></li>
+
+			<li class="divider"></li>
+			
+			<li><i class="icon-angle-right"></i> Bootbox.js 4 <a href="http://bootboxjs.com" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery Gritter 1.2 <a href="http://boedesign.com/2009/07/11/growl-for-jquery-gritter/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery slimScroll 1.2.0 <a href="http://rocha.la/jQuery-slimScroll" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Spin.js 1.3.0 <a href="http://fgnass.github.io/spin.js/" target="_blank"><i class="icon-external-link"></i></a></li>
+			
+			<li class="divider"></li>
+			
+			<li><i class="icon-angle-right"></i> jQuery Mobile 1.3.2 (Custom Build) <a href="http://jquerymobile.com/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> jQuery UI Touch Punch 0.2.2 <a href="http://touchpunch.furf.com/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> Google Code Prettify <a href="http://code.google.com/p/google-code-prettify/" target="_blank"><i class="icon-external-link"></i></a></li>
+			<li><i class="icon-angle-right"></i> ExplorerCanvas <a href="http://code.google.com/p/explorercanvas/" target="_blank"><i class="icon-external-link"></i></a></li>
+		  </ul>
+
+
+
+        </section>
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="bigger-150 dark"><span class="blue bigger-125">Ace</span> Admin Template &copy;2013</p>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<!--[if !IE]> -->
+	<script src="../assets/js/jquery-2.0.3.min.js"></script>
+	<!-- <![endif]-->
+	<!--[if IE 9]>
+	<script src="../assets/js/jquery-2.0.3.min.js"></script>
+	<![endif]-->
+	
+	<script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/prettify.js"></script>
+
+
+	<script>
+	$(function() {
+		var $window = $(window)
+		setTimeout(function () {
+		  $('.bs-docs-sidenav').affix({
+			offset: {
+			  top: function () { return $window.width() <= 980 ? 290 : 210 }
+			, bottom: 270
+			}
+		  })
+		}, 100)
+
+		// make code pretty
+		window.prettyPrint && prettyPrint()
+	});
+	</script>
+
+
+  </body>
+</html>

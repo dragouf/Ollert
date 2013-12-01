@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -36,5 +37,17 @@ namespace Ollert.Models
         public virtual ICollection<Fichier> Fichiers { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual Tableau Tableau { get; set; }
+        [NotMapped]
+        [DataMember]
+        public int TableauId
+        {
+            get
+            {
+                if (Tableau != null)
+                    return Tableau.Id;
+                else
+                    return -1;
+            }
+        }
     }
 }

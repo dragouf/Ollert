@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -20,5 +21,17 @@ namespace Ollert.Models
         [DataMember]
         public virtual OllertUser Utilisateur { get; set; }
         public virtual Carte Carte { get; set; }
+        [NotMapped]
+        [DataMember]
+        public int CarteId
+        {
+            get 
+            {
+                if (Carte != null)
+                    return Carte.Id;
+                else
+                    return -1;
+            }
+        }
     }
 }

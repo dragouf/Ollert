@@ -41,7 +41,7 @@ namespace Ollert.Api
         // PUT api/Carte/5
         public async Task<IHttpActionResult> PutCarte(int id, Carte carte)
         {
-            var carteBdd = await db.Cartes.FirstAsync(c => c.Id == id);
+            var carteBdd = await db.Cartes.Include(c => c.Tableau).FirstAsync(c => c.Id == id);
             
             if (!ModelState.IsValid)
             {
