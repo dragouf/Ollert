@@ -13,6 +13,7 @@ using Ollert.Models;
 using Ollert.DAL;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Ollert.Api
 {
@@ -25,10 +26,15 @@ namespace Ollert.Api
         public async Task<IEnumerable<Tableau>> GetTableaux()
         {
             var tableaux = await db.Tableaux
+                .OrderBy(t => t.Position)
                 .Include(i => i.Cartes)
+                //.Include(i => i.Cartes.Select(c => c.CartesVues))
                 .Include(i => i.Cartes.Select(c => c.Messages))
                 .Include(i => i.Cartes.Select(c => c.Messages.Select(m => m.Utilisateur)))
                 .ToListAsync();
+
+            Parallel.ForEach(tableaux, t => t.Cartes = t.Cartes.OrderBy(c => c.Position).ToList());
+            //Parallel.ForEach(tableaux, t => Parallel.ForEach(t.Cartes.ToList(), c => c.Messages = c.Messages.OrderByDescending(m => m.CreateOn).ToList()));
 
             return tableaux;
         }
@@ -92,6 +98,7 @@ namespace Ollert.Api
 
             // Retrouve le tableau
             var nouveauTableau = await db.Tableaux.FirstAsync(t => t.Id == deplacement.NouveauTableauId);
+            var ancienTableau = await db.Tableaux.FirstAsync(t => t.Id == deplacement.AncienTableauId);
 
             // Change le tableau de la carte
             carte.Tableau = nouveauTableau;
@@ -101,8 +108,8 @@ namespace Ollert.Api
             // Ajoute une notification
             await Ollert.Services.NotificationService.AddNotification<DeplacementModelView>(
                 "Deplacement de carte",
-                "La carte '{0}' a été deplacée vers '{1}' par {2}".FormatWith(carte.Titre, nouveauTableau.Nom, this.User.Identity.Name),
-                TypeNotification.Mouvement,
+                "La carte 'Demande {0}' a été deplacée de '{3}' vers '{1}' par {2}".FormatWith(carte.NumeroDemande, nouveauTableau.Nom, this.User.Identity.Name, ancienTableau.Nom),
+                TypeNotification.MouvementCarte,
                 deplacement);
 
             return StatusCode(HttpStatusCode.NoContent);

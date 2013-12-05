@@ -32,7 +32,9 @@ namespace Ollert.DAL
             //    .Map(t => t.MapLeftKey("CourseID")
             //        .MapRightKey("InstructorID")
             //        .ToTable("CourseInstructor"));
-
+            //var conv = new OneToManyCascadeDeleteConvention();
+            //conv.Apply(System.Data.Entity.Core.Metadata.Edm.AssociationType.Create())
+            modelBuilder.Conventions.Add<OneToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
         }
     }

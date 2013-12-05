@@ -45,6 +45,19 @@ namespace Ollert.Controllers
 
             return File(user.Avatar, "image/png");
         }
+
+        public async Task<ActionResult> UserLastSeen()
+        {
+            var db = new OllertDbContext();
+            string userId = this.User.Identity.GetUserId();
+            var currentUser = await db.Users.FirstAsync(u => u.Id == userId);
+            currentUser.LastViewed = DateTime.Now;
+            await db.SaveChangesAsync();
+
+            var result = Json(true);
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return result;
+        }
         #endregion
 
         #region File Management
@@ -75,7 +88,7 @@ namespace Ollert.Controllers
 
                 // Ajoute une notification
                 await Ollert.Services.NotificationService.AddNotification<Fichier>(
-                    "Fichier Ajouté", "{0} a ajouté un fichier a la carte : {1}".FormatWith(this.User.Identity.Name, carte.Titre), 
+                    "Fichier Ajouté", "{0} a ajouté un fichier a la carte : 'Demande {1}'".FormatWith(this.User.Identity.Name, carte.NumeroDemande), 
                     TypeNotification.AjoutFichier,
                     fichier);
             }

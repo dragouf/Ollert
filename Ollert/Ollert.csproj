@@ -213,7 +213,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\OllertConnection.cs" />
     <Compile Include="Hubs\OllertHub.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -238,6 +237,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dropzone.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\images\comment_add.png" />
+    <Content Include="Content\images\comment_trash.png" />
+    <Content Include="Content\images\note_add.png" />
+    <Content Include="Content\images\note_trash.png" />
     <Content Include="Content\images\notifyIcon.png" />
     <Content Include="Content\images\avatar\avatar1.png" />
     <Content Include="Content\images\avatar\avatar2.png" />
@@ -247,6 +250,10 @@
     <Content Include="Content\images\favicon.png" />
     <Content Include="Content\images\spritemap%402x.png" />
     <Content Include="Content\images\spritemap.png" />
+    <Content Include="Content\images\tag_add.png" />
+    <Content Include="Content\images\tag_info.png" />
+    <Content Include="Content\images\tag_move.png" />
+    <Content Include="Content\images\tag_trash.png" />
     <Content Include="Content\images\text_enriched.png" />
     <Content Include="Content\img\gritter-light.png" />
     <Content Include="Content\img\gritter-long.png" />

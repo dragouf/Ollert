@@ -12,13 +12,16 @@ namespace Ollert.Models
     public enum TypeNotification
     {
         NouveauMessage = 1,
-        Mouvement = 2,
+        SuppressionMessage = 8,
+
+        MouvementCarte = 2,
         NouvelleCarte = 3,
         EditionCarte = 4,
-        AjoutFichier = 5,
         SuppressionCarte = 6,
-        SuppressionFichier = 7,
-        SuppressionMessage = 8
+
+        AjoutFichier = 5,
+        SuppressionFichier = 7
+        
     }
     public class Notification : Ollert.Models.IEntity
     {
@@ -29,5 +32,6 @@ namespace Ollert.Models
         public string Titre { get; set; }
         public string Texte { get; set; }
         public DateTime Date { get; set; }
+        public virtual OllertUser Createur { get; set; }
     }
 }

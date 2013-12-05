@@ -13,7 +13,7 @@ namespace Ollert.Models
     {
         public CarteVue()
         {
-            this.CartesVues = new List<CarteVue>();
+            //this.CartesVues = new List<CarteVue>();
         }
 
         [Key]
@@ -21,6 +21,6 @@ namespace Ollert.Models
         public virtual OllertUser Utilisateur { get; set; }
         public virtual Carte Carte { get; set; }
         public DateTime DerniereConsultation { get; set; }
-        public virtual ICollection<CarteVue> CartesVues { get; set; }
+        //public virtual ICollection<CarteVue> CartesVues { get; set; }
     }
 }

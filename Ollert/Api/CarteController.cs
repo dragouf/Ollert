@@ -11,6 +11,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Ollert.Models;
 using Ollert.DAL;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Ollert.Api
 {
@@ -53,22 +55,53 @@ namespace Ollert.Api
                 return BadRequest();
             }
 
+            bool isModified = true;
+            if (carteBdd.NumeroDemande.Equals(carte.NumeroDemande) &&
+                carteBdd.Titre.Equals(carte.Titre) &&
+                carteBdd.Description.Equals(carte.Description) &&
+                carteBdd.Estimation.Equals(carte.Estimation))
+            {
+                isModified = false;
+            }
+
             carteBdd.NumeroDemande = carte.NumeroDemande;
             carteBdd.Titre = carte.Titre;
             carteBdd.Description = carte.Description;
             carteBdd.Estimation = carte.Estimation;
+            //carteBdd.LastTimeViewed = carte.LastTimeViewed;
 
-            //db.Entry(carte).State = EntityState.Modified;
+            string userId = this.User.Identity.GetUserId();
+            var carteVue = carteBdd.CartesVues.FirstOrDefault(c => c.Utilisateur.Id == userId);
+            if (carteVue != null)
+            {
+                carteVue.DerniereConsultation = carte.LastTimeViewed;
+            }
+            else
+            {
+                var currentUser = await db.Users.FirstAsync(u => u.Id == userId);
+
+                carteVue = new CarteVue
+                {
+                    DerniereConsultation = carte.LastTimeViewed,
+                    Utilisateur = currentUser
+                };
+
+                carteBdd.CartesVues.Add(carteVue);
+            }
 
             try
             {
+
                 await db.SaveChangesAsync();
 
-                // Ajoute une notification
-                await Ollert.Services.NotificationService.AddNotification<Carte>(
-                    "Carte Modifiée", "La carte '{0}' a été modifiée par {1}".FormatWith(carte.Titre, this.User.Identity.Name),
-                    TypeNotification.EditionCarte,
-                    carteBdd);
+                if (isModified)
+                {
+                    // Ajoute une notification
+                    await Ollert.Services.NotificationService.AddNotification<Carte>(
+                        "Carte Modifiée", "La carte 'Demande {0}' a été modifiée par {1}".FormatWith(carte.NumeroDemande, this.User.Identity.Name),
+                        TypeNotification.EditionCarte,
+                        carteBdd);
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -91,7 +124,7 @@ namespace Ollert.Api
         {
             // Add current date
             carte.DateCreation = DateTime.Now;
-            
+
             // find table
             var tableau = await db.Tableaux.FindAsync(carte.Tableau.Id);
 
@@ -103,12 +136,23 @@ namespace Ollert.Api
             // Add to correct table
             carte.Tableau = tableau;
 
+            // carte vue pour notification
+            var userId = this.User.Identity.GetUserId();
+            var currentUser = await db.Users.FirstAsync(u => u.Id == userId);
+            var carteVue = new CarteVue
+            {
+                DerniereConsultation = carte.LastTimeViewed,
+                Utilisateur = currentUser
+            };
+            carte.CartesVues.Clear(); // Il s' agit d' une nouvelle carte, la liste peut etre videe
+            carte.CartesVues.Add(carteVue);
+           
             db.Cartes.Add(carte);
             await db.SaveChangesAsync();
 
             // Ajoute une notification
             await Ollert.Services.NotificationService.AddNotification<Carte>(
-                "Carte Ajoutée", "La carte '{0}' a été ajouté par {1}".FormatWith(carte.Titre, this.User.Identity.Name),
+                "Carte Ajoutée", "La carte 'Demande {0}' a été ajouté par {1}".FormatWith(carte.NumeroDemande, this.User.Identity.Name),
                 TypeNotification.NouvelleCarte,
                 carte);
 
@@ -125,14 +169,14 @@ namespace Ollert.Api
                 return NotFound();
             }
 
-            db.Cartes.Remove(carte);
-            await db.SaveChangesAsync();
-
             // Ajoute une notification
             await Ollert.Services.NotificationService.AddNotification<Carte>(
-                "Carte Ajoutée", "La carte '{0}' a été supprimée par {1}".FormatWith(carte.Titre, this.User.Identity.Name),
+                "Carte Supprimée", "La carte 'Demande {0}' a été supprimée par {1}".FormatWith(carte.NumeroDemande, this.User.Identity.Name),
                 TypeNotification.SuppressionCarte,
                 carte);
+
+            db.Cartes.Remove(carte);
+            await db.SaveChangesAsync();
 
             return Ok(carte);
         }

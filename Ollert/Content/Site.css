@@ -291,7 +291,7 @@ ul.dropdown-navbar span.msg-title {
     line-height: 14px;
 }*/
 
-ul.dropdown-navbar i.icontype {
+/*ul.dropdown-navbar i.icontype {
     display: inline-block;
     font-size: 18px;
     min-height: 19px;
@@ -310,4 +310,69 @@ ul.dropdown-navbar span.msg-time {
 }
 ul.dropdown-navbar > li > a {
     padding: 7px 2px;
+}*/
+
+ul.dropdown-navbar {
+    width: 274px;
+}
+ul.dropdown-navbar div.msg-body {
+    max-width: 205px;
+}
+ul.dropdown-navbar > li:last-child > a {
+    border-bottom: inherit;
+    border-top: inherit;
+    color: inherit;
+    font-size: inherit;
+    text-align: inherit;
+}
+ul.dropdown-navbar > li:last-child > a {
+    clear: both;
+    color: #333333;
+    display: block;
+    font-weight: normal;
+    line-height: 1.42857;
+    white-space: nowrap;
+    border-bottom: 1px solid;
+    color: #555555;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+    padding: 10px 2px;
+    border-bottom: 0px solid;
+}
+ul.dropdown-navbar > li:last-child > a:active, ul.dropdown-navbar > li:last-child > a:hover, ul.dropdown-navbar > li:last-child > a:focus {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #555555;
+    text-decoration:none;
+}
+
+ul.dropdown-navbar > li > a > .user-notification, ul.dropdown-navbar > li:last-child > a > .user-notification {
+    color: #555555;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+ ul.dropdown-navbar > li > a > .user-notification .msg-title, ul.dropdown-navbar > li:last-child > a > .user-notification .msg-title {
+    padding-left:10px;
+}
+
+ ul.dropdown-navbar > li.notification {
+    background-color: #FFEADB;
+}
+
+ .clickable {
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.clickable:hover {
+  color: #0088CC;
+}
+
+div#gritter-notice-wrapper {
+    right: 12px;
+    top: 46px;
 }

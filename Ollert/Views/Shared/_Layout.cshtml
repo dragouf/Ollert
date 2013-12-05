@@ -27,92 +27,47 @@
                     <li class="grey">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-group"></i>
-                            <span class="badge badge-grey">0</span>
+                            <span class="badge badge-grey" data-bind="text: connectedUsers().length"></span>
                         </a>
 
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
                                 <i class="icon-ok"></i>
-                                0 Utilisateurs connectés
+                                <span data-bind="text: connectedUsers().length"></span> Utilisateurs connectés
                             </li>
 
+                            <!-- ko foreach: connectedUsers -->
                             <li>
                                 <a href="#">
-                                    <div class="clearfix">
-                                        <span class="pull-left">Software Update</span>
-                                        <span class="pull-right">65%</span>
-                                    </div>
-
-                                    <div class="progress progress-mini ">
-                                        <div style="width:65%" class="progress-bar "></div>
-                                    </div>
+                                    <img class="msg-photo" alt="Avatar" data-bind="attr: { src: avatarPath() }" />
+                                    <span class="msg-body user-notification">
+                                        <span class="msg-title">
+                                            <span class="blue" data-bind="text: name"></span>
+                                        </span>
+                                    </span>
                                 </a>
                             </li>
+                            <!-- /ko -->
 
-                            <li>
-                                <a href="#">
-                                    <div class="clearfix">
-                                        <span class="pull-left">Hardware Upgrade</span>
-                                        <span class="pull-right">35%</span>
-                                    </div>
-
-                                    <div class="progress progress-mini ">
-                                        <div style="width:35%" class="progress-bar progress-bar-danger"></div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="clearfix">
-                                        <span class="pull-left">Unit Testing</span>
-                                        <span class="pull-right">15%</span>
-                                    </div>
-
-                                    <div class="progress progress-mini ">
-                                        <div style="width:15%" class="progress-bar progress-bar-warning"></div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="clearfix">
-                                        <span class="pull-left">Bug Fixes</span>
-                                        <span class="pull-right">90%</span>
-                                    </div>
-
-                                    <div class="progress progress-mini progress-striped active">
-                                        <div style="width:90%" class="progress-bar progress-bar-success"></div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    See tasks with details
-                                    <i class="icon-arrow-right"></i>
-                                </a>
-                            </li>
                         </ul>
                     </li>
 
                     <li class="purple">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-bell-alt icon-animated-bell"></i>
-                            <span class="badge badge-important" data-bind="text: notificationNumber">0</span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" data-bind="click: declareNotifAsSeen">
+                            <i class="icon-bell-alt" id="notif-icon" data-bind="css: { 'icon-animated-bell': totalNewNotifications() > 0 }"></i>
+                            <span class="badge badge-important" data-bind="text: totalNewNotifications(), valueUpdate: 'afterkeydown'"></span>
                         </a>
 
                         <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
                                 <i class="icon-warning-sign"></i>
-                                <span data-bind="text: notificationNumber"></span> Notifications
+                                <span data-bind="text: totalNewNotifications, valueUpdate: 'afterkeydown'"></span> Notifications
                             </li>
 
-                            <!-- ko foreach: sixNotifications -->
-                            <li>
+                            <!-- ko foreach: lastNotifications() -->
+                            <li data-bind="css: {notification: isNotifViewed()}">
                                 <a href="#">
-                                    <i class="icon-shopping-cart icontype pimk"></i>
+                                    <img class="msg-photo" alt="Action" data-bind="attr: {src: notificationImgUrl()}" />
                                     <span class="msg-body">
                                         <span class="msg-title">
                                             <span data-bind="text: text"></span>
@@ -126,30 +81,44 @@
                                 </a>
                             </li>
                             <!-- /ko -->
-                            <li>
+                            @*<li>
                                 &nbsp;
-                            </li>
+                            </li>*@
                         </ul>
                     </li>
 
                     <li class="green">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-comment icon-animated-vertical"></i>
-                            <span class="badge badge-success">0</span>
+                            <i class="icon-comment" id="comment-icon" data-bind="css: { 'icon-animated-vertical': newMessagesNumber() > 0 }"></i>
+                            <span class="badge badge-success" data-bind="text: newMessagesNumber">0</span>
                         </a>
 
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
                                 <i class="icon-envelope-alt"></i>
-                                0 Messages
+                                <span data-bind="text: newMessagesNumber"></span> Messages
                             </li>
-
-                            <li>
+                            <!-- ko foreach: lastMessages() -->
+                            <li data-bind="css: {notification: isViewed()}">
                                 <a href="#">
-                                    Répondre
-                                    <i class="icon-arrow-right"></i>
+                                    <img class="msg-photo" alt="Avatar" data-bind="attr: {src: user().avatarPath()}" />
+                                    <span class="msg-body">
+                                        <span class="msg-title">
+                                            <span class="blue" data-bind="text: user().name"></span>
+                                            <span data-bind="text: text"></span>
+                                        </span>
+
+                                        <span class="msg-time">
+                                            <i class="icon-time"></i>
+                                            <span data-bind="text: formattedDate">a moment ago</span>
+                                        </span>
+                                    </span>
                                 </a>
                             </li>
+                            <!-- /ko -->
+                            @*<li>
+                                &nbsp;
+                            </li>*@
                         </ul>
                     </li>
 
@@ -208,6 +177,31 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/libraries")
+    <script type="text/javascript">
+        (function () {
+            if (typeof Object.defineProperty === 'function') {
+                try { Object.defineProperty(Array.prototype, 'sortBy', { value: sb }); } catch (e) { }
+            }
+            if (!Array.prototype.sortBy) Array.prototype.sortBy = sb;
+
+            function sb(f) {
+                for (var i = this.length; i;) {
+                    var o = this[--i];
+                    this[i] = [].concat(f.call(o, o, i), o);
+                }
+                this.sort(function (a, b) {
+                    for (var i = 0, len = a.length; i < len; ++i) {
+                        if (a[i] != b[i]) return a[i] > b[i] ? -1 : 1;
+                    }
+                    return 0;
+                });
+                for (var i = this.length; i;) {
+                    this[--i] = this[i][this[i].length - 1];
+                }
+                return this;
+            }
+        })();
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

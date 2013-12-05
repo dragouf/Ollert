@@ -18,8 +18,8 @@
                         </div>
                         <div class="text" data-bind="text: text"></div>
 
-                        <div class="tools">
-                            <a href="#" class="btn btn-minier btn-info">
+                        <div class="tools" data-bind="visible: $parent.isOwner($data)">
+                            <a href="#" class="btn btn-minier btn-info" data-bind="click: $parent.deleteMessage">
                                 <i class="icon-only icon-trash"></i>
                             </a>
                         </div>

@@ -16,7 +16,10 @@
                 <div class="panel-body" data-bind="sortable: { data: cards, allowDrop: $root.isTableFull }">
                     @*Panel content*@
                     <div class="panel panel-default" data-bind="click: $root.editCard">
-                        <div class="panel-heading card-heading">Demande <span data-bind="text: demande"></span></div>
+                        <div class="panel-heading card-heading">
+                            Demande <span data-bind="text: demande"></span>
+                            <i class="icon-trash pull-right clickable" data-bind="click: $parent.deleteCard"></i>
+                        </div>
                         <div class="card-body">
                             <div class="card-labels clearfix js-card-labels">
                                 @*<span class="card-label green-label"></span>
@@ -28,23 +31,23 @@
                             <span class="card-text" data-bind="text: titre"></span>
                         </div>
                         <div class="panel-footer card-footer">
-                            <div class="badges" data-bind="with: evenements">
-                                <div class="unread-notification badge squarebadge" data-bind="attr: { title: nouveauxText }, visible: hasUnread">
+                            <div class="badges">
+                                <div class="unread-notification badge squarebadge" data-bind="attr: { title: unseenFilesOrMsgText }, visible: hasUnseenFilesOrMsg()">
                                     <span class="glyphicon glyphicon-bell"></span>
-                                    <span class="badge-text" data-bind="text: nombreNouveaux"></span>
+                                    <span class="badge-text" data-bind="text: totalUnseenFilesAndMsg"></span>
                                 </div>
                                 <div class="badge squarebadge" data-bind="attr: { title: messagesText }">
                                     <span class="glyphicon glyphicon-comment"></span>
-                                    <span class="badge-text" data-bind="text: nombreMessages"></span>
+                                    <span class="badge-text" data-bind="text: totalMessages"></span>
                                 </div>
                                 <div class="badge squarebadge" data-bind="attr: { title: attachementsText }">
                                     <span class="glyphicon glyphicon-paperclip"></span>
-                                    <span class="badge-text" data-bind="text: nombresAttachements"></span>
+                                    <span class="badge-text" data-bind="text: totalFiles"></span>
                                 </div>
-                                <div class="badge squarebadge" data-bind="attr: { title: listText }, visible: hasList">
+                                @*<div class="badge squarebadge" data-bind="attr: { title: listText }, visible: hasList">
                                     <span class="glyphicon glyphicon-list"></span>
                                     <span class="badge-text"><span data-bind="text: listDone"></span>/<span data-bind="text: listMax"></span></span>
-                                </div>
+                                </div>*@
                                 <div class="badge squarebadge" data-bind="attr: { title: timeText }, visible: hasTime">
                                     <span class="glyphicon glyphicon-time"></span>
                                     <span class="badge-text" data-bind="text: toReadableTime()"></span>
@@ -54,7 +57,9 @@
                     </div>
                     @*End PanelContent*@
                 </div>
-                <div class="panel-footer"><a href="#" data-bind="click: $parent.openCardDetails">Ajouter une carte...</a></div>
+                <div class="panel-footer">
+                    <a href="#" data-bind="click: $parent.openCardDetails">Ajouter une carte...</a>
+                </div>
             </div>
         </div>
     </div>

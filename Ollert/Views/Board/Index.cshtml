@@ -13,6 +13,25 @@
 @section Scripts {
 <script src="~/signalr/hubs"></script>
 <script type="text/javascript">
+    Dropzone.autoDiscover = false;
+
+    function getNotifyIconUrl(type)
+    {
+        imgUrl = '';
+        switch (type) {
+            case 'NouveauMessage': imgUrl = '/Content/images/comment_add.png'; break;
+            case 'SuppressionMessage': imgUrl = '/Content/images/comment_trash.png'; break;
+            case 'MouvementCarte': imgUrl = '/Content/images/tag_move.png'; break;
+            case 'NouvelleCarte': imgUrl = '/Content/images/tag_add.png'; break;
+            case 'EditionCarte': imgUrl = '/Content/images/tag_info.png'; break;
+            case 'SuppressionCarte': imgUrl = '/Content/images/tag_trash.png'; break;
+            case 'AjoutFichier': imgUrl = '/Content/images/note_add.png'; break;
+            case 'SuppressionFichier': imgUrl = '/Content/images/note_trash.png'; break;
+            default: imgUrl = '/Content/images/notifyIcon.png';
+        }
+
+        return imgUrl;
+    }
     var File = function (id, name, date, type, size) {
         this.id = id;
         this.name = name;
@@ -21,65 +40,131 @@
         this.size = size;
     };
 
-    var User = function (id, name) {
+    var User = function (id, name, lastViewed) {
         this.id = id;
         this.name = name;
+        this.lastViewed = ko.observable(lastViewed);
 
         this.avatarPath = function () {
             return "/Board/AvatarImage/" + this.id;
         };
     };
 
-    var Message = function (id, text, user, date) {
+    var Message = function (id, text, user, date, cardViewed) {
         this.id = id;
         this.text = ko.observable(text);
         this.user = ko.observable(user);
         this.date = ko.observable(date);
+        this.cardViewed = cardViewed;
+
+        this.isViewed = ko.computed(function () {
+            if (this.cardViewed() != null)
+                return this.date() > this.cardViewed();
+            else
+                return true;
+        }, this);
 
         this.formattedDate = ko.computed(function () {
             var formattedDate = null;
             if (this.date() != null)
             {
-                formattedDate = moment(this.date()).calendar();
+                formattedDate = this.date().calendar();
             }
             return formattedDate;
         }, this);
     };
 
-    var Event = function (nbMessages, nbAttachments, nbNew, listDone, listMax, time) {
-        this.nombreMessages = nbMessages;
-        this.nombresAttachements = nbAttachments;
-        this.nombreNouveaux = nbNew;
-        this.listDone = listDone;
-        this.listMax = listMax;
-        this.time = ko.observable(time);
+    var Card = function (id, demande, titre, description, user, estimation,/*events,*/ messages, currentUser, files, lastViewed) {
+        var self = this;
+        self.id = id;
+        self.demande = ko.observable(demande);
+        self.titre = ko.observable(titre);
+        self.description = ko.observable(description);
+        self.estimation = ko.observable(estimation);
+        self.user = user;
+        //self.evenements = events;
+        self.currentUser = currentUser;
+        self.messages = ko.observableArray(messages);
+        self.files = ko.observableArray(files);
+        self.lastViewed = ko.observable(lastViewed);
 
-        this.messagesText = ko.computed(function() {
-            return "Cette carte contient " + this.nombreMessages.toString() + " messages";
-        }, this);
+        self.isOwner = function (data) {
+            return data.user().id == currentUser.id;
 
-        this.attachementsText = ko.computed(function() {
-            return "Cette carte a " + this.nombresAttachements.toString() + " attachements";
-        }, this);
+            return false;
+        };
 
-        this.nouveauxText = ko.computed(function() {
-            return "Cette carte a " + this.nombreNouveaux.toString() + " nouvels evenements";
-        }, this);        
+        self.deleteMessage = function (data) {
+            $.ajax({
+                url: '/api/Message/' + data.id,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function (jsonData) {
+                    var msgToDeleteIndex = -1;
+                    $.each(self.messages(), function (index, msg) {
+                        if (msg.id == data.id)
+                            msgToDeleteIndex = index;
+                    });
 
-        this.listText = ko.computed(function () {
-            return "Cette carte a " + this.listDone.toString() + " / " + this.listMax.toString() + " etapes terminées";
-        }, this);
+                    console.log(msgToDeleteIndex);
+                    if (msgToDeleteIndex >= 0)
+                        self.messages.splice(msgToDeleteIndex, 1);
+                },
+                statusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
 
-        this.hasUnread = ko.computed(function () {
-            return this.nombreNouveaux > 0;
-        }, this);
+            return false;
+        };
 
-        this.hasList = ko.computed(function () {
-            return this.listMax > 0;
-        }, this);
+        self.UnreadMessages = ko.computed(function () {
+            var unread = new Array();
+            $.each(self.messages(), function (index, msg) {
+                if (msg.date() > self.lastViewed())
+                    unread.push(msg);
+            });
+            return unread;
+        }, self);
+
+        self.totalFiles = ko.computed(function () {
+            return self.files().length;
+        }, self);
+
+        self.totalMessages = ko.computed(function () {
+            return self.messages().length;
+        }, self);
+
+        self.totalUnreadMessages = ko.computed(function () {
+            var nbNew = 0;
+            $.each(self.messages(), function (index, msg) {
+                if (msg.date() > self.lastViewed())
+                    nbNew++;
+            });
+            return nbNew;
+        }, self);
+
+        self.totalUnseenFiles = ko.computed(function () {
+            var nbNew = 0;
+            $.each(self.files(), function (index, file) {
+                if (file.date > self.lastViewed())
+                    nbNew++;
+            });
+            return nbNew;
+        }, self);
+
+        self.hasUnseenFilesOrMsg = ko.computed(function () {
+            return self.totalUnreadMessages() > 0 || self.totalUnseenFiles();
+        }, self);
+
+        self.totalUnseenFilesAndMsg = ko.computed(function () {
+            return self.totalUnseenFiles() + self.totalUnreadMessages();
+        }, self);
 
         this.toReadableTime = function () {
-            var seconds = parseInt(this.time());
+            var seconds = parseInt(this.estimation());
             var numyears = Math.floor(seconds / 31536000);
             var numdays = Math.floor((seconds % 31536000) / 86400);
             var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
@@ -90,38 +175,37 @@
         };
 
         this.hasTime = ko.computed(function () {
-            return parseInt(this.time()) > 0;
+            return parseInt(this.estimation()) > 0;
         }, this);
 
         this.timeText = ko.computed(function () {
             return "Cette carte est éstimée a " + this.toReadableTime() + " de travail";
         }, this);
-    };
 
-    var Card = function (id, demande, titre, description, user, events, messages, currentUser, files) {
-        var self = this;
-        self.id = id;
-        self.demande = ko.observable(demande);
-        self.titre = ko.observable(titre);
-        self.description = ko.observable(description);
-        self.user = user;
-        self.evenements = events;
-        self.currentUser = currentUser;
-        self.messages = ko.observableArray(messages);
-        self.files = ko.observableArray(files);
+        this.messagesText = ko.computed(function () {
+            return "Cette carte contient " + this.totalUnreadMessages().toString() + " messages";
+        }, this);
 
-        self.newMessage = ko.observable(new Message(1, "", self.currentUser, null));
+        this.unseenFilesOrMsgText = ko.computed(function () {
+            return "Cette carte contient " + this.totalUnreadMessages().toString() + " messages non lu et " + this.totalUnseenFiles() + " nouveaux fichiers";
+        }, this);
+
+        this.attachementsText = ko.computed(function () {
+            return "Cette carte a " + this.totalFiles().toString() + " attachements";
+        }, this);
+
+        self.newMessage = ko.observable(new Message(1, "", self.currentUser, null, self.lastViewed));
         
         self.uploadFilePath = ko.computed(function () {
             return '/Api/Fichier/' + self.id;
         }, self);
 
-        self.uploadId = ko.computed(function () {
+        self.uploadId = function () {
             return 'dropzone-' + self.id;
-        }, self);
-            
+        }
+
         self.addMessage = function (data) {
-            var currentDate = new Date();
+            var currentDate = moment();
             self.newMessage().date(currentDate);
                        
 
@@ -137,15 +221,39 @@
                 dataType: 'json',
                 data: messageServeur,
                 success: function (jsonData) {
-                    // Envoi du nouveau message au serveur signalr
+                    // change la date de vue de la carte pour eviter la notification
+                    self.lastViewed(moment());
+                    // Change la date de vue de la carte
+                    var carteServeur = {
+                        Id: self.id,
+                        NumeroDemande: self.demande(),
+                        Titre: self.titre(),
+                        Description: self.description(),
+                        Estimation: self.estimation(),
+                        LastTimeViewed: moment().format()
+                    };
 
+                    $.ajax({
+                        url: '/api/Carte/' + self.id,
+                        type: 'PUT',
+                        dataType: 'json',
+                        data: carteServeur,
+                        success: function (jsonData) {
+
+                        },
+                        vstatusCode: {
+                            404: function () {
+                                alert('Erreur');
+                            }
+                        }
+                    });
                     // Met a jour l'id du message
                     self.newMessage().id = jsonData.Id;
                     // Ajoute a la liste
                     self.messages.push(self.newMessage());
 
                     // Rebind avec un nouveeau message
-                    self.newMessage(new Message(1, "", self.currentUser, currentDate));
+                    self.newMessage(new Message(1, "", self.currentUser, currentDate, self.lastViewed));
 
                     //$('.dialogs,.comments').slimScroll({
                     //    height: '300px'
@@ -163,7 +271,7 @@
         self.editingEstimation = ko.observable(false);
         self.previousEstimation = 0;
         self.editEstimation = function () {
-            self.previousEstimation = self.evenements.time();
+            self.previousEstimation = self.estimation();
             self.editingEstimation(true);
         };
         self.saveEstimation = function () {
@@ -171,11 +279,11 @@
             self.saveEditedCard();
         };
         self.cancelEstimation = function () {
-            self.evenements.time(self.previousEstimation);
+            self.estimation(self.previousEstimation);
             self.editingEstimation(false);
         };
         self.clearEstimation = function () {
-            self.evenements.time(null);
+            self.estimation(null);
             $('#edit-estimation').focus();
         };
 
@@ -183,7 +291,7 @@
         self.editingTitre = ko.observable(false);
         self.previousTitre = '';
         self.editTitre = function () {
-            self.previousTitre = self.evenements.time();
+            self.previousTitre = self.titre();
             self.editingTitre(true);
         };
         self.saveTitre = function () {
@@ -222,7 +330,8 @@
                 NumeroDemande: self.demande(),
                 Titre: self.titre(),
                 Description: self.description(),
-                Estimation: self.evenements.time()
+                Estimation: self.estimation(),
+                LastTimeViewed: self.lastViewed().format()
             };
             $.ajax({
                 url: '/api/Carte/' + self.id,
@@ -249,6 +358,33 @@
         self.id = id;
         self.cards.id = id;
 
+        self.deleteCard = function (data, event) {
+            event.stopImmediatePropagation();
+            $.ajax({
+                url: '/api/Carte/' + data.id,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function (jsonData) {
+                    var indexToRemove = -1;
+                    // Envoi du nouveau message au serveur signalr
+                    $.each(self.cards(), function (index, card) {
+                        if (card.id == data.id)
+                            indexToRemove = index;
+                    });
+                    console.log(indexToRemove);
+                    if (indexToRemove >= 0)
+                        self.cards.splice(indexToRemove, 1);
+                },
+                statusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
+
+            return false;
+        };
+
         self.hasCards = ko.computed(function () {
             return self.cards().length > 0;
         }, self);
@@ -256,7 +392,7 @@
         self.totalTime = ko.computed(function () {
             var total = 0;
             $.each(self.cards(), function (index, el) {
-                total += parseInt(el.evenements.time());
+                total += parseInt(el.estimation());
             });
 
             var seconds = total;
@@ -269,29 +405,30 @@
         }, self);
     };
 
-    var Notification = function (id, type, title, text, date) {
+    var Notification = function (id, type, title, text, date, lastUserViewed, creator) {
         this.id = id;
         this.type = type;
         this.title = title;
         this.text = text;
         this.date = date;
+        this.lastUserViewed = lastUserViewed;
+        this.creator = creator;
+
+        this.isNotifViewed = ko.computed(function () {
+            if (this.lastUserViewed != null) {
+                return this.date > this.lastUserViewed;
+            }
+            else
+                return true;
+        }, this);
 
         this.formattedDate = ko.computed(function () {
-            return moment(this.date).calendar();
+            return this.date.calendar();
         }, this);
-        this.notificationClass = ko.computed(function () {
-            var cssClass = '';
-            switch (this.type) {
-                case 'NouveauMessage': cssClass = 'icon-comment'; break;
-                case 'Mouvement': cssClass = 'icon-exchange'; break;
-                case 'NouvelleCarte': cssClass = ' icon-check'; break;
-                case 'EditionCarte': cssClass = 'icon-edit'; break;
-                case 'AjoutFichier': cssClass = 'icon-file-text-o'; break;
-                case 'SuppressionCarte': cssClass = 'icon-ban-circle'; break;
-                default:
-            }
+        this.notificationImgUrl = ko.computed(function () {
+            var imgUrl = getNotifyIconUrl(this.type);
 
-            return cssClass;
+            return imgUrl;
         }, this);
     };
 
@@ -301,19 +438,83 @@
         self.lastAction = ko.observable();
         self.lastError = ko.observable();
         self.maximumCards = 100;
-        self.currentUser = currentUser;
+        self.currentUser = ko.observable(currentUser);
 
-        self.newMessages = ko.observableArray();
+        self.connectedUsers = ko.observableArray();
+
+        self.newMessages = ko.computed(function () {
+            var newMsg = new Array();
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    $.each(card.UnreadMessages(), function (indexMsg, msg) {
+                        newMsg.push(msg);
+                    });
+                });
+            });
+
+            return newMsg;
+        });
+
+        self.lastMessages = ko.computed(function () {
+            var newMsg = new Array();
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    $.each(card.messages(), function (indexMsg, msg) {
+                        newMsg.push(msg);
+                    });
+                });
+            });
+
+            return newMsg.sortBy(function(o){ return o.date() }).slice(0, 8);
+        });
+
+        self.newMessagesNumber = ko.computed(function () {
+            var newMsgNumber = 0;
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    newMsgNumber += card.totalUnreadMessages();
+                });
+            });
+            return newMsgNumber;
+        }, self);
 
         self.notifications = ko.observableArray(notifications);
-        self.notificationNumber = ko.computed(function () {
-            return self.notifications != null ? self.notifications().length : 0;
+        self.totalnotifications = ko.computed(function () {
+            return self.notifications().length;
         }, self);
-        self.sixNotifications = ko.computed(function () {
+
+        self.totalNewNotifications = ko.computed(function () {
+            var newNotif = 0;
+            var currentUserDate = self.currentUser().lastViewed();
+            $.each(self.notifications(), function (indexNotif, notif) {
+                if (notif.date > currentUserDate && notif.creator.id != self.currentUser().id)
+                    newNotif++;
+            });
+
+            return newNotif;
+        }, self);
+
+        self.declareNotifAsSeen = function () {
+            $.ajax({
+                url: '/Board/UserLastSeen/',
+                type: 'GET',
+                dataType: 'json',
+                success: function () {
+                    self.currentUser().lastViewed(moment());
+                },
+                statusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
+        };
+
+        self.lastNotifications = ko.computed(function () {
             return self.notifications.slice(0, 6);
         }, self);
 
-        self.dialogNewCard = ko.observable(new Card(0, null, null, "", self.currentUser, new Event(0, 0, 0, 0, 0, null), null, self.currentUser));
+        self.dialogNewCard = ko.observable(new Card(0, null, null, "", self.currentUser(), null, null, self.currentUser(), null, moment()));
         self.dialogCurrentCard = ko.observable();
         self.dialogCurrentTable = ko.observable();
         
@@ -333,7 +534,8 @@
                 NumeroDemande: self.dialogNewCard().demande(),
                 Titre: self.dialogNewCard().titre(),
                 Description: self.dialogNewCard().description(),
-                Estimation: self.dialogNewCard().evenements.time(),
+                Estimation: self.dialogNewCard().estimation(),
+                LastTimeViewed: moment().format(),
                 Tableau: { Id: self.dialogCurrentTable().id } 
             };
             $.ajax({
@@ -342,15 +544,17 @@
                 dataType: 'json',
                 data: carteServeur,
                 success: function (jsonData) {
-                    // Envoi de la nouvelle carte au serveur signalr
+                    // Change la date de vue de l' utilisateur pour eviter les alertes
+                    self.currentUser().lastViewed(moment());
 
                     // Met a jour l'id de la carte
-                    self.dialogNewCard().id = jsonData.Id;
+                    var nouvelleCarte = self.dialogNewCard();
+                    nouvelleCarte.id = jsonData.Id;
                     // Ajoute a la liste
-                    self.dialogCurrentTable().cards.push(self.dialogNewCard());
+                    self.dialogCurrentTable().cards.push(nouvelleCarte);
 
                     // Rebind avec une nouvelle carte
-                    self.dialogNewCard(new Card(0, null, null, "", self.currentUser, new Event(0, 0, 0, 0, 0, null), null, self.currentUser));
+                    self.dialogNewCard(new Card(0, null, null, "", self.currentUser(), null, null, self.currentUser(), null, moment()));
 
                 },
                 statusCode: {
@@ -370,12 +574,39 @@
 
         self.editCard = function (data) {
             self.dialogCurrentCard(data);
+            // Change la date de vue de la carte
+            var carteServeur = {
+                Id: self.dialogCurrentCard().id,
+                NumeroDemande: self.dialogCurrentCard().demande(),
+                Titre: self.dialogCurrentCard().titre(),
+                Description: self.dialogCurrentCard().description(),
+                Estimation: self.dialogCurrentCard().estimation(),
+                LastTimeViewed: moment().format()
+            };
+
+            $.ajax({
+                url: '/api/Carte/' + self.dialogCurrentCard().id,
+                type: 'PUT',
+                dataType: 'json',
+                data: carteServeur,
+                success: function (jsonData) {
+                    
+                },
+                vstatusCode: {
+                    404: function () {
+                        alert('Erreur');
+                    }
+                }
+            });
+
+            self.dialogCurrentCard().lastViewed(moment());
+
             $('#modal-visualisation').modal('show');
             //$('.dialogs,.comments').slimScroll({
             //    height: '300px'
             //});
 
-            try {                
+            //try {                
                 var dropzoneObject = new Dropzone("#dropzone-" + data.id, {
                     paramName: 'file',
                     method: 'POST',
@@ -407,7 +638,7 @@
 
                         this.on("success", function (file, response) {
                             file.id = response.id;
-                            data.files.push(new File(response.Id, response.Nom, response.DateEnvoi, response.Type, response.FileSize));
+                            data.files.push(new File(response.Id, response.Nom, moment(response.DateEnvoi), response.Type, response.FileSize));
                         });
 
                         this.on("sending", function (file, xhr, formData) {
@@ -440,9 +671,10 @@
                     window.open(url, "_blank")
                 });
 
-            } catch (e) {
-                alert('L\'upload de fichier ne supporte pas ce navigateur!');
-            }
+            //} catch (e) {
+            //    console.log(e);
+            //    alert('L\'upload de fichier ne supporte pas ce navigateur! ' + e.Message);
+            //}
         };
 
         self.updateLastAction = function (arg) {
@@ -469,23 +701,33 @@
             });
         };
 
-        self.desktopNotification = function notify(titre, message) {
+        self.desktopNotification = function notify(titre, message, type) {
             if (window.webkitNotifications != null) {
                 var havePermission = window.webkitNotifications.checkPermission();
                 if (havePermission == 0) {
                     // 0 is PERMISSION_ALLOWED
                     var notification = window.webkitNotifications.createNotification(
-                      '/Content/images/notifyIcon.png',
+                      getNotifyIconUrl(type),
                       titre,
                       message
                     );
 
                     notification.onclick = function () {
-                        window.open("http://stackoverflow.com/a/13328397/1269037");
+                        //window.open("http://stackoverflow.com/a/13328397/1269037");
                         notification.close();
                     }
                     notification.show();
                 } else {
+                    // Standard html notification
+                    var unique_id = $.gritter.add({
+                        title: titre,
+                        text: message + '<br/><a href="javascript:window.webkitNotifications.requestPermission()">Notifications Chrome</a>',
+                        image: getNotifyIconUrl(type),
+                        sticky: false,
+                        //time: '',
+                        class_name: 'gritter-info'
+                    });
+
                     window.webkitNotifications.requestPermission();
                 }
             }
@@ -495,8 +737,8 @@
                 var unique_id = $.gritter.add({
                     title: titre,
                     text: message,
-                    image: 'Content/images/notifyIcon.png',
-                    sticky: false,
+                    image: getNotifyIconUrl(type),
+                    sticky: true,
                     //time: '',
                     class_name: 'gritter-info'
                 });
@@ -506,17 +748,27 @@
         };
 
         $.connection.ollertHub.client.newNotification = function (note) {
-            self.notifications.push(new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date));
-            self.desktopNotification(note.Titre, note.Texte);
+            if (note.Type != "NouveauMessage") {
+                $('#notif-icon').removeClass('icon-animated-bell');
+                $('#notif-icon').addClass('icon-animated-bell');
+                var newUser = new User('00', 'noname');;
+                if (note.Createur != null)
+                    newUser = new User(note.Createur.Id, note.Createur.UserName);
+                self.notifications.unshift(new Notification(note.Id, note.Type, note.Titre, note.Texte, moment(note.Date), self.currentUser().lastViewed(), newUser));
+                self.desktopNotification(note.Titre, note.Texte, note.Type);
+            }
         };
 
         $.connection.ollertHub.client.newMessage = function (message) {
-            var newMessage = new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), new Date(message.CreateOn))
-            self.newMessages.push(newMessage);
+            $('#comment-icon').removeClass('icon-animated-vertical');
+            $('#comment-icon').addClass('icon-animated-vertical');
+            
+            //self.newMessages.push(messageServeur);
             $.each(self.tables(), function (indexTable, table) {
                 $.each(table.cards(), function (indexCard, card) {
                     if (message.CarteId == card.id) {
-                        card.messages.push(newMessage);
+                        var messageServeur = new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), moment(message.CreateOn), card.lastViewed);
+                        card.messages.push(messageServeur);
                     }
                 });
             });
@@ -552,7 +804,7 @@
         $.connection.ollertHub.client.newCard = function (card) {
             $.each(self.tables(), function (indexTable, table) {
                 if (table.id == card.TableauId) {
-                    table.cards.push(new Card(carte.Id, carte.NumeroDemande, carte.Titre, carte.Description, null, null, null, self.currentUser, null));
+                    table.cards.push(new Card(carte.Id, carte.NumeroDemande, carte.Titre, carte.Description, null, null, null, self.currentUser(), null, moment(carte.LastTimeViewed)));
                 }
             });
         };
@@ -563,7 +815,7 @@
                     if(card.id == carte.Id)
                     {
                         card.demande(carte.NumeroDemande);
-                        card.evenements.time(carte.Estimation);
+                        card.estimation(carte.Estimation);
                         card.titre(carte.Titre);
                         card.description(carte.Description);
                     }
@@ -575,7 +827,7 @@
             $.each(self.tables(), function (indexTable, table) {
                 $.each(table.cards(), function (indexCard, card) {
                     if (card.id == fichier.CarteId) {
-                        card.files.push(new File(fichier.Id, fichier.Nom, fichier.DateEnvoi, fichier.Type, fichier.FileSize));
+                        card.files.push(new File(fichier.Id, fichier.Nom, moment(fichier.DateEnvoi), fichier.Type, fichier.FileSize));
                     }
                 });
             });
@@ -597,6 +849,65 @@
                 });
             });
         };
+
+        $.connection.ollertHub.client.deleteMessage = function (message) {
+            var indexMessage = null;
+            console.log(message);
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    if (card.id == message.CarteId) {
+                        $.each(card.messages(), function (indexMsg, msg) {
+                            if (msg.id == message.Id)
+                                indexMessage = indexMsg;
+                        });
+
+                        if (indexMessage != null)
+                            card.messages.splice(indexMessage, 1);
+                    }
+                });
+            });
+        };
+
+        $.connection.ollertHub.client.deleteCard = function (carte) {
+            var indexCarte = null;
+            var tableLocal = null;
+            $.each(self.tables(), function (indexTable, table) {
+                $.each(table.cards(), function (indexCard, card) {
+                    if (card.id == carte.Id) {
+                        indexCarte = indexCard;
+                        tableLocal = table;
+                    }
+                });
+            });
+
+            console.log(tableLocal);
+            if (indexCarte != null)
+                tableLocal.cards.splice(indexCarte, 1);
+        };
+
+        $.connection.ollertHub.client.onConnected = function (users) {
+            $.each(users, function (indexU, newUser) {
+                var isPresent = false;
+                $.each(self.connectedUsers(), function (indexC, user) {
+                    if (newUser.UserId == user.id)
+                        isPresent = true;
+                });
+                if (!isPresent)
+                    self.connectedUsers.push(new User(newUser.UserId, newUser.UserName, null));
+            });
+        };
+
+        $.connection.ollertHub.client.onDisconnected = function (users) {
+            $.each(self.connectedUsers(), function (indexU, oldUser) {
+                var oldUserIndex = -1;
+                $.each(users, function (indexC, user) {
+                    if (oldUser.id == user.UserId)
+                        oldUserIndex = indexC;
+                });
+                if (oldUserIndex >= 0)
+                    self.connectedUsers.splice(oldUserIndex, 1);
+            });
+        };
     };
 
 
@@ -604,7 +915,7 @@
     function initilize() {
         moment.lang('fr');
         $.get('/Board/CurrentUser', function (userJson) {
-            var currentUser = new User(userJson.Id, userJson.UserName);
+            var currentUser = new User(userJson.Id, userJson.UserName, moment(userJson.LastViewed));
 
             $.ajax({
                 url: '/api/Tableau',
@@ -628,19 +939,20 @@
             $.each(tableau.Cartes, function (index, carte) {
                 var messages = new Array();
                 $.each(carte.Messages, function (index, message) {
-                    messages.push(new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), new Date(message.CreateOn)));
+                    var newMessage = new Message(message.Id, message.Texte, new User(message.Utilisateur.Id, message.Utilisateur.UserName), moment(message.CreateOn), ko.observable(moment(carte.LastTimeViewed)));
+                    //console.log(message);
+                    messages.push(newMessage);
                 });
 
-                var evenement = new Event(messages.length, 0, 0, 0, 0, carte.Estimation);
-                if (carte.Notifications != null)
-                { }
+                //var evenement = new Event(messages.length, 0, 0, 0, 0, carte.Estimation);
 
                 var fichiers = new Array();
                 $.each(carte.Fichiers, function (index, fichier) {
-                    fichiers.push(new File(fichier.Id, fichier.Nom, fichier.DateEnvoi, fichier.Type, fichier.FileSize));
+                    fichiers.push(new File(fichier.Id, fichier.Nom, moment(fichier.DateEnvoi), fichier.Type, fichier.FileSize));
                 });
-
-                cartes.push(new Card(carte.Id, carte.NumeroDemande, carte.Titre, carte.Description, null, evenement, messages, currentUser, fichiers));
+                var newCard = new Card(carte.Id, carte.NumeroDemande, carte.Titre, carte.Description, null, carte.Estimation, messages, currentUser, fichiers, moment(carte.LastTimeViewed));
+                //console.log(carte);
+                cartes.push(newCard);
             });
 
             initialTables.push(new Table(
@@ -658,7 +970,10 @@
             dataType: 'json',
             success: function (notif) {
                 $.each(notif, function (index, note) {
-                    notifications.push(new Notification(note.Id, note.Type, note.Titre, note.Texte, note.Date));
+                    var newUser = new User('00', 'noname');
+                    if (note.Createur != null)
+                        newUser = new User(note.Createur.Id, note.Createur.UserName);
+                    notifications.push(new Notification(note.Id, note.Type, note.Titre, note.Texte, moment(note.Date), currentUser.lastViewed(), newUser));
                 });
 
                 var vm = new BoardModel(initialTables, currentUser, notifications);
@@ -689,7 +1004,7 @@
         //$.connection.hub.start().done(function () {
         //    $.connection.ollertHub.server.newMove();
         //});
-        Dropzone.autoDiscover = false;
+
         initilize();
     });
 

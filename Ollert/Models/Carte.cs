@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Ollert.DAL;
+using System.Web;
 
 namespace Ollert.Models
 {
@@ -16,6 +20,7 @@ namespace Ollert.Models
             this.Messages = new List<Message>();
             this.Fichiers = new List<Fichier>();
             this.Notifications = new List<Notification>();
+            this.CartesVues = new List<CarteVue>();
         }
 
         [Key]
@@ -32,11 +37,40 @@ namespace Ollert.Models
         [DataMember]
         public DateTime DateCreation { get; set; }
         [DataMember]
-        public virtual ICollection<Message> Messages { get; set; }
+        public int Position { get; set; }
+        [NotMapped]
         [DataMember]
-        public virtual ICollection<Fichier> Fichiers { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
-        public virtual Tableau Tableau { get; set; }
+        public DateTime LastTimeViewed
+        {
+            get
+            {
+                var carteVue = CartesVues.FirstOrDefault(c => c.Utilisateur.Id == System.Web.HttpContext.Current.User.Identity.GetUserId());
+                if (carteVue != null)
+                {
+                    return carteVue.DerniereConsultation;
+                }
+
+                return DateTime.MinValue;
+            }
+            set
+            {
+                var carteVue = CartesVues.FirstOrDefault(c => c.Utilisateur.Id == System.Web.HttpContext.Current.User.Identity.GetUserId());
+                if (carteVue != null)
+                {
+                    carteVue.DerniereConsultation = value;
+                }
+                else
+                {
+                    carteVue = new CarteVue
+                    {
+                        DerniereConsultation = value,
+                        Utilisateur = new OllertUser { Id = System.Web.HttpContext.Current.User.Identity.GetUserId() }
+                    };
+                }
+                
+                this.CartesVues.Add(carteVue);
+            }
+        }
         [NotMapped]
         [DataMember]
         public int TableauId
@@ -49,5 +83,12 @@ namespace Ollert.Models
                     return -1;
             }
         }
+        [DataMember]
+        public virtual ICollection<Message> Messages { get; set; }
+        [DataMember]
+        public virtual ICollection<Fichier> Fichiers { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual Tableau Tableau { get; set; }
+        public virtual ICollection<CarteVue> CartesVues { get; set; }
     }
 }

@@ -19,7 +19,8 @@ namespace Ollert.Models
         [DataMember]
         public override string UserName { get; set; }
         public byte[] Avatar { get; set; }
-        public Nullable<DateTime> LastTimeBoardView { get; set; }
+        [DataMember]
+        public Nullable<DateTime> LastViewed { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
     }
 }
