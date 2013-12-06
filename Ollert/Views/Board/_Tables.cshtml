@@ -18,7 +18,17 @@
                     <div class="panel panel-default" data-bind="click: $root.editCard">
                         <div class="panel-heading card-heading">
                             Demande <span data-bind="text: demande"></span>
-                            <i class="icon-trash pull-right clickable" data-bind="click: $parent.deleteCard"></i>
+
+                            <div class="widget-toolbar">
+                                <a data-action="settings" href="#">
+                                    <i class="icon-cog clickable"></i>
+                                </a>
+                                <a data-action="close" href="#" data-bind="click: $parent.deleteCard">
+                                    <i class="icon-remove clickable-red"></i>
+                                </a>
+                            </div>
+
+                            @*<i class="icon-trash pull-right clickable" data-bind="click: $parent.deleteCard"></i>*@
                         </div>
                         <div class="card-body">
                             <div class="card-labels clearfix js-card-labels">

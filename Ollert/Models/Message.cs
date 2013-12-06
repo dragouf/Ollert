@@ -20,7 +20,10 @@ namespace Ollert.Models
         public DateTime CreateOn { get; set; }
         [DataMember]
         public virtual OllertUser Utilisateur { get; set; }
+        [Required]
         public virtual Carte Carte { get; set; }
+
+
         [NotMapped]
         [DataMember]
         public int CarteId

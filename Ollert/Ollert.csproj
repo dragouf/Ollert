@@ -239,6 +239,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\comment_add.png" />
     <Content Include="Content\images\comment_trash.png" />
+    <Content Include="Content\images\connection_error.png" />
     <Content Include="Content\images\note_add.png" />
     <Content Include="Content\images\note_trash.png" />
     <Content Include="Content\images\notifyIcon.png" />
@@ -335,6 +336,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\ServerspamWebDeploy.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\bootstrap-editable.js" />
     <Content Include="Scripts\bootstrap-editable.min.js" />

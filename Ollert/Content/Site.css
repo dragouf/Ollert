@@ -252,14 +252,15 @@ form.dropzone {
 form.dropzone div.dz-default.dz-message {
     filter: none;
     height: 123px;
-    left: 50%;
-    margin-left: -214px;
+    /*left: 50%;
+    margin-left: -214px;*/
     margin-top: 0;
     opacity: 1;
     position: absolute;
     top: inherit;
     transition: opacity 0.3s ease-in-out 0s;
-    width: 428px;
+    font-size: 1.3em;
+    /*width: 428px;*/
 }
 
 form.dropzone.dz-started .dz-message {
@@ -275,7 +276,7 @@ form.dropzone div.dz-processing div.progress {
 }
 
 .modal-dialog {
-    width: 626px;
+    /*width: 626px;*/
 }
 
 /*span.msg-title {
@@ -375,4 +376,65 @@ ul.dropdown-navbar > li > a > .user-notification, ul.dropdown-navbar > li:last-c
 div#gritter-notice-wrapper {
     right: 12px;
     top: 46px;
+}
+
+div.gritter-center {
+    left: 33%;
+    position: fixed;
+    right: 49%;
+    top: inherit;
+    background-color:#CB4D4D;
+}
+div.gritter-center .gritter-with-image {
+    float: right;
+    width: auto;
+}
+
+div.gritter-item-wrapper.gritter-info.gritter-center {
+    background-color:#CB4D4D;
+}
+
+div.panel-heading div.widget-toolbar:before {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #D9D9D9;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    bottom: 7px;
+    content: "";
+    display: inline-block;
+    left: 8px;
+    position: absolute;
+    top: 0;
+}
+
+div.panel-heading div.widget-toolbar {
+    display: inline-block;
+    float: right;
+    line-height: 18px;
+    padding: 0 0 0 5px;
+    position: relative;
+}
+
+div.panel-heading div.widget-toolbar > a {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 23px;
+    margin: 0 0 0 4px;
+    padding: 0;
+    position: relative;
+    right: -7px;
+    top: -3px;
+}
+
+ .clickable-red {
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.clickable-red:hover {
+  color: #ED6D5E;
 }

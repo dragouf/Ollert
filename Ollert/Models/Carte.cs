@@ -18,8 +18,7 @@ namespace Ollert.Models
         public Carte()
         {
             this.Messages = new List<Message>();
-            this.Fichiers = new List<Fichier>();
-            this.Notifications = new List<Notification>();
+            this.Fichiers = new List<Fichier>();            
             this.CartesVues = new List<CarteVue>();
         }
 
@@ -38,6 +37,14 @@ namespace Ollert.Models
         public DateTime DateCreation { get; set; }
         [DataMember]
         public int Position { get; set; }
+        [DataMember]
+        public virtual ICollection<Message> Messages { get; set; }
+        [DataMember]
+        public virtual ICollection<Fichier> Fichiers { get; set; }
+        public virtual Tableau Tableau { get; set; }
+        public virtual ICollection<CarteVue> CartesVues { get; set; }
+
+
         [NotMapped]
         [DataMember]
         public DateTime LastTimeViewed
@@ -67,7 +74,7 @@ namespace Ollert.Models
                         Utilisateur = new OllertUser { Id = System.Web.HttpContext.Current.User.Identity.GetUserId() }
                     };
                 }
-                
+
                 this.CartesVues.Add(carteVue);
             }
         }
@@ -83,12 +90,5 @@ namespace Ollert.Models
                     return -1;
             }
         }
-        [DataMember]
-        public virtual ICollection<Message> Messages { get; set; }
-        [DataMember]
-        public virtual ICollection<Fichier> Fichiers { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
-        public virtual Tableau Tableau { get; set; }
-        public virtual ICollection<CarteVue> CartesVues { get; set; }
     }
 }

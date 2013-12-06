@@ -34,7 +34,11 @@ namespace Ollert.DAL
             //        .ToTable("CourseInstructor"));
             //var conv = new OneToManyCascadeDeleteConvention();
             //conv.Apply(System.Data.Entity.Core.Metadata.Edm.AssociationType.Create())
-            modelBuilder.Conventions.Add<OneToManyCascadeDeleteConvention>();
+
+            //modelBuilder.Entity<Carte>().HasMany(a => a.Fichiers).WithRequired().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Carte>().HasMany(a => a.Messages).WithRequired().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Carte>().HasMany(a => a.CartesVues).WithRequired().WillCascadeOnDelete(true);
+
             base.OnModelCreating(modelBuilder);
         }
     }

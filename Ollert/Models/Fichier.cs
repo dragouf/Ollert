@@ -19,12 +19,11 @@ namespace Ollert.Models
         [DataMember]
         public DateTime DateEnvoi { get; set; }
         [DataMember]
-        public string ContentType { get; set; }
-        [NotMapped]
-        [DataMember]
-        public int FileSize { get { return this.Data.Length; } }
+        public string ContentType { get; set; }        
         public byte[] Data { get; set; }
+        [Required]
         public virtual Carte Carte { get; set; }
+
         [NotMapped]
         [DataMember]
         public int CarteId
@@ -36,6 +35,9 @@ namespace Ollert.Models
                 else
                     return -1;
             }
-        }
+        }        
+        [NotMapped]
+        [DataMember]
+        public int FileSize { get { return this.Data.Length; } }
     }
 }

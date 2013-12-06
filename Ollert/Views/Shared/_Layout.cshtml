@@ -17,8 +17,10 @@
                 <a href="#" class="navbar-brand">
                     <small>
                         <i class="icon-align-right"></i>
-                        Ollert
+                        Ollert  
                     </small>
+                    
+                    <i class="icon-spinner icon-spin white" id="global-spinner"></i>
                 </a><!-- /.brand -->
             </div><!-- /.navbar-header -->
 
@@ -200,6 +202,15 @@
                 }
                 return this;
             }
+
+            var $loading = $('#global-spinner').hide();
+            $(document)
+              .ajaxStart(function () {
+                  $loading.show();
+              })
+              .ajaxStop(function () {
+                  $loading.hide();
+              });
         })();
     </script>
     @RenderSection("scripts", required: false)

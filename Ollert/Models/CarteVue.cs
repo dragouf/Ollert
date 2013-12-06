@@ -13,14 +13,14 @@ namespace Ollert.Models
     {
         public CarteVue()
         {
-            //this.CartesVues = new List<CarteVue>();
+            this.Carte = new Carte();
         }
 
         [Key]
         public int Id { get; set; }
         public virtual OllertUser Utilisateur { get; set; }
+        [Required]
         public virtual Carte Carte { get; set; }
         public DateTime DerniereConsultation { get; set; }
-        //public virtual ICollection<CarteVue> CartesVues { get; set; }
     }
 }

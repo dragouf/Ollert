@@ -44,11 +44,6 @@ namespace Ollert.Api
         public async Task<IHttpActionResult> PutCarte(int id, Carte carte)
         {
             var carteBdd = await db.Cartes.Include(c => c.Tableau).FirstAsync(c => c.Id == id);
-            
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             if (carteBdd == null || id != carte.Id)
             {
@@ -83,10 +78,16 @@ namespace Ollert.Api
                 carteVue = new CarteVue
                 {
                     DerniereConsultation = carte.LastTimeViewed,
-                    Utilisateur = currentUser
+                    Utilisateur = currentUser,
+                    Carte = carteBdd
                 };
 
                 carteBdd.CartesVues.Add(carteVue);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
 
             try
@@ -142,12 +143,14 @@ namespace Ollert.Api
             var carteVue = new CarteVue
             {
                 DerniereConsultation = carte.LastTimeViewed,
-                Utilisateur = currentUser
+                Utilisateur = currentUser,
+                Carte = carte
             };
             carte.CartesVues.Clear(); // Il s' agit d' une nouvelle carte, la liste peut etre videe
             carte.CartesVues.Add(carteVue);
            
             db.Cartes.Add(carte);
+
             await db.SaveChangesAsync();
 
             // Ajoute une notification

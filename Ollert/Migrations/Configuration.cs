@@ -34,8 +34,8 @@ namespace Ollert.Migrations
 
             var carte = new Carte
             {
-                Titre = "Devel. of a new things",
-                Description = @"it's really something new and interesting",
+                Titre = "Un exemple de carte 1",
+                Description = @"il faut vraiment le faire!",
                 NumeroDemande = 40,
                 DateCreation = DateTime.Now,
                 Estimation = 1200
@@ -66,13 +66,13 @@ namespace Ollert.Migrations
             //var db = new OllertDbContext();
             var david = new OllertUser()
             {
-                UserName = "david",
-                Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/avatar1.png"))
+                UserName = "David",
+                Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/david.png"))
             };
             var yannick = new OllertUser()
             {
-                UserName = "yannick",
-                Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/avatar2.png"))
+                UserName = "Yannick",
+                Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/yannick.png"))
             };
 
             var r1 = userManager.Create(david, "123456");

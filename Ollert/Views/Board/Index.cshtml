@@ -10,11 +10,22 @@
 <!-- Modal Visualisation -->
 @Html.Partial("_EditModal")
 
+<div style="display:none"><img src="/Content/images/connection_error.png" /></div>
 @section Scripts {
 <script src="~/signalr/hubs"></script>
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
 
+    function ShowConnectionError() {
+        var unique_id = $.gritter.add({
+            title: 'A propos de la requete Ajax',
+            text: 'Il semble y avoir un probleme de connection',
+            image: '/Content/images/connection_error.png',
+            sticky: true,
+            //time: '',
+            class_name: 'gritter-info gritter-center'
+        });
+    }
     function getNotifyIconUrl(type)
     {
         imgUrl = '';
@@ -106,13 +117,18 @@
                             msgToDeleteIndex = index;
                     });
 
-                    console.log(msgToDeleteIndex);
                     if (msgToDeleteIndex >= 0)
                         self.messages.splice(msgToDeleteIndex, 1);
                 },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -241,9 +257,15 @@
                         success: function (jsonData) {
 
                         },
-                        vstatusCode: {
+                        statusCode: {
+                            400: function () {
+                                ShowConnectionError();
+                            },
                             404: function () {
-                                alert('Erreur');
+                                ShowConnectionError();
+                            },
+                            500: function () {
+                                ShowConnectionError();
                             }
                         }
                     });
@@ -260,8 +282,14 @@
                     //});
                 },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -343,8 +371,14 @@
 
                 },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -371,13 +405,19 @@
                         if (card.id == data.id)
                             indexToRemove = index;
                     });
-                    console.log(indexToRemove);
+
                     if (indexToRemove >= 0)
                         self.cards.splice(indexToRemove, 1);
                 },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -503,8 +543,14 @@
                     self.currentUser().lastViewed(moment());
                 },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -536,7 +582,7 @@
                 Description: self.dialogNewCard().description(),
                 Estimation: self.dialogNewCard().estimation(),
                 LastTimeViewed: moment().format(),
-                Tableau: { Id: self.dialogCurrentTable().id } 
+                Tableau: { Id: self.dialogCurrentTable().id }
             };
             $.ajax({
                 url: '/api/Carte',
@@ -558,8 +604,14 @@
 
                 },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -592,9 +644,15 @@
                 success: function (jsonData) {
                     
                 },
-                vstatusCode: {
+                statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -623,8 +681,14 @@
                                 type: 'DELETE',
                                 dataType: 'json',
                                 statusCode: {
+                                    400: function () {
+                                        ShowConnectionError();
+                                    },
                                     404: function () {
-                                        alert('Erreur');
+                                        ShowConnectionError();
+                                    },
+                                    500: function () {
+                                        ShowConnectionError();
                                     }
                                 }
                             });
@@ -694,8 +758,14 @@
 
                 },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('Erreur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -852,7 +922,6 @@
 
         $.connection.ollertHub.client.deleteMessage = function (message) {
             var indexMessage = null;
-            console.log(message);
             $.each(self.tables(), function (indexTable, table) {
                 $.each(table.cards(), function (indexCard, card) {
                     if (card.id == message.CarteId) {
@@ -879,8 +948,7 @@
                     }
                 });
             });
-
-            console.log(tableLocal);
+            
             if (indexCarte != null)
                 tableLocal.cards.splice(indexCarte, 1);
         };
@@ -923,8 +991,14 @@
                 dataType: 'json',
                 success: function (json) { onLoadingSuccess(json, currentUser) },
                 statusCode: {
+                    400: function () {
+                        ShowConnectionError();
+                    },
                     404: function () {
-                        alert('impossible de se connecter au serveur');
+                        ShowConnectionError();
+                    },
+                    500: function () {
+                        ShowConnectionError();
                     }
                 }
             });
@@ -989,8 +1063,14 @@
                 });
             },
             statusCode: {
+                400: function () {
+                    ShowConnectionError();
+                },
                 404: function () {
-                    alert('Erreur');
+                    ShowConnectionError();
+                },
+                500: function () {
+                    ShowConnectionError();
                 }
             }
         });
