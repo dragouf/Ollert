@@ -18,7 +18,7 @@ namespace Ollert.Models
         public Salle()
         {
             this.Tableaux = new List<Tableau>();
-            this.Participants = new List<OllertUser>();
+            this.ParticipantsSalle = new List<ParticipantSalle>();
         }
 
         [Key]
@@ -28,6 +28,15 @@ namespace Ollert.Models
         public virtual ICollection<Tableau> Tableaux { get; set; }
         [Required]
         public virtual OllertUser Proprietaire { get; set; }
-        public virtual ICollection<OllertUser> Participants { get; set; }
+        [JsonIgnore]
+        public ICollection<ParticipantSalle> ParticipantsSalle { get; set; }
+        [NotMapped]
+        public ICollection<OllertUser> Participants
+        {
+            get 
+            {
+                return this.ParticipantsSalle.Select(p => p.Participant).ToList();
+            }
+        }
     }
 }

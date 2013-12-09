@@ -19,6 +19,7 @@ namespace Ollert.DAL
         public DbSet<Tableau> Tableaux { get; set; }
         public DbSet<CarteVue> CartesVues { get; set; }
         public DbSet<Salle> Salles { get; set; }
+        public DbSet<ParticipantSalle> ParticipantsSalles { get; set; }
 
         public OllertDbContext() : base("DefaultConnection")
         {

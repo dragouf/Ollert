@@ -7,28 +7,77 @@
     </ul><!-- .breadcrumb -->
 </div>
 
-<div class="body-content" id="liste-content">    
+<div class="body-content" id="liste-content">
 
     <div class="row">
         <div class="col-xs-12">
-            <table class="table table-bordered table-striped">
-                <thead class="thin-border-bottom">
-                    <tr>
-                        <th>
-                            <i class="icon-caret-right blue"></i>
-                            Salles
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-bind="foreach: salles">
-                        <td><a href="/Board/Salle/" data-bind="text: name, attr:{href: salleUrl}"></a></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div data-bind="template: 'sallesTemplate'"></div>
+
+            <script id="sallesTemplate" type="text/html">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="icon-home"></i>Salles</th>
+                            <th><i class="icon-key"></i>Proprietaire</th>
+                            <th><i class="icon-group"></i>Participants</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind ="foreach: salles">
+                        <tr>
+                            <td>
+                                <a class="pull-left" href="/Board/Salle/" data-bind="text: name, attr:{href: salleUrl}"></a>
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown">
+                                        Danger
+                                        <i class="icon-angle-down icon-on-right"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-danger">
+                                        <li>                                            
+                                            <a href="#" data-bind="click: $parent.deleteSalle"><i class="icon-trash"></i> Supprimer</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td data-bind="text: proprietaire().name"></td>
+                            <td>
+                                <div class="list-participants pull-left" data-bind="foreach: participants">
+                                    <div class="label label-lg label-yellow arrowed-in arrowed-right">
+                                        <span data-bind="text: name"></span>
+                                        <span class="icon-remove clickable-red" data-bind="visible: $parents[1].currentUser.id == $parent.proprietaire().id, click: $parent.removeParticipant"></span>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group pull-right" data-bind="visible: users().length > 0 && $parent.currentUser.id == proprietaire().id">
+                                    <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        Ajouter
+                                        <span class="icon-caret-down icon-on-right"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-info pull-right" data-bind="foreach: users">
+                                        <li>
+                                            <a href="#" data-bind="text: name, click: $parent.addParticipant"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbodydata-bind>
+                </table>
+            </script>
         </div>
     </div>
 
+    <div id="ace-settings-container" class="ace-settings-container">
+        <div id="ace-settings-btn" class="btn btn-app btn-xs btn-warning ace-settings-btn">
+            <i class="icon-cog bigger-150"></i>
+        </div>
+        <div id="ace-settings-box" class="ace-settings-box">
+            <div>
+                <a href="#" class="lbl" data-bind="click: modalAddSalle"> Ajouter Salle</a>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("List/_AddModal")
 </div>
 
 @section Scripts {

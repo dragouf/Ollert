@@ -120,35 +120,39 @@ namespace Ollert.Api
         }
 
         // POST api/Tableau
-        //[ResponseType(typeof(Tableau))]
-        //public async Task<IHttpActionResult> PostTableau(Tableau tableau)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [ResponseType(typeof(Tableau))]
+        public async Task<IHttpActionResult> PostTableau(Tableau tableau)
+        {
+            var salle = await db.Salles.FirstOrDefaultAsync(s => s.Id == tableau.Salle.Id);
+            
+            if (!ModelState.IsValid || salle == null)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.Tableaux.Add(tableau);
-        //    await db.SaveChangesAsync();
+            tableau.Salle = salle;
 
-        //    return CreatedAtRoute("DefaultApi", new { id = tableau.Id }, tableau);
-        //}
+            db.Tableaux.Add(tableau);
+            await db.SaveChangesAsync();
 
-        // DELETE api/Tableau/5
-        //[ResponseType(typeof(Tableau))]
-        //public async Task<IHttpActionResult> DeleteTableau(int id)
-        //{
-        //    Tableau tableau = await db.Tableaux.FindAsync(id);
-        //    if (tableau == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return CreatedAtRoute("DefaultApi", new { id = tableau.Id }, tableau);
+        }
 
-        //    db.Tableaux.Remove(tableau);
-        //    await db.SaveChangesAsync();
+        //DELETE api/Tableau/5
+        [ResponseType(typeof(Tableau))]
+        public async Task<IHttpActionResult> DeleteTableau(int id)
+        {
+            Tableau tableau = await db.Tableaux.FindAsync(id);
+            if (tableau == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(tableau);
-        //}
+            db.Tableaux.Remove(tableau);
+            await db.SaveChangesAsync();
+
+            return Ok(tableau);
+        }
 
         protected override void Dispose(bool disposing)
         {

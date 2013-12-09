@@ -2,8 +2,12 @@
     <div data-bind="template: 'tableauTemplate'"></div>
 </div>
 
-<script id="tableauTemplate" type="text/html">
+    <script id="tableauTemplate" type="text/html">
     <div id="main" data-bind="foreach: tables">
+        <!-- ko if: false -->
+            </div>
+            <div class="row">
+        <!-- /ko -->
         <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -83,9 +87,9 @@
                                     <span class="badge-text" data-bind="text: totalFiles"></span>
                                 </div>
                                 @*<div class="badge squarebadge" data-bind="attr: { title: listText }, visible: hasList">
-                                    <span class="glyphicon glyphicon-list"></span>
-                                    <span class="badge-text"><span data-bind="text: listDone"></span>/<span data-bind="text: listMax"></span></span>
-                                </div>*@
+                                        <span class="glyphicon glyphicon-list"></span>
+                                        <span class="badge-text"><span data-bind="text: listDone"></span>/<span data-bind="text: listMax"></span></span>
+                                    </div>*@
                                 <div class="badge squarebadge" data-bind="attr: { title: timeText }, visible: hasTime">
                                     <span class="glyphicon glyphicon-time"></span>
                                     <span class="badge-text" data-bind="text: toReadableTime()"></span>

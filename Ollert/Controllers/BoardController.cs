@@ -31,9 +31,13 @@ namespace Ollert.Controllers
         [HttpGet]
         public async Task<ActionResult> Salle(int id = -1)
         {
-            var db = new OllertDbContext();
-            var salle = await db.Salles.FirstOrDefaultAsync(s => s.Id == id);
+            var currentUserId = this.User.Identity.GetUserId();
 
+            var db = new OllertDbContext();
+            var salle = await db.Salles
+                .Where(s => s.ParticipantsSalle.Count(p => p.Participant.Id == currentUserId) > 0 || s.Proprietaire.Id == currentUserId)
+                .FirstOrDefaultAsync(s => s.Id == id);
+            
             if (salle == null)
                 return RedirectToAction("List");
 

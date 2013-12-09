@@ -187,6 +187,7 @@
     <Compile Include="Api\CarteController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Api\UserController.cs" />
     <Compile Include="Api\EtapeController.cs" />
     <Compile Include="Api\FichierController.cs">
       <SubType>Code</SubType>
@@ -219,6 +220,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CarteEtape.cs" />
+    <Compile Include="Models\ParticipantSalle.cs" />
     <Compile Include="Models\Salle.cs" />
     <Compile Include="Models\CarteVue.cs" />
     <Compile Include="Models\Carte.cs" />
@@ -410,14 +412,16 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Board\Salle.cshtml" />
-    <Content Include="Views\Board\Salle\_AddModal.cshtml" />
-    <Content Include="Views\Board\Salle\_EditModal.cshtml" />
+    <Content Include="Views\Board\Salle\_AddCardModal.cshtml" />
+    <Content Include="Views\Board\Salle\_EditCardModal.cshtml" />
     <Content Include="Views\Board\Salle\_Tables.cshtml" />
     <Content Include="Views\Board\Salle\_MessagesList.cshtml" />
     <Content Include="Views\Board\Salle\_CardDetails.cshtml" />
     <Content Include="Views\Shared\_LayoutPublic.cshtml" />
     <Content Include="Views\Board\Salle\_Steps.cshtml" />
     <Content Include="Views\Board\List.cshtml" />
+    <Content Include="Views\Board\List\_AddModal.cshtml" />
+    <Content Include="Views\Board\Salle\_AddTableModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

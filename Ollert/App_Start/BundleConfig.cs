@@ -12,7 +12,7 @@ namespace Ollert
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js"));
-            bundles.Add(new ScriptBundle("~/bundles/libraries").Include(
+            bundles.Add(new ScriptBundle("~/bundles/libraries").Include(                      
                       "~/Scripts/knockout-{version}.js",
                       "~/Scripts/jquery-ui-{version}.js",
                       "~/Scripts/knockout-sortable.js",
@@ -21,7 +21,7 @@ namespace Ollert
                       "~/Scripts/jquery.cookie.js",
                       "~/Scripts/moment-with-langs.js",
                       "~/Scripts/dropzone.js",
-                      "~/Scripts/jquery.gritter.js",                      
+                      "~/Scripts/jquery.gritter.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/pages/extensions.js"));
             bundles.Add(new ScriptBundle("~/bundles/page-global").Include("~/Scripts/pages/global.js"));

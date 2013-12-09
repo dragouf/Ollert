@@ -22,5 +22,7 @@ namespace Ollert.Models
         [DataMember]
         public Nullable<DateTime> LastViewed { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
+
+        public ICollection<ParticipantSalle> Participants { get; set; }
     }
 }

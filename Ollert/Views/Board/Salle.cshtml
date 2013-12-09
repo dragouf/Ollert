@@ -16,13 +16,11 @@
     @Html.Partial("Salle/_Tables")
 
     <!-- Modal Ajout -->
-    @Html.Partial("Salle/_AddModal")
+    @Html.Partial("Salle/_AddCardModal")
+    @Html.Partial("Salle/_AddTableModal")
 
     <!-- Modal Visualisation -->
-    @Html.Partial("Salle/_EditModal")
-
-    <div style="display:none"><img src="/Content/images/connection_error.png" /></div>
-
+    @Html.Partial("Salle/_EditCardModal")
 
     <div id="ace-settings-container" class="ace-settings-container">
         <div id="ace-settings-btn" class="btn btn-app btn-xs btn-warning ace-settings-btn">
@@ -34,7 +32,7 @@
                 <label for="ace-settings-navbar" class="lbl"> Voir Archive</label>
             </div>
             <div>
-                <a href="#" class="lbl"> Ajouter Tableau</a>
+                <a href="#" class="lbl" data-bind="click: modalAddTable"> Ajouter Tableau</a>
             </div>
         </div>
     </div>

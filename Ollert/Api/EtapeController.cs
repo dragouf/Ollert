@@ -14,6 +14,7 @@ using Ollert.DAL;
 
 namespace Ollert.Api
 {
+    [Authorize]
     public class EtapeController : ApiController
     {
         private OllertDbContext db = new OllertDbContext();

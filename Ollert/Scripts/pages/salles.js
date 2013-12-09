@@ -607,6 +607,44 @@ var BoardModel = function (currentUser) {
             $('body').removeClass('archive');
     });
 
+    self.dialogNewTable = ko.observable(new Table(-1, '', null, self));
+    self.modalAddTable = function (data) {
+        $('#modal-ajout-table').modal('show');
+    };
+    self.addTable = function () {
+        var tableauServeur = {
+            Id: self.dialogNewTable().id,
+            Nom: self.dialogNewTable().name,
+            Salle: { Id: $('#SalleId').val(), Proprietaire: { Id: -1 } }
+        };
+
+        // Sauvegarde le message
+        $.ajax({
+            url: '/api/Tableau',
+            type: 'POST',
+            dataType: 'json',
+            data: tableauServeur,
+            success: function (jsonData) {
+                self.dialogNewTable().id = jsonData.Id;
+                self.tables.push(self.dialogNewTable());
+                self.dialogNewTable(new Table(-1, '', null, self));
+            },
+            statusCode: {
+                400: function () {
+                    ShowConnectionError();
+                },
+                404: function () {
+                    ShowConnectionError();
+                },
+                500: function () {
+                    ShowConnectionError();
+                }
+            }
+        });
+
+        $('#modal-ajout-table').modal('hide');
+    };
+
     self.dialogNewCard = ko.observable(new Card(0, null, null, "", self.currentUser(), false, null, self.currentUser(), null, moment()));
     self.dialogCurrentCard = ko.observable();
     self.dialogCurrentTable = ko.observable();
