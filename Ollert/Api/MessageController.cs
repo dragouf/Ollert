@@ -22,10 +22,10 @@ namespace Ollert.Api
         private OllertDbContext db = new OllertDbContext();
 
         // GET api/Message
-        //public IQueryable<Message> GetMessages()
-        //{
-        //    return db.Messages;
-        //}
+        public async Task<IEnumerable<Message>> GetMessages()
+        {
+            return await db.Messages.ToListAsync();
+        }
 
         // GET api/Message/5
         //[ResponseType(typeof(Message))]
@@ -88,10 +88,10 @@ namespace Ollert.Api
             var carte = await db.Cartes.FindAsync(message.Carte.Id);
             message.Carte = carte;
 
-            if (carte== null || !ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (carte== null || !ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             db.Messages.Add(message);
             await db.SaveChangesAsync();
@@ -117,7 +117,7 @@ namespace Ollert.Api
 
             // Ajoute une notification
             await Ollert.Services.NotificationService.AddNotification<Message>(
-                "Carte Supprimée", "Le message du '{0}' a été supprimé par {1}".FormatWith(message.CreateOn.ToShortDateString(), this.User.Identity.Name),
+                "Message Supprimé", "Le message du '{0}' a été supprimé par {1}".FormatWith(message.CreateOn.ToShortDateString(), this.User.Identity.Name),
                 TypeNotification.SuppressionMessage,
                 message);
 

@@ -1,0 +1,42 @@
+﻿<div id="breadcrumbs" class="breadcrumbs">
+    <ul class="breadcrumb">
+        <li class="active">
+            <i class="icon-home home-icon"></i>
+            <span>Salles</span>
+        </li>
+    </ul><!-- .breadcrumb -->
+</div>
+
+<div class="body-content" id="liste-content">    
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered table-striped">
+                <thead class="thin-border-bottom">
+                    <tr>
+                        <th>
+                            <i class="icon-caret-right blue"></i>
+                            Salles
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-bind="foreach: salles">
+                        <td><a href="/Board/Salle/" data-bind="text: name, attr:{href: salleUrl}"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/page-liste")
+    <script type="text/javascript">
+        ////////// CHARGEMENT
+        $(window).bind("load", function () {
+            initializeListe(InitializeGlobal);
+        });
+    </script>
+}

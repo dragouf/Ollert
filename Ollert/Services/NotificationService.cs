@@ -62,6 +62,12 @@ namespace Ollert.Services
                     break;
                 case TypeNotification.SuppressionMessage: hubContext.Clients.AllExcept(userConnIds).deleteMessage(objetMessage); // TODO
                     break;
+                case TypeNotification.AjoutEtape: hubContext.Clients.AllExcept(userConnIds).addStep(objetMessage); // TODO
+                    break;
+                case TypeNotification.SuppressionEtape: hubContext.Clients.AllExcept(userConnIds).deleteStep(objetMessage); // TODO
+                    break;
+                case TypeNotification.ModificationEtape: hubContext.Clients.AllExcept(userConnIds).changeStep(objetMessage); // TODO
+                    break;
                 default:
                     break;
             }

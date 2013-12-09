@@ -13,22 +13,50 @@
                         <span class="badge-text" data-bind="text: totalTime"></span>
                     </div>
                 </div>
-                <div class="panel-body" data-bind="sortable: { data: cards, allowDrop: $root.isTableFull }">
+                <div class="panel-body" data-bind="sortable: { data: cards, allowDrop: true }">
                     @*Panel content*@
                     <div class="panel panel-default" data-bind="click: $root.editCard">
                         <div class="panel-heading card-heading">
-                            Demande <span data-bind="text: demande"></span>
+                            <div class="row no-margin">
+                                <div class="col-xs-4 no-padding">
+                                    Demande <span data-bind="text: demande"></span>
+                                </div>
+                                <div class="col-xs-6 no-padding">
+                                    <div class="progress progress-mini progress-striped" data-bind="visible: percentComplete() > 0">
+                                        <div class="progress-bar progress-bar-purple" data-bind="style: {width: percentComplete() + '%' }"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 no-padding">
+                                    <div class="widget-toolbar">
+                                        <div class="inline dropdown-hover">
+                                            <a title="" href="#">
+                                                <i class="icon-cog clickable"></i>
+                                            </a>
 
-                            <div class="widget-toolbar">
-                                <a data-action="settings" href="#">
-                                    <i class="icon-cog clickable"></i>
-                                </a>
-                                <a data-action="close" href="#" data-bind="click: $parent.deleteCard">
-                                    <i class="icon-remove clickable-red"></i>
-                                </a>
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-caret dropdown-close pull-right">
+                                                <li>
+                                                    <a data-action="settings" href="#" data-bind="click: archiveCard">
+                                                        <span>
+                                                            Archiver
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-action="settings" href="#">
+                                                        <span>
+                                                            Deplacer...
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <a data-action="close" href="#" data-bind="click: $parent.deleteCard">
+                                            <i class="icon-remove clickable-red"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-
-                            @*<i class="icon-trash pull-right clickable" data-bind="click: $parent.deleteCard"></i>*@
                         </div>
                         <div class="card-body">
                             <div class="card-labels clearfix js-card-labels">

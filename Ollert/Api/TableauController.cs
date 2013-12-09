@@ -23,12 +23,16 @@ namespace Ollert.Api
         private OllertDbContext db = new OllertDbContext();
 
         // GET api/Tableau
-        public async Task<IEnumerable<Tableau>> GetTableaux()
+        [ResponseType(typeof(List<Tableau>))]
+        public async Task<IHttpActionResult> GetTableaux(int id)
         {
+            if (await db.Salles.CountAsync(e => e.Id == id) == 0)
+                return NotFound();
+
             var tableaux = await db.Tableaux
+                .Where(t => t.Salle.Id == id)
                 .OrderBy(t => t.Position)
                 .Include(i => i.Cartes)
-                //.Include(i => i.Cartes.Select(c => c.CartesVues))
                 .Include(i => i.Cartes.Select(c => c.Messages))
                 .Include(i => i.Cartes.Select(c => c.Messages.Select(m => m.Utilisateur)))
                 .ToListAsync();
@@ -36,7 +40,7 @@ namespace Ollert.Api
             Parallel.ForEach(tableaux, t => t.Cartes = t.Cartes.OrderBy(c => c.Position).ToList());
             //Parallel.ForEach(tableaux, t => Parallel.ForEach(t.Cartes.ToList(), c => c.Messages = c.Messages.OrderByDescending(m => m.CreateOn).ToList()));
 
-            return tableaux;
+            return Ok( tableaux );
         }
 
         // GET api/Tableau/5

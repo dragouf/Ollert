@@ -1,16 +1,14 @@
-﻿- demande suppression par popover
+﻿- Gestion de plusieurs salles (manque ajout de salle et de tableau!)
+- Ajout de progression (TERMINE)
+- Rendre notification global dans le layout (TERMINE)
 
-- possibilité de mettre des etapes avec progression
-- Notification dans la carte ?
+
+- demande suppression par popover
 - possibilité de deplacer en cliquant sur la roue de la carte
 - possibilité de mettre une etiquette
 
-- Rendre notification global dans le layout
-
 - Profil -> changer la photo d'identité ou le mot de passe
 - Parametre -> notification par email
-
-- responsivité : voir le mode d'affichage des colonnes
 
 ----FUTUR
 - possibilité de générer facture a partir des taches terminées

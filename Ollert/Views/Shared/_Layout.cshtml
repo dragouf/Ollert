@@ -5,21 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Ollert</title>
-    @Styles.Render("~/Content/bootstrap")
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/global")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <div class="navbar navbar-default" id="navbar">    
+    <div class="navbar navbar-default" id="navbar">
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
-                <a href="#" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <small>
                         <i class="icon-align-right"></i>
-                        Ollert  
+                        Ollert
                     </small>
-                    
+
                     <i class="icon-spinner icon-spin white" id="global-spinner"></i>
                 </a><!-- /.brand -->
             </div><!-- /.navbar-header -->
@@ -84,21 +83,21 @@
                             </li>
                             <!-- /ko -->
                             @*<li>
-                                &nbsp;
-                            </li>*@
+                                    &nbsp;
+                                </li>*@
                         </ul>
                     </li>
 
                     <li class="green">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-comment" id="comment-icon" data-bind="css: { 'icon-animated-vertical': newMessagesNumber() > 0 }"></i>
-                            <span class="badge badge-success" data-bind="text: newMessagesNumber">0</span>
+                            <i class="icon-comment" id="comment-icon" data-bind="css: { 'icon-animated-vertical': totalNewMessages() > 0 }"></i>
+                            <span class="badge badge-success" data-bind="text: totalNewMessages"></span>
                         </a>
 
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
                                 <i class="icon-envelope-alt"></i>
-                                <span data-bind="text: newMessagesNumber"></span> Messages
+                                <span data-bind="text: totalNewMessages"></span> Messages
                             </li>
                             <!-- ko foreach: lastMessages() -->
                             <li data-bind="css: {notification: isViewed()}">
@@ -119,8 +118,8 @@
                             </li>
                             <!-- /ko -->
                             @*<li>
-                                &nbsp;
-                            </li>*@
+                                    &nbsp;
+                                </li>*@
                         </ul>
                     </li>
 
@@ -172,47 +171,28 @@
     </div>
 
 
-    <div class="body-content">
-        @RenderBody()
-    </div>
+    @RenderBody()
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/libraries")
+    @Scripts.Render("~/bundles/page-global")
+    <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
-        (function () {
-            if (typeof Object.defineProperty === 'function') {
-                try { Object.defineProperty(Array.prototype, 'sortBy', { value: sb }); } catch (e) { }
-            }
-            if (!Array.prototype.sortBy) Array.prototype.sortBy = sb;
+        Dropzone.autoDiscover = false;
+        moment.lang('fr');
 
-            function sb(f) {
-                for (var i = this.length; i;) {
-                    var o = this[--i];
-                    this[i] = [].concat(f.call(o, o, i), o);
-                }
-                this.sort(function (a, b) {
-                    for (var i = 0, len = a.length; i < len; ++i) {
-                        if (a[i] != b[i]) return a[i] > b[i] ? -1 : 1;
-                    }
-                    return 0;
-                });
-                for (var i = this.length; i;) {
-                    this[--i] = this[i][this[i].length - 1];
-                }
-                return this;
-            }
-
-            var $loading = $('#global-spinner').hide();
-            $(document)
-              .ajaxStart(function () {
-                  $loading.show();
-              })
-              .ajaxStop(function () {
-                  $loading.hide();
-              });
-        })();
+        $(window).bind("load", function () {
+            
+        });
     </script>
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(window).bind("load", function () {
+            
+        });
+    </script>
 </body>
+
 </html>

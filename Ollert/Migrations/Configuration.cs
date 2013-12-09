@@ -17,6 +17,7 @@ namespace Ollert.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Ollert.DAL.OllertDbContext context)
@@ -30,7 +31,15 @@ namespace Ollert.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            var tableau1 = new Tableau { Nom = "Attente Estimation", Position = 0 };
+
+            var admin = context.Users.First(u => u.UserName == "Admin");
+
+            var salle = new Salle {
+                Nom = "Developpements",
+                Proprietaire = admin
+            };
+
+            context.Salles.AddOrUpdate(T => T.Nom, salle);
 
             var carte = new Carte
             {
@@ -38,9 +47,10 @@ namespace Ollert.Migrations
                 Description = @"il faut vraiment le faire!",
                 NumeroDemande = 40,
                 DateCreation = DateTime.Now,
-                Estimation = 1200
+                Etapes = new List<CarteEtape> { new CarteEtape { Estimation = 1200, Position = 0, Terminee = false, Titre = "Total" } }
             };
-            tableau1.Cartes = new List<Carte>();
+
+            var tableau1 = new Tableau { Nom = "Attente Estimation", Position = 0, Salle = salle };
             tableau1.Cartes.Add(carte);
 
             var message = new Message
@@ -56,11 +66,11 @@ namespace Ollert.Migrations
             context.Tableaux.AddOrUpdate(
               T => T.Nom,
               tableau1,
-              new Tableau { Nom = "Attente Validation", Position = 1 },
-              new Tableau { Nom = "Accepté", Position = 2 },
-              new Tableau { Nom = "Developpement", Position = 3 },
-              new Tableau { Nom = "A Tester", Position = 4 },
-              new Tableau { Nom = "Terminé et Validé", Position = 5 }
+              new Tableau { Nom = "Attente Validation", Position = 1, Salle = salle },
+              new Tableau { Nom = "Accepté", Position = 2, Salle = salle },
+              new Tableau { Nom = "Developpement", Position = 3, Salle = salle },
+              new Tableau { Nom = "A Tester", Position = 4, Salle = salle },
+              new Tableau { Nom = "Terminé et Validé", Position = 5, Salle = salle }
             );
 
             //var db = new OllertDbContext();

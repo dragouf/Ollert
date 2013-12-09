@@ -18,6 +18,7 @@ namespace Ollert.DAL
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Tableau> Tableaux { get; set; }
         public DbSet<CarteVue> CartesVues { get; set; }
+        public DbSet<Salle> Salles { get; set; }
 
         public OllertDbContext() : base("DefaultConnection")
         {
@@ -41,5 +42,7 @@ namespace Ollert.DAL
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<Ollert.Models.CarteEtape> CarteEtapes { get; set; }
     }
 }

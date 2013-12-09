@@ -3,32 +3,7 @@
         <div class="profile-info-name"> Estimation </div>
 
         <div class="profile-info-value">
-            <span class="editable" data-bind="text: toReadableTime(), visible: !editingEstimation(), click: editEstimation">&nbsp;</span>
-            <div class="editable-container editable-inline" data-bind="visible: editingEstimation()">
-                <div>
-                    <div class="editableform-loading" style="display: none;">
-                        <i class="light-blue icon-2x icon-spinner icon-spin"></i>
-                    </div>
-                    <form class="form-inline editableform">
-                        <div class="control-group">
-                            <div>
-                                <div class="editable-input" style="position: relative;">
-                                    <input type="text" style="padding-right: 24px;" class="input-medium" id="edit-estimation" data-bind="value: estimation" placeholder="en secondes">
-                                    <span class="editable-clear-x" data-bind="click:clearEstimation"></span>
-                                </div>
-                                <div class="editable-buttons">
-                                    <button class="btn btn-info editable-submit" type="button" data-bind="click:saveEstimation">
-                                        <i class="icon-ok icon-white"></i>
-                                    </button>
-                                    <button class="btn editable-cancel" type="button" data-bind="click:cancelEstimation">
-                                        <i class="icon-remove"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <span class="editable" data-bind="text: toReadableTime(), click: editEstimation">&nbsp;</span>            
         </div>
     </div>
 

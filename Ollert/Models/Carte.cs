@@ -20,6 +20,7 @@ namespace Ollert.Models
             this.Messages = new List<Message>();
             this.Fichiers = new List<Fichier>();            
             this.CartesVues = new List<CarteVue>();
+            this.Etapes = new List<CarteEtape>();
         }
 
         [Key]
@@ -30,20 +31,24 @@ namespace Ollert.Models
         [DataMember]
         public string Titre { get; set; }
         [DataMember]
-        public string Description { get; set; }
-        [DataMember]
-        public Nullable<int> Estimation { get; set; }
+        public string Description { get; set; }        
         [DataMember]
         public DateTime DateCreation { get; set; }
         [DataMember]
         public int Position { get; set; }
         [DataMember]
+        public bool Archive { get; set; }
+        [DataMember]
         public virtual ICollection<Message> Messages { get; set; }
         [DataMember]
-        public virtual ICollection<Fichier> Fichiers { get; set; }
-        public virtual Tableau Tableau { get; set; }
+        public virtual ICollection<Fichier> Fichiers { get; set; }        
         public virtual ICollection<CarteVue> CartesVues { get; set; }
-
+        [DataMember]
+        public virtual ICollection<CarteEtape> Etapes { get; set; }
+        [Required]
+        public virtual Tableau Tableau { get; set; }
+        [DataMember]
+        public virtual ICollection<TagCarte> Tags { get; set; }
 
         [NotMapped]
         [DataMember]
@@ -90,5 +95,26 @@ namespace Ollert.Models
                     return -1;
             }
         }
+        [DataMember]
+        [NotMapped]
+        public Nullable<int> Estimation
+        {
+            get
+            {
+                if (Etapes != null)
+                    return this.Etapes.Sum(e => e.Estimation);
+                else
+                    return 0;
+            }
+        }
+    }
+
+    public enum TagCarte
+    {
+        Vert,
+        Jaune,
+        Orange,
+        Rouge,
+        Violet
     }
 }

@@ -20,6 +20,28 @@ namespace Ollert.Controllers
         // GET: /Board/
         public ActionResult Index()
         {
+            return RedirectToAction("List");
+        }
+
+        public ActionResult List()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Salle(int id = -1)
+        {
+            var db = new OllertDbContext();
+            var salle = await db.Salles.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (salle == null)
+                return RedirectToAction("List");
+
+            this.ViewBag.SalleId = salle.Id;
+            this.ViewBag.NomSalle = salle.Nom;
+
+            db.Dispose();
+
             return View();
         }
 

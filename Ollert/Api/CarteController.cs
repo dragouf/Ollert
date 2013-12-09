@@ -54,7 +54,7 @@ namespace Ollert.Api
             if (carteBdd.NumeroDemande.Equals(carte.NumeroDemande) &&
                 carteBdd.Titre.Equals(carte.Titre) &&
                 carteBdd.Description.Equals(carte.Description) &&
-                carteBdd.Estimation.Equals(carte.Estimation))
+                carteBdd.Archive.Equals(carte.Archive))
             {
                 isModified = false;
             }
@@ -62,8 +62,7 @@ namespace Ollert.Api
             carteBdd.NumeroDemande = carte.NumeroDemande;
             carteBdd.Titre = carte.Titre;
             carteBdd.Description = carte.Description;
-            carteBdd.Estimation = carte.Estimation;
-            //carteBdd.LastTimeViewed = carte.LastTimeViewed;
+            carteBdd.Archive = carte.Archive;
 
             string userId = this.User.Identity.GetUserId();
             var carteVue = carteBdd.CartesVues.FirstOrDefault(c => c.Utilisateur.Id == userId);
@@ -83,11 +82,6 @@ namespace Ollert.Api
                 };
 
                 carteBdd.CartesVues.Add(carteVue);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
             }
 
             try
@@ -129,10 +123,10 @@ namespace Ollert.Api
             // find table
             var tableau = await db.Tableaux.FindAsync(carte.Tableau.Id);
 
-            if (tableau == null || !ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (tableau == null || !ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             // Add to correct table
             carte.Tableau = tableau;

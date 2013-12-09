@@ -36,5 +36,18 @@ namespace Ollert.Models
                     return -1;
             }
         }
+
+        [NotMapped]
+        [DataMember]
+        public DateTime DerniereVueCarte
+        {
+            get
+            {
+                if (Carte != null)
+                    return Carte.LastTimeViewed;
+                else
+                    return DateTime.MinValue;
+            }
+        }
     }
 }

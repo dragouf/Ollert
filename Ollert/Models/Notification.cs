@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -12,15 +13,19 @@ namespace Ollert.Models
     public enum TypeNotification
     {
         NouveauMessage = 1,
-        SuppressionMessage = 8,
+        SuppressionMessage = 2,
 
-        MouvementCarte = 2,
-        NouvelleCarte = 3,
-        EditionCarte = 4,
+        MouvementCarte = 3,
+        NouvelleCarte = 4,
+        EditionCarte = 5,
         SuppressionCarte = 6,
 
-        AjoutFichier = 5,
-        SuppressionFichier = 7
+        AjoutFichier = 7,
+        SuppressionFichier = 8,
+
+        AjoutEtape = 9,
+        SuppressionEtape = 10,
+        ModificationEtape = 11
         
     }
     public class Notification : Ollert.Models.IEntity

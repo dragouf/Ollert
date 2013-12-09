@@ -187,6 +187,7 @@
     <Compile Include="Api\CarteController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Api\EtapeController.cs" />
     <Compile Include="Api\FichierController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -196,6 +197,7 @@
     <Compile Include="Api\NotificationController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Api\SalleController.cs" />
     <Compile Include="Api\TableauController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -216,6 +218,8 @@
     <Compile Include="Hubs\OllertHub.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CarteEtape.cs" />
+    <Compile Include="Models\Salle.cs" />
     <Compile Include="Models\CarteVue.cs" />
     <Compile Include="Models\Carte.cs" />
     <Compile Include="Models\DeplacementModelView.cs" />
@@ -240,6 +244,9 @@
     <Content Include="Content\images\comment_add.png" />
     <Content Include="Content\images\comment_trash.png" />
     <Content Include="Content\images\connection_error.png" />
+    <Content Include="Content\images\date_add.png" />
+    <Content Include="Content\images\date_info.png" />
+    <Content Include="Content\images\date_trash.png" />
     <Content Include="Content\images\note_add.png" />
     <Content Include="Content\images\note_trash.png" />
     <Content Include="Content\images\notifyIcon.png" />
@@ -249,6 +256,7 @@
     <Content Include="Content\images\avatar\david.png" />
     <Content Include="Content\images\avatar\yannick.png" />
     <Content Include="Content\images\favicon.png" />
+    <Content Include="Content\images\oldpaper.jpg" />
     <Content Include="Content\images\spritemap%402x.png" />
     <Content Include="Content\images\spritemap.png" />
     <Content Include="Content\images\tag_add.png" />
@@ -329,13 +337,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\ServerspamWebDeploy.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\bootstrap-editable.js" />
@@ -363,14 +371,19 @@
     <Content Include="Scripts\knockout-3.0.0.debug.js" />
     <Content Include="Scripts\knockout-3.0.0.js" />
     <Content Include="Scripts\knockout-sortable.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.7.1.js" />
     <Content Include="Scripts\moment-with-langs.js" />
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\pages\extensions.js" />
+    <Content Include="Scripts\pages\global.js" />
+    <Content Include="Scripts\pages\liste.js" />
+    <Content Include="Scripts\pages\salles.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Taches.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -396,17 +409,19 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Board\Index.cshtml" />
-    <Content Include="Views\Board\_AddModal.cshtml" />
-    <Content Include="Views\Board\_EditModal.cshtml" />
-    <Content Include="Views\Board\_Tables.cshtml" />
-    <Content Include="Views\Board\_MessagesList.cshtml" />
-    <Content Include="Views\Board\_CardDetails.cshtml" />
+    <Content Include="Views\Board\Salle.cshtml" />
+    <Content Include="Views\Board\Salle\_AddModal.cshtml" />
+    <Content Include="Views\Board\Salle\_EditModal.cshtml" />
+    <Content Include="Views\Board\Salle\_Tables.cshtml" />
+    <Content Include="Views\Board\Salle\_MessagesList.cshtml" />
+    <Content Include="Views\Board\Salle\_CardDetails.cshtml" />
     <Content Include="Views\Shared\_LayoutPublic.cshtml" />
-    <Content Include="Views\Board\_Steps.cshtml" />
+    <Content Include="Views\Board\Salle\_Steps.cshtml" />
+    <Content Include="Views\Board\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

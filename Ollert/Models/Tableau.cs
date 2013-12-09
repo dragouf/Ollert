@@ -24,5 +24,7 @@ namespace Ollert.Models
         public int Position { get; set; }
         [DataMember]
         public virtual ICollection<Carte> Cartes { get; set; }
+        [Required]
+        public virtual Salle Salle { get; set; }
     }
 }

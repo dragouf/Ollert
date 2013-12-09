@@ -1,0 +1,57 @@
+﻿<div id="breadcrumbs" class="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home home-icon"></i>
+            <a href="/Board/List">Salles</a>
+        </li>
+        <li class="active">
+            <span>@ViewBag.NomSalle</span>
+        </li>
+    </ul><!-- .breadcrumb -->   
+</div>
+
+<div class="body-content" id="salle-content">
+    @Html.Hidden("SalleId", (int)ViewBag.SalleId)
+
+    @Html.Partial("Salle/_Tables")
+
+    <!-- Modal Ajout -->
+    @Html.Partial("Salle/_AddModal")
+
+    <!-- Modal Visualisation -->
+    @Html.Partial("Salle/_EditModal")
+
+    <div style="display:none"><img src="/Content/images/connection_error.png" /></div>
+
+
+    <div id="ace-settings-container" class="ace-settings-container">
+        <div id="ace-settings-btn" class="btn btn-app btn-xs btn-warning ace-settings-btn">
+            <i class="icon-cog bigger-150"></i>
+        </div>
+        <div id="ace-settings-box" class="ace-settings-box">
+            <div>
+                <input type="checkbox" id="settings-archive" class="ace ace-checkbox-2" data-bind="checked: displayArchive">
+                <label for="ace-settings-navbar" class="lbl"> Voir Archive</label>
+            </div>
+            <div>
+                <a href="#" class="lbl"> Ajouter Tableau</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+@Scripts.Render("~/bundles/page-salles")
+<script type="text/javascript">
+    ////////// CHARGEMENT
+    $(window).bind("load", function () {        
+        //$.connection.hub.logging = true;
+        // Start the connection
+        //$.connection.hub.start().done(function () {
+        //    $.connection.ollertHub.server.newMove();
+        //});
+
+        initializeSalle(InitializeGlobal);
+    });
+</script>
+}
