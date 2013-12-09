@@ -458,7 +458,6 @@ var Table = function (id, name, cards, parent) {
 
     self.cards = ko.observableArray();
     self.cards.id = id;
-
     self.listCards = ko.computed(function () {
         var cartes = new Array();
 
@@ -606,6 +605,15 @@ var BoardModel = function (currentUser) {
         else
             $('body').removeClass('archive');
     });
+
+    self.groupedTablesIndexs = function () {
+        var indexes = new Array();
+        for (var i = 0; i < self.tables().length; i = i + 6) {
+            indexes.push(i);
+        }
+
+        return indexes;
+    };
 
     self.dialogNewTable = ko.observable(new Table(-1, '', null, self));
     self.modalAddTable = function (data) {

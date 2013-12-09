@@ -526,3 +526,13 @@ div.ace-settings-container {
 div.pull-right > ul.dropdown-danger {
     left: 0;
 }
+
+i.icon-font14 {
+    font-size: 14px;
+}
+
+div.panel-heading div.toolbar-main:before {
+    bottom: -4px;
+    left: -3px;
+    top: -2px;
+}
