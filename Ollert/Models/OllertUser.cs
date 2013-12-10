@@ -21,6 +21,9 @@ namespace Ollert.Models
         public byte[] Avatar { get; set; }
         [DataMember]
         public Nullable<DateTime> LastViewed { get; set; }
+        public string Email { get; set; }
+
+
         public virtual ICollection<Message> Messages { get; set; }
 
         public ICollection<ParticipantSalle> Participants { get; set; }

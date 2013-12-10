@@ -94,6 +94,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.2\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -218,7 +221,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\OllertHub.cs" />
+    <Compile Include="Mailers\NotificationMailer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\MailEventViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CarteEtape.cs" />
     <Compile Include="Models\ParticipantSalle.cs" />
@@ -429,6 +434,8 @@
     <Content Include="Views\Board\List.cshtml" />
     <Content Include="Views\Board\List\_AddModal.cshtml" />
     <Content Include="Views\Board\Salle\_AddTableModal.cshtml" />
+    <Content Include="Views\NotificationMailer\_Layout.cshtml" />
+    <Content Include="Views\NotificationMailer\NewEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,12 +10,13 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using Ollert.Mailers;
 
 namespace Ollert.Services
 {
     public class NotificationService
     {
-        public static async Task AddNotification<T>(string titre, string message, TypeNotification type, T objetMessage) /*where T : IEntity*/
+        public static async Task AddNotification<T>(string titre, string message, TypeNotification type, T objetMessage, int salleId) /*where T : IEntity*/
         {
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<OllertHub>();
             var db = new OllertDbContext();
@@ -23,27 +24,10 @@ namespace Ollert.Services
             var userId = HttpContext.Current.User.Identity.GetUserId();
             var currentUser = await db.Users.FirstAsync(u => u.Id == userId);
 
-            var notification = new Notification
-            {
-                Date = DateTime.Now,
-                Titre = titre,
-                Texte = message,
-                Type = type,
-                Createur = currentUser
-            };
-
-            db.Notifications.Add(notification);
-            await db.SaveChangesAsync();
-
-            //var cookie = HttpContext.Current.Request.Cookies["signalr-conn-id"];
-            //var connectionID = "";
-            //if (cookie != null)
-            //{
-                //connectionID = HttpContext.Current.Request.Cookies["signalr-conn-id"].Value;
-            //}
-
+            // les ids de connexion SignalR de l' utilisateur
             var userConnIds = OllertHub.ConnectedUsers.Where(u => u.Key == userId).SelectMany(u => u.Value.ConnectionIds.ToArray()).ToArray();
 
+            // Maj de l' interface des clients connectes
             switch (type)
             {
                 case TypeNotification.NouveauMessage: hubContext.Clients.AllExcept(userConnIds).newMessage(objetMessage);
@@ -71,9 +55,44 @@ namespace Ollert.Services
                 default:
                     break;
             }
-            
+
+            var notification = new Notification {
+                Date = DateTime.Now,
+                Titre = titre,
+                Texte = message,
+                Type = type,
+                Createur = currentUser
+            };
+
+            db.Notifications.Add(notification);
+            await db.SaveChangesAsync();
+
             // Notification globale
             hubContext.Clients.AllExcept(userConnIds).newNotification(notification);
+
+            // Recupere les participants de la salle et envoi l'email sans attendre la fin de la tache
+            var salle = await db.Salles.Include(p => p.ParticipantsSalle).FirstOrDefaultAsync(s => s.Id == salleId);
+            if(salle != null)
+            {
+                var participants = salle.Participants.ToList();
+                participants.Add(salle.Proprietaire);
+
+                foreach (var user in participants.Where(p => p.Id != userId))
+                {
+                    if (!string.IsNullOrWhiteSpace(user.Email))
+                    {
+                        var eventMailer = new NotificationMailer();
+                        var mailTask = eventMailer.NewEvent(new MailEventViewModel
+                        {
+                            Titre = titre,
+                            Message = message,
+                            SalleId = salleId
+                        },
+                            currentUser.Email)
+                            .SendAsync();
+                    }
+                }
+            }
 
             db.Dispose();
         }

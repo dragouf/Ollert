@@ -123,15 +123,7 @@ namespace Ollert.Api
             }
 
             db.Salles.Remove(salle);
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
+            await db.SaveChangesAsync();
 
             return Ok(salle);
         }

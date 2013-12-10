@@ -116,9 +116,11 @@ namespace Ollert.Controllers
 
                 // Ajoute une notification
                 await Ollert.Services.NotificationService.AddNotification<Fichier>(
-                    "Fichier Ajouté", "{0} a ajouté un fichier a la carte : 'Demande {1}'".FormatWith(this.User.Identity.Name, carte.NumeroDemande), 
+                    "Fichier Ajouté", 
+                    "{0} a ajouté un fichier a la carte : 'Demande {1}'".FormatWith(this.User.Identity.Name, carte.NumeroDemande), 
                     TypeNotification.AjoutFichier,
-                    fichier);
+                    fichier,
+                    fichier.Carte.Tableau.Salle.Id);
             }
 
             var result = await Newtonsoft.Json.JsonConvert.SerializeObjectAsync(fichier);

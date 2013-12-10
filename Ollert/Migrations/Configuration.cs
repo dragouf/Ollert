@@ -17,7 +17,7 @@ namespace Ollert.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Ollert.DAL.OllertDbContext context)
@@ -77,11 +77,13 @@ namespace Ollert.Migrations
             var david = new OllertUser()
             {
                 UserName = "David",
+                Email = "david-laurent@outlook.com",
                 Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/david.png"))
             };
             var yannick = new OllertUser()
             {
                 UserName = "Yannick",
+                Email = "david-laurent@outlook.com",
                 Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/yannick.png"))
             };
 

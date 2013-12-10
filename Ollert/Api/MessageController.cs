@@ -98,9 +98,11 @@ namespace Ollert.Api
 
             // Ajoute une notification
             await Ollert.Services.NotificationService.AddNotification<Message>(
-                "Message Ajouté", "Un message a été ajouté a la carte 'Demande {1}' par {0}".FormatWith(this.User.Identity.Name, carte.NumeroDemande),
+                "Message Ajouté", 
+                "Un message a été ajouté a la carte 'Demande {1}' par {0}".FormatWith(this.User.Identity.Name, carte.NumeroDemande),
                 TypeNotification.NouveauMessage,
-                message);
+                message,
+                message.Carte.Tableau.Salle.Id);
 
             return CreatedAtRoute("DefaultApi", new { id = message.Id }, message);
         }
@@ -117,9 +119,11 @@ namespace Ollert.Api
 
             // Ajoute une notification
             await Ollert.Services.NotificationService.AddNotification<Message>(
-                "Message Supprimé", "Le message du '{0}' a été supprimé par {1}".FormatWith(message.CreateOn.ToShortDateString(), this.User.Identity.Name),
+                "Message Supprimé", 
+                "Le message du '{0}' a été supprimé par {1}".FormatWith(message.CreateOn.ToShortDateString(), this.User.Identity.Name),
                 TypeNotification.SuppressionMessage,
-                message);
+                message,
+                message.Carte.Tableau.Salle.Id);
 
             db.Messages.Remove(message);
             await db.SaveChangesAsync();

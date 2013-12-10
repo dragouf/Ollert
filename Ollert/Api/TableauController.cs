@@ -114,7 +114,8 @@ namespace Ollert.Api
                 "Deplacement de carte",
                 "La carte 'Demande {0}' a été deplacée de '{3}' vers '{1}' par {2}".FormatWith(carte.NumeroDemande, nouveauTableau.Nom, this.User.Identity.Name, ancienTableau.Nom),
                 TypeNotification.MouvementCarte,
-                deplacement);
+                deplacement,
+                nouveauTableau.Salle.Id);
 
             return StatusCode(HttpStatusCode.NoContent);
         }

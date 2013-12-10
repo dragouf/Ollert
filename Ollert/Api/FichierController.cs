@@ -99,9 +99,11 @@ namespace Ollert.Api
             }
 
             await Ollert.Services.NotificationService.AddNotification<Fichier>(
-                   "Fichier Supprimé", "Le fichier '{0}' a été supprimé par {1}".FormatWith(fichier.Nom, this.User.Identity.Name),
+                   "Fichier Supprimé", 
+                   "Le fichier '{0}' a été supprimé par {1}".FormatWith(fichier.Nom, this.User.Identity.Name),
                    TypeNotification.SuppressionFichier,
-                   fichier);
+                   fichier,
+                   fichier.Carte.Tableau.Salle.Id);
 
             db.Fichiers.Remove(fichier);
             await db.SaveChangesAsync();

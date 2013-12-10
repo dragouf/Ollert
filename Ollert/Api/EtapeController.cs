@@ -64,9 +64,11 @@ namespace Ollert.Api
 
                 // Ajoute une notification
                 await Ollert.Services.NotificationService.AddNotification<CarteEtape>(
-                    "Etape Modifiée", "L'etape '{0}' a été modifiée par {1}".FormatWith(etapeBdd.Titre, this.User.Identity.Name),
+                    "Etape Modifiée", 
+                    "L'etape '{0}' a été modifiée par {1}".FormatWith(etapeBdd.Titre, this.User.Identity.Name),
                     TypeNotification.ModificationEtape,
-                    etapeBdd);
+                    etapeBdd,
+                    etapeBdd.Carte.Tableau.Salle.Id);
             }           
             catch (DbUpdateConcurrencyException)
             {
@@ -103,7 +105,8 @@ namespace Ollert.Api
             await Ollert.Services.NotificationService.AddNotification<CarteEtape>(
                 "Etape Ajoutée", "Une etape d'estimation a été ajoutée a la carte 'Demande {1}' par {0}".FormatWith(this.User.Identity.Name, carte.NumeroDemande),
                 TypeNotification.AjoutEtape,
-                carteEtape);
+                carteEtape,
+                carteEtape.Carte.Tableau.Salle.Id);
 
             return CreatedAtRoute("DefaultApi", new { id = carteEtape.Id }, carteEtape);
         }
@@ -122,7 +125,8 @@ namespace Ollert.Api
             await Ollert.Services.NotificationService.AddNotification<CarteEtape>(
                 "Etape Supprimée", "L'etape '{0}' a été supprimé par {1}".FormatWith(carteetape.Titre, this.User.Identity.Name),
                 TypeNotification.SuppressionEtape,
-                carteetape);
+                carteetape,
+                carteetape.Carte.Tableau.Salle.Id);
 
             db.CarteEtapes.Remove(carteetape);
             await db.SaveChangesAsync();
