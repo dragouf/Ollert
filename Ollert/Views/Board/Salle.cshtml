@@ -27,13 +27,21 @@
             <i class="icon-cog bigger-150"></i>
         </div>
         <div id="ace-settings-box" class="ace-settings-box">
-            <div>
-                <input type="checkbox" id="settings-archive" class="ace ace-checkbox-2" data-bind="checked: displayArchive">
-                <label for="ace-settings-navbar" class="lbl"> Voir Archive</label>
-            </div>
-            <div>
-                <a href="#" class="lbl" data-bind="click: modalAddTable"> Ajouter Tableau</a>
-            </div>
+            <table>
+                <tr>
+                    <td class="align-top align-left">
+                        <label>
+                            <input type="checkbox" class="ace ace-checkbox-2" name="form-field-checkbox" data-bind="checked: displayArchive">
+                            <span class="lbl"></span>
+                        </label>
+                    </td>
+                    <td> Voir Archive</td>
+                </tr>
+                <tr>
+                    <td><i class="icon-plus"></i>&nbsp;</td>
+                    <td> <a href="#" data-bind="click: modalAddTable">Ajouter Tableau</a></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

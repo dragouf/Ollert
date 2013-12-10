@@ -30,6 +30,8 @@ namespace Ollert.Models
         public virtual OllertUser Proprietaire { get; set; }
         [JsonIgnore]
         public ICollection<ParticipantSalle> ParticipantsSalle { get; set; }
+
+
         [NotMapped]
         public ICollection<OllertUser> Participants
         {
@@ -37,6 +39,38 @@ namespace Ollert.Models
             {
                 return this.ParticipantsSalle.Select(p => p.Participant).ToList();
             }
+        }        
+        [NotMapped]
+        public int MessageNonLu
+        {
+            get
+            {
+                return this.Tableaux.Sum(t => t.Cartes.Sum(c => c.Messages.Count(m => c.LastTimeViewed < m.CreateOn)));
+            }
+        }       
+        [NotMapped]
+        public int TempsRestant
+        {
+            get
+            {
+                return this.Tableaux.Sum(t => t.Cartes.Sum(c => c.Etapes.Where(e => !e.Terminee).Sum(e => e.Estimation)));
+            }
         }
+        [NotMapped]
+        public int FichierNonVu
+        {
+            get
+            {
+                return this.Tableaux.Sum(t => t.Cartes.Sum(c => c.Fichiers.Count(m => c.LastTimeViewed < m.DateEnvoi)));
+            }
+        }
+        //[NotMapped]
+        //public int EvenementsNonVu
+        //{
+        //    get
+        //    {
+        //        return this.Cartes.Sum(c => c.Fichiers.Count(m => c.LastTimeViewed < m.DateEnvoi));
+        //    }
+        //}
     }
 }

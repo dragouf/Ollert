@@ -1,4 +1,4 @@
-﻿var Salle = function (id, nom, participants, proprietaire, users) {
+﻿var Salle = function (id, nom, participants, proprietaire, users, unseenMessage, unseenFiles, timeLeft) {
     var self = this;
     self.id = id;
     self.name = nom;
@@ -7,6 +7,21 @@
     self.participants = ko.observableArray(participants);
     self.isShow = ko.observable(false);
 
+    self.unseenMessage = ko.observable(unseenMessage);
+    self.unseenFiles = ko.observable(unseenFiles);
+    self.timeLeft = ko.observable(timeLeft);
+
+    this.timeLeftHumanReadable = function () {
+        var seconds = parseInt(this.timeLeft());
+        var numyears = Math.floor(seconds / 31536000);
+        var numdays = Math.floor((seconds % 31536000) / 86400);
+        var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+        var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+        var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+        var output = (numyears > 0 ? numyears + " y " : '') + (numdays > 0 ? numdays + " d" : '') + (numhours > 0 ? numhours + " h" : '') + (numminutes > 0 ? numminutes + " m" : '') + (numseconds > 0 ? numseconds + " s" : '');
+        return output;
+    };
+    
     self.showUsers = function () {
         self.isShow(!self.isShow());
     };
@@ -223,7 +238,7 @@ function initializeListe(globalFunctions) {
 
                             var proprietaire = new User(salle.Proprietaire.Id, salle.Proprietaire.UserName, moment(salle.Proprietaire.LastViewed));
 
-                            listeSalles.push(new Salle(salle.Id, salle.Nom, participants, proprietaire, users));
+                            listeSalles.push(new Salle(salle.Id, salle.Nom, participants, proprietaire, users, salle.MessageNonLu, salle.FichierNonVu, salle.TempsRestant));
                         });
 
                         var users = new Array();
@@ -235,7 +250,9 @@ function initializeListe(globalFunctions) {
                         ko.applyBindings(vm, $('#liste-content').get(0));
 
                         globalFunctions();
-
+                        //$('[data-rel=tooltip]').tooltip({
+                        //    delay:  1000 
+                        //});
                     },
                     statusCode: {
                         400: function () {

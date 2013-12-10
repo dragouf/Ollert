@@ -1,11 +1,29 @@
-﻿body {
+﻿html, body{ margin:0px; padding:0px; background: #F7F7F7; height:100%; }
+
+body {
     background-color: #F7F7F7;
 }
 
 body.archive {
-    background-image: url("/Content/images/oldpaper.jpg");
-    /*background-color: #F7F7F7;*/
+    background: rgb(169,3,41); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,3,41,1)), color-stop(44%,rgba(143,2,34,1)), color-stop(100%,rgba(109,0,25,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
 }
+    body.archive div.panel-heading,  body.archive div.panel-footer {
+        background: rgb(254,252,252); /* Old browsers */
+        background: -moz-linear-gradient(top,  rgba(254,252,252,1) 0%, rgba(254,248,246,1) 50%, rgba(255,246,243,1) 100%, rgba(253,250,249,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,252,252,1)), color-stop(50%,rgba(254,248,246,1)), color-stop(100%,rgba(255,246,243,1)), color-stop(100%,rgba(253,250,249,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcfc', endColorstr='#fdfaf9',GradientType=0 ); /* IE6-9 */
+    }
 /* Set padding to keep content from hitting the edges */
 .body-content {
     margin-top: 20px;
@@ -375,6 +393,7 @@ ul.dropdown-navbar > li > a > .user-notification, ul.dropdown-navbar > li:last-c
  .clickable {
   cursor: pointer;
   font-weight: normal;
+  color:#629CBA;
 }
 
 .clickable:hover {
@@ -442,6 +461,7 @@ div.progress {
  .clickable-red {
   cursor: pointer;
   font-weight: normal;
+  color: #B7685F;
 }
 
 .clickable-red:hover {
@@ -454,10 +474,11 @@ div.item-red {
     border-style: solid;
 }
 
-/*div.breadcrumbs {
-    text-align: right;
+ul.breadcrumb {
+    margin-left: 0.2em;
 }
 
+/*
 div.btn.ace-settings-btn {
     border-radius: 0 6px 6px 0 !important;
 }
@@ -508,6 +529,11 @@ div.widget-toolbar ul.dropdown-menu.dropdown-only-icon > li {
 div.widget-toolbar div.dropdown-hover a {
     text-decoration:none;
 }
+div.widget-toolbar div.dropdown-hover {
+    margin-left:6px;    
+    float: left;
+}
+
 div.ace-settings-container {
     top: 46px;
 }
@@ -535,4 +561,18 @@ div.panel-heading div.toolbar-main:before {
     bottom: -4px;
     left: -3px;
     top: -2px;
+}
+
+div.padding-8 {
+    padding:0 8px;
+}
+
+ul.dropdown-menu li.success a:hover {
+    background: none repeat scroll 0 0 #87B87F;
+    color: #FFFFFF;
+}
+
+div.modal-dialog div.modal-footer {   
+    padding-bottom: 6px;
+    padding-top: 6px;
 }

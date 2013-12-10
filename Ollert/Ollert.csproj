@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="DAL\OllertDbContext.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectQueryExtensions.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,6 +244,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dropzone.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\images\apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="Content\images\apple-touch-icon-120x120-precomposed.png" />
+    <Content Include="Content\images\apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="Content\images\apple-touch-icon-152x152-precomposed.png" />
+    <Content Include="Content\images\apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="Content\images\apple-touch-icon-precomposed.png" />
     <Content Include="Content\images\comment_add.png" />
     <Content Include="Content\images\comment_trash.png" />
     <Content Include="Content\images\connection_error.png" />

@@ -18,27 +18,49 @@
                     <thead>
                         <tr>
                             <th><i class="icon-home"></i>Salles</th>
-                            <th><i class="icon-key"></i>Proprietaire</th>
+                            <th class="hidden-480"><i class="icon-key"></i>Proprietaire</th>
                             <th><i class="icon-group"></i>Participants</th>
                         </tr>
                     </thead>
-                    <tbody data-bind ="foreach: salles">
+                    <tbody data-bind="foreach: salles">
                         <tr>
                             <td>
-                                <a class="pull-left" href="/Board/Salle/" data-bind="text: name, attr:{href: salleUrl}"></a>
-                                <div class="btn-group pull-right">
-                                    <button class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown">
-                                        Danger
-                                        <i class="icon-angle-down icon-on-right"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-danger">
-                                        <li>                                            
-                                            <a href="#" data-bind="click: $parent.deleteSalle"><i class="icon-trash"></i> Supprimer</a>
-                                        </li>
-                                    </ul>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <a class="pull-left" href="/Board/Salle/" data-bind="text: name, attr:{href: salleUrl}"></a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="badges">
+                                            <div class="unread-notification badge squarebadge" title="Messages non lus" data-rel="tooltip" data-bind="visible: unseenMessage() > 0">
+                                                <span class="glyphicon glyphicon-comment"></span>
+                                                <span class="badge-text" data-bind="text: unseenMessage"></span>
+                                            </div>
+                                            <div class="unread-notification badge squarebadge" title="Fichiers non vus" data-rel="tooltip" data-bind="visible: unseenFiles() > 0">
+                                                <span class="glyphicon glyphicon-paperclip"></span>
+                                                <span class="badge-text" data-bind="text: unseenFiles"></span>
+                                            </div>
+                                            <div class="badge squarebadge" title="Temps restant" data-rel="tooltip" data-bind="visible: timeLeft() > 0">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                                <span class="badge-text" data-bind="text: timeLeftHumanReadable()"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="btn-group pull-right">
+                                            <button class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown">
+                                                Danger
+                                                <i class="icon-angle-down icon-on-right"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-danger">
+                                                <li>
+                                                    <a href="#" data-bind="click: $parent.deleteSalle"><i class="icon-trash"></i> Supprimer</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
-                            <td data-bind="text: proprietaire().name"></td>
+                            <td class="hidden-480" data-bind="text: proprietaire().name"></td>
                             <td>
                                 <div class="list-participants pull-left" data-bind="foreach: participants">
                                     <div class="label label-lg label-yellow arrowed-in arrowed-right">
@@ -60,7 +82,7 @@
                                 </div>
                             </td>
                         </tr>
-                    </tbodydata-bind>
+                    </tbody>
                 </table>
             </script>
         </div>
@@ -72,7 +94,7 @@
         </div>
         <div id="ace-settings-box" class="ace-settings-box">
             <div>
-                <a href="#" class="lbl" data-bind="click: modalAddSalle"> Ajouter Salle</a>
+                <i class="icon-plus blue"></i> <a href="#" data-bind="click: modalAddSalle">Ajouter Salle</a>
             </div>
         </div>
     </div>

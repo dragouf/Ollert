@@ -25,6 +25,7 @@ namespace Ollert.Controllers
 
         public ActionResult List()
         {
+            this.ViewBag.Title = "Liste des salles";
             return View();
         }
 
@@ -41,6 +42,7 @@ namespace Ollert.Controllers
             if (salle == null)
                 return RedirectToAction("List");
 
+            this.ViewBag.Title = salle.Nom;
             this.ViewBag.SalleId = salle.Id;
             this.ViewBag.NomSalle = salle.Nom;
 

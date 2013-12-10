@@ -41,46 +41,37 @@ namespace Ollert.Hubs
 
             lock (user.ConnectionIds)
             {
-
                 user.ConnectionIds.Add(connectionId);
-
-                this.Clients.All.onConnected(ConnectedUsers.Select(u => u.Value));
             }
+
+            this.Clients.All.onConnected(ConnectedUsers.Select(u => u.Value));
+
             return base.OnConnected();
         }
 
         public override Task OnDisconnected()
         {
-            string userId = Guid.Empty.ToString();
-            if (Context.User != null)
-                userId = Context.User.Identity.GetUserId();
+            //string userId = Guid.Empty.ToString();
+            //if(Context.User != null)
+            //    userId = Context.User.Identity.GetUserId();
 
-            if(Context.User != null)
-                userId = Context.User.Identity.GetUserId();
-
-            string connectionId = Context.ConnectionId;
-
-            if (!string.IsNullOrEmpty(userId))
+            // Retire l'id de la liste
+            foreach (var connectedUser in ConnectedUsers)
             {
-                User user;
-                ConnectedUsers.TryGetValue(userId, out user);
-
-                if (user != null)
+                lock (connectedUser.Value.ConnectionIds)
                 {
-                    lock (user.ConnectionIds)
-                    {
-                        user.ConnectionIds.RemoveWhere(cid => cid.Equals(connectionId));
+                    connectedUser.Value.ConnectionIds = connectedUser.Value.ConnectionIds.Where(c => !c.Equals(Context.ConnectionId)).ToHashSet();
+                }
 
-                        if (!user.ConnectionIds.Any())
-                        {
-                            User removedUser;
-                            ConnectedUsers.TryRemove(userId, out removedUser);
-
-                            Clients.Others.onDisconnected(ConnectedUsers.Select(u => u.Value));
-                        }
-                    }
+                if (!connectedUser.Value.ConnectionIds.Any())
+                {
+                    User removedUser;
+                    ConnectedUsers.TryRemove(connectedUser.Key, out removedUser);
                 }
             }
+            
+            // Send to js client
+            Clients.Others.onDisconnected(ConnectedUsers.Select(u => u.Value));
 
             return base.OnDisconnected();
         }

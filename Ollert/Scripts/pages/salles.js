@@ -652,6 +652,36 @@ var BoardModel = function (currentUser) {
 
         $('#modal-ajout-table').modal('hide');
     };
+    self.deleteTable = function (data) {
+        $.ajax({
+            url: '/api/Tableau/' + data.id,
+            type: 'DELETE',
+            dataType: 'json',
+            success: function (jsonData) {
+                var tableToDeleteIndex = -1;
+                $.each(self.tables(), function (index, table) {
+                    if (table.id == data.id)
+                        tableToDeleteIndex = index;
+                });
+
+                if (tableToDeleteIndex >= 0)
+                    self.tables.splice(tableToDeleteIndex, 1);
+            },
+            statusCode: {
+                400: function () {
+                    ShowConnectionError();
+                },
+                404: function () {
+                    ShowConnectionError();
+                },
+                500: function () {
+                    ShowConnectionError();
+                }
+            }
+        });
+
+        return false;
+    };
 
     self.dialogNewCard = ko.observable(new Card(0, null, null, "", self.currentUser(), false, null, self.currentUser(), null, moment()));
     self.dialogCurrentCard = ko.observable();

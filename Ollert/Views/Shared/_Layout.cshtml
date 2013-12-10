@@ -2,8 +2,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="maximum-scale=1.0,width=device-width,initial-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" /> 
+    <meta name="description" content="">
+    <meta name="author" content="dragouf">
+    <meta name="robots" content="noarchive">
+
+    <link rel="shortcut icon" href="/Content/images/favicon.png">    
+
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/Content/images/apple-touch-icon-152x152-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Content/images/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/Content/images/apple-touch-icon-120x120-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Content/images/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Content/images/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/Content/images/apple-touch-icon-precomposed.png">
+
     <title>@ViewBag.Title - Ollert</title>
     @Styles.Render("~/css/bootstrap")
     @Styles.Render("~/css/global")
@@ -183,14 +199,13 @@
         Dropzone.autoDiscover = false;
         moment.lang('fr');
 
-        $(window).bind("load", function () {
-            
-        });
+        //$(window).bind("load", function () {
+        //});
     </script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
-        $(window).bind("load", function () {
-            
+        $(window).bind("load", function () {            
+            initiliazeMobileApp();
         });
     </script>
 
