@@ -51,10 +51,6 @@ namespace Ollert.Hubs
 
         public override Task OnDisconnected()
         {
-            //string userId = Guid.Empty.ToString();
-            //if(Context.User != null)
-            //    userId = Context.User.Identity.GetUserId();
-
             // Retire l'id de la liste
             foreach (var connectedUser in ConnectedUsers)
             {

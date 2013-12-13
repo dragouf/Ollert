@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Ollert.Models;
 using System.IO;
+using TrelloNet;
 
 namespace Ollert.Controllers
 {
@@ -47,6 +48,23 @@ namespace Ollert.Controllers
             this.ViewBag.NomSalle = salle.Nom;
 
             db.Dispose();
+
+            return View();
+        }
+
+        public ActionResult ImportTrello()
+        {
+            var trello = new TrelloNet.Trello(key: "e46d4ab3b91a338f01b2a8575c8954bd");
+            var url = trello.GetAuthorizationUrl("Ollert", Scope.ReadOnly);
+            trello.Authorize("[the token the user got]");
+
+            var myBoard = trello.Boards;
+
+            var todoList = trello.Lists.Add("To Do", myBoard);
+            trello.Lists.Add("Doing", myBoard);
+            trello.Lists.Add("Done", myBoard);
+
+            trello.Cards.Add("My card", todoList);
 
             return View();
         }

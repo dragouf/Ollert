@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="btn-group pull-right">
+                                        <div class="btn-group pull-right" data-bind="visible: $parent.currentUser.id == proprietaire().id">
                                             <button class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown">
                                                 Danger
                                                 <i class="icon-angle-down icon-on-right"></i>
