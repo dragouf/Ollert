@@ -24,9 +24,26 @@ namespace Ollert
                       "~/Scripts/jquery.gritter.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/pages/extensions.js"));
-            bundles.Add(new ScriptBundle("~/bundles/page-global").Include("~/Scripts/pages/global.js"));
-            bundles.Add(new ScriptBundle("~/bundles/page-salles").Include("~/Scripts/pages/salles.js"));
-            bundles.Add(new ScriptBundle("~/bundles/page-liste").Include("~/Scripts/pages/liste.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ollert-engine").Include(
+                "~/Scripts/pages/Classes/Global.js",
+
+                "~/Scripts/pages/Classes/Attachment.js",     
+                "~/Scripts/pages/Classes/Card.js",                
+                "~/Scripts/pages/Classes/List.js",
+                "~/Scripts/pages/Classes/Message.js",
+                "~/Scripts/pages/Classes/Notification.js",
+                "~/Scripts/pages/Classes/Step.js",
+                "~/Scripts/pages/Classes/User.js",
+                "~/Scripts/pages/Classes/BoardDetails.js",
+
+                "~/Scripts/pages/Classes/Converter.js",
+                "~/Scripts/pages/Classes/OllertApi.js",
+                "~/Scripts/pages/Classes/Ollert.js",
+
+                "~/Scripts/pages/Classes/Layout.js",
+                "~/Scripts/pages/Classes/Board.js",
+                "~/Scripts/pages/Classes/BoardsList.js"
+                ));
 
             // CSS
             bundles.Add(new StyleBundle("~/css/global").Include(

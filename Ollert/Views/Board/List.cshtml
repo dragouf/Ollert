@@ -22,7 +22,7 @@
                             <th><i class="icon-group"></i>Participants</th>
                         </tr>
                     </thead>
-                    <tbody data-bind="foreach: salles">
+                    <tbody data-bind="foreach: boards">
                         <tr>
                             <td>
                                 <div class="row">
@@ -102,12 +102,11 @@
     @Html.Partial("List/_AddModal")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/page-liste")
+@section Scripts {    
     <script type="text/javascript">
         ////////// CHARGEMENT
         $(window).bind("load", function () {
-            initializeListe(InitializeGlobal);
+            Ollert.initializeListe();
         });
     </script>
 }

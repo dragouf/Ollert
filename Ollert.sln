@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ollert.Tests", "Ollert.Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EF0A59CE-C095-4F92-8773-8FF463ADB5FD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{848242DA-3488-442F-80EF-76E964BB7F66}"
+	ProjectSection(SolutionItems) = preProject
+		docs\TypeScript Language Specification.pdf = docs\TypeScript Language Specification.pdf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

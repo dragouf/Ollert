@@ -47,7 +47,6 @@
 </div>
 
 @section Scripts {
-@Scripts.Render("~/bundles/page-salles")
 <script type="text/javascript">
     ////////// CHARGEMENT
     $(window).bind("load", function () {        
@@ -57,7 +56,7 @@
         //    $.connection.ollertHub.server.newMove();
         //});
 
-        initializeSalle(InitializeGlobal);
+        Ollert.initializeBoard();
     });
 </script>
 }

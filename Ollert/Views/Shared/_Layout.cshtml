@@ -193,7 +193,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/libraries")
-    @Scripts.Render("~/bundles/page-global")
+
+    @Scripts.Render("~/bundles/ollert-engine")
     <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
         Dropzone.autoDiscover = false;
@@ -204,8 +205,8 @@
     </script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
-        $(window).bind("load", function () {            
-            initiliazeMobileApp();
+        $(window).bind("load", function () { 
+            Ollert.initiliazeMobileApp();
         });
     </script>
 

@@ -3,8 +3,8 @@
 @*</div>*@
 
 <script id="tableauTemplate" type="text/html">
-    <div data-bind="foreach: groupedTablesIndexs()">
-        <div class="row" data-bind="foreach: $parent.tables.slice($data, $data + 6)">
+    <div data-bind="foreach: groupedListIndexes()">
+        <div class="row" data-bind="foreach: $parent.lists.slice($data, $data + 6)">
             <div class="col-md-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -29,13 +29,13 @@
                                     </div>
                                     <div class="col-xs-3 no-padding">
                                         <div class="widget-toolbar">
-                                            <div class="inline dropdown-hover">                                                
+                                            <div class="inline dropdown-hover">
                                                 <i class="icon-cog clickable"></i>
                                                 <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-caret dropdown-close pull-right">
                                                     <li>
                                                         <a data-action="settings" href="#" data-bind="click: archiveCard">
                                                             <span>
-                                                                <i class="icon-archive"></i> Archiver
+                                                                <i class="icon-archive"></i> <span data-bind="text: $parents[2].displayArchive() ? 'Récuperer' : 'Archiver'">Archiver</span>
                                                             </span>
                                                         </a>
                                                     </li>
@@ -66,10 +66,10 @@
                             <div class="card-body">
                                 <div class="card-labels clearfix js-card-labels">
                                     @*<span class="card-label green-label"></span>
-                                        <span class="card-label yellow-label"></span>
-                                        <span class="card-label orange-label"></span>
-                                        <span class="card-label red-label"></span>
-                                        <span class="card-label purple-label"></span>*@
+                                    <span class="card-label yellow-label"></span>
+                                    <span class="card-label orange-label"></span>
+                                    <span class="card-label red-label"></span>
+                                    <span class="card-label purple-label"></span>*@
                                 </div>
                                 <span class="card-text" data-bind="text: titre"></span>
                             </div>
@@ -88,9 +88,9 @@
                                         <span class="badge-text" data-bind="text: totalFiles"></span>
                                     </div>
                                     @*<div class="badge squarebadge" data-bind="attr: { title: listText }, visible: hasList">
-                                            <span class="glyphicon glyphicon-list"></span>
-                                            <span class="badge-text"><span data-bind="text: listDone"></span>/<span data-bind="text: listMax"></span></span>
-                                        </div>*@
+                                        <span class="glyphicon glyphicon-list"></span>
+                                        <span class="badge-text"><span data-bind="text: listDone"></span>/<span data-bind="text: listMax"></span></span>
+                                    </div>*@
                                     <div class="badge squarebadge" data-bind="attr: { title: timeText }, visible: hasTime">
                                         <span class="glyphicon glyphicon-time"></span>
                                         <span class="badge-text" data-bind="text: toReadableTime()"></span>
@@ -102,12 +102,12 @@
                     </div>
                     <div class="panel-footer align-right">
 
-                        <div class="btn-group">
+                        <div class="btn-group" data-bind="visible: !parent().displayArchive()">
                             <button class="btn btn-xs btn-primary" data-bind="click: parent().openCardDetails">Nouvelle Carte</button>
                             <button class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
                                 <span class="icon-caret-down icon-only"></span>
                             </button>
-                            <ul class="dropdown-menu dropdown-danger align-left">                                
+                            <ul class="dropdown-menu dropdown-danger align-left">
                                 <li data-bind="click: parent().deleteTable">
                                     <a href="#"><i class="icon-trash"></i> Supprimer</a>
                                 </li>

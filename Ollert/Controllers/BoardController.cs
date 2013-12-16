@@ -54,17 +54,17 @@ namespace Ollert.Controllers
 
         public ActionResult ImportTrello()
         {
-            var trello = new TrelloNet.Trello(key: "e46d4ab3b91a338f01b2a8575c8954bd");
-            var url = trello.GetAuthorizationUrl("Ollert", Scope.ReadOnly);
-            trello.Authorize("[the token the user got]");
+            //var trello = new TrelloNet.Trello(key: "e46d4ab3b91a338f01b2a8575c8954bd");
+            //var url = trello.GetAuthorizationUrl("Ollert", Scope.ReadOnly);
+            //trello.Authorize("[the token the user got]");
 
-            var myBoard = trello.Boards;
+            //var myBoard = trello.Boards;
 
-            var todoList = trello.Lists.Add("To Do", myBoard);
-            trello.Lists.Add("Doing", myBoard);
-            trello.Lists.Add("Done", myBoard);
+            //var todoList = trello.Lists.Add("To Do", myBoard);
+            //trello.Lists.Add("Doing", myBoard);
+            //trello.Lists.Add("Done", myBoard);
 
-            trello.Cards.Add("My card", todoList);
+            //trello.Cards.Add("My card", todoList);
 
             return View();
         }

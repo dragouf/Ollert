@@ -27,5 +27,18 @@ namespace Ollert.Models
         public virtual ICollection<Carte> Cartes { get; set; }
         [Required]
         public virtual Salle Salle { get; set; }
+
+        [NotMapped]
+        [DataMember]
+        public int SalleId
+        {
+            get
+            {
+                if (this.Salle != null)
+                    return this.Salle.Id;
+                else
+                    return -1;
+            }
+        }
     }
 }

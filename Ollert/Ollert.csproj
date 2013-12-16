@@ -401,9 +401,6 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\pages\extensions.js" />
-    <Content Include="Scripts\pages\global.js" />
-    <Content Include="Scripts\pages\liste.js" />
-    <Content Include="Scripts\pages\salles.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\trello_token.js" />
@@ -457,15 +454,35 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\pages\File.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Attachment.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Board.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\BoardDetails.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\BoardsList.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Card.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Converter.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Global.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Layout.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\List.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Message.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Notification.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Ollert.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\OllertApi.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\Step.ts" />
+    <TypeScriptCompile Include="Scripts\pages\Classes\User.ts" />
+    <TypeScriptCompile Include="Scripts\typings\array\array.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dropzone\dropzone.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\gritter\gritter.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout.mapping\knockout.mapping.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.amd.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\Knockout.extension.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\moment\moment.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\navigator\navigator.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\signalr\signalr.ollert.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\webkit\webkit.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
