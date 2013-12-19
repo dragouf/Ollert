@@ -576,3 +576,29 @@ div.modal-dialog div.modal-footer {
     padding-bottom: 6px;
     padding-top: 6px;
 }
+
+.ui-sortable-helper {
+transform:rotate(6deg);
+-ms-transform:rotate(6deg); /* IE 9 */
+-webkit-transform:rotate(6deg); /* Safari and Chrome */
+
+ /*-webkit-transition: all 1s ease-in-out;
+-moz-transition: all 1s ease-in-out;
+-o-transition: all 1s ease-in-out;
+transition: all 1s ease-in-out;*/
+}
+
+div.ui-sortable-placeholder {
+ border:1px dashed #E8E8E8;
+
+
+ background-color: #f3f3f3;
+         padding-right:10px;
+         padding-left:10px;
+         text-align:center;
+         visibility: visible !important;
+ /*-webkit-transition: all 1s ease-in-out;
+-moz-transition: all 1s ease-in-out;
+-o-transition: all 1s ease-in-out;
+transition: all 1s ease-in-out;*/
+}

@@ -178,6 +178,7 @@ interface KnockoutSortableAfterMoveArguments {
     item: any;
 }
 interface KnockoutSortable {
+    startActual: (args: KnockoutSortableAfterMoveArguments, event: any, ui: any) => any
     afterMove: (args: KnockoutSortableAfterMoveArguments) => any
 }
 interface KnockoutBindingHandlers {
