@@ -1,14 +1,22 @@
-﻿- Gestion de plusieurs salles (manque ajout de salle et de tableau!)
+﻿- Gestion de plusieurs salles (TERMINE)
 - Ajout de progression (TERMINE)
 - Rendre notification global dans le layout (TERMINE)
 - demande suppression par popover (TERMINE)
 - wep app iphone (TERMINE)
+
+- possibilite de mettre une date limite
+- import des donnees de trello
+- affichage d'une roue a la place de la barre de progression
+
+- possibilite d'archiver un tableau
+
 
 - positions
 - possibilité de deplacer en cliquant sur la roue de la carte
 - possibilité de mettre une etiquette
 
 - Profil -> changer la photo d'identité ou le mot de passe
+- Profil -> Utilisation de gravatar
 - Parametre -> notification par email
 
 
@@ -22,5 +30,4 @@
 - App iphone
 
 ---------BUGS
-- personne connectés mom maj parfois
 - notif nouveau fichier tj affiché pour utilisateur

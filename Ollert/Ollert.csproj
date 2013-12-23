@@ -221,6 +221,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="DAL\OllertDbContext.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectQueryExtensions.cs" />
@@ -445,10 +446,11 @@
     <Content Include="Views\Board\Salle\_AddTableModal.cshtml" />
     <Content Include="Views\NotificationMailer\_Layout.cshtml" />
     <Content Include="Views\NotificationMailer\NewEvent.cshtml" />
+    <Content Include="Views\Member\Profil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Member\" />
+    <Folder Include="Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

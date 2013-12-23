@@ -1,15 +1,23 @@
 class User {
     id: number;
-    name: string;
+    name: KnockoutObservable<string>;
+    email: KnockoutObservable<string>;
+    emailMd5: KnockoutObservable<string>;
+    useGravatar: KnockoutObservable<boolean>;
     lastViewed: KnockoutObservable<Moment>;
 
-    constructor(id: number, name: string, lastViewed: Moment) {
-        this.id = id;
-        this.name = name;
-        this.lastViewed = ko.observable(lastViewed);
-    }
+    avatarPath: () => string;
 
-    avatarPath() {
-        return "/Board/AvatarImage/" + this.id;
+    constructor(id: number, name: string, lastViewed: Moment, emailMd5: string, useGravatar: boolean, email: string) {
+        this.id = id;
+        this.name = ko.observable(name);
+        this.email = ko.observable(email);
+        this.emailMd5 = ko.observable(emailMd5);
+        this.useGravatar = ko.observable(useGravatar);
+        this.lastViewed = ko.observable(lastViewed);
+
+        this.avatarPath = () => {
+            return this.useGravatar ? "http://www.gravatar.com/avatar/" + this.emailMd5 : "/Board/AvatarImage/" + this.id;
+        }
     }
 } 

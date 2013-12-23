@@ -1,0 +1,87 @@
+﻿@model Ollert.Models.OllertUser
+
+<div id="breadcrumbs" class="breadcrumbs">
+    <ul class="breadcrumb">
+        <li class="active">
+            <i class="icon-user home-icon"></i>
+            <span>Profil</span>
+        </li>
+    </ul><!-- .breadcrumb -->
+</div>
+
+<div class="body-content" id="profil-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="hr dotted"></div>
+
+            <div>
+                <div id="user-profile-1" class="user-profile row">
+                    <div class="col-xs-12 col-sm-3 center">
+                        <div>
+                            <span class="profile-picture">
+                                <img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="assets/avatars/profile-pic.jpg" />
+                            </span>
+
+                            <div class="space-4"></div>
+
+                            <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                                <div class="inline position-relative">
+                                    <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
+                                        @*<i class="icon-circle light-green middle"></i>*@
+                                        &nbsp;
+                                        <span class="white">Alex M. Doe</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-6"></div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-9">
+
+                        <div class="space-12"></div>
+
+                        <div class="profile-user-info profile-user-info-striped">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Nom </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="familyname">alexdoe</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Prenom </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="firstname">alexdoe</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Email </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="email" data-bind="text: "></span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Gravatar </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="usegravatar">alexdoe</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div>

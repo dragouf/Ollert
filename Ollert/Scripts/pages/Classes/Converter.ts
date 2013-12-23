@@ -57,7 +57,10 @@ module Converter {
         return new User(
             serverData.Id,
             serverData.UserName,
-            moment(serverData.LastViewed));
+            moment(serverData.LastViewed),
+            serverData.EmailMd5,
+            serverData.UseGravatar,
+            serverData.Email);
     }
     export function toModelStep(serverData: Ollert.ServerStep) {
         return new Step(

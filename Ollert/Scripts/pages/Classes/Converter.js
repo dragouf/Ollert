@@ -56,7 +56,7 @@ var Converter;
     }
     Converter.toModelAttachment = toModelAttachment;
     function toModelUser(serverData) {
-        return new User(serverData.Id, serverData.UserName, moment(serverData.LastViewed));
+        return new User(serverData.Id, serverData.UserName, moment(serverData.LastViewed), serverData.EmailMd5, serverData.UseGravatar, serverData.Email);
     }
     Converter.toModelUser = toModelUser;
     function toModelStep(serverData) {
