@@ -1,4 +1,4 @@
-var Ollert;
+﻿var Ollert;
 (function (Ollert) {
     ///////////////////////////// INITIALIZATION
     function initializeBoard() {
@@ -37,23 +37,23 @@ var Ollert;
                         var participants = new Array();
                         $.each(salle.Participants, function (index, userJson) {
                             participantsIds.push(userJson.Id);
-                            participants.push(new User(userJson.Id, userJson.UserName, moment(userJson.LastViewed)));
+                            participants.push(Converter.toModelUser(userJson));
                         });
 
                         var users = new Array();
                         $.each(usersJson, function (index, userJson) {
                             if (!inArray(userJson.Id, participantsIds))
-                                users.push(new User(userJson.Id, userJson.UserName, moment(userJson.LastViewed)));
+                                users.push(Converter.toModelUser(userJson));
                         });
 
-                        var proprietaire = new User(salle.Proprietaire.Id, salle.Proprietaire.UserName, moment(salle.Proprietaire.LastViewed));
+                        var proprietaire = Converter.toModelUser(salle.Proprietaire);
 
                         listeSalles.push(new BoardDetails(salle.Id, salle.Nom, participants, proprietaire, users, salle.MessageNonLu, salle.FichierNonVu, salle.TempsRestant));
                     });
 
                     var users = new Array();
                     $.each(usersJson, function (index, userJson) {
-                        users.push(new User(userJson.Id, userJson.UserName, moment(userJson.LastViewed)));
+                        users.push(Converter.toModelUser(userJson));
                     });
 
                     var vm = new BoardsList(listeSalles, currentUser, users);
@@ -83,7 +83,7 @@ var Ollert;
                 var messages = new Array();
 
                 $.each(notifs, function (index, note) {
-                    var newUser = new User(-1, 'noname', moment());
+                    var newUser = new User(-1, 'noname', moment(), null, false, null);
                     if (note.Createur != null)
                         newUser = Converter.toModelUser(note.Createur);
                     if (newUser.id != currentUser.id) {

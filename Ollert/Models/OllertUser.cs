@@ -22,6 +22,22 @@ namespace Ollert.Models
         [DataMember]
         public Nullable<DateTime> LastViewed { get; set; }
         public string Email { get; set; }
+        [DataContract]
+        public string EmailMd5
+        {
+            get 
+            {
+                if(!string.IsNullOrWhiteSpace(this.Email))
+                {
+                    return this.Email.Trim().ToLower().Md5();
+                }
+
+                return string.Empty;
+                    
+            }
+        }
+        [DataMember]
+        public bool UseGravatar { get; set; }
 
 
         public virtual ICollection<Message> Messages { get; set; }

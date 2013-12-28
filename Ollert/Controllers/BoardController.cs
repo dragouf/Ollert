@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Ollert.Models;
 using System.IO;
-using TrelloNet;
 
 namespace Ollert.Controllers
 {

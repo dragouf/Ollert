@@ -64,7 +64,7 @@ class Layout {
             if (note.Type != "NouveauMessage") {
                 $('#notif-icon').removeClass('icon-animated-bell');
                 $('#notif-icon').addClass('icon-animated-bell');
-                var newUser = new User(-1, 'noname', moment());
+                var newUser = new User(-1, 'noname', moment(), null, false, null);
                 if (note.Createur != null)
                     newUser = Converter.toModelUser(note.Createur);
                 self.notifications.unshift(Converter.toModelNotification(note, self.currentUser().lastViewed(), newUser));
@@ -100,7 +100,7 @@ class Layout {
                         isPresent = true;
                 });
                 if (!isPresent)
-                    self.connectedUsers.push(new User(newUser.UserId, newUser.UserName, null));
+                    self.connectedUsers.push(new User(newUser.UserId, newUser.UserName, null, newUser.EmailMd5, newUser.UseGravatar, null));
             });
         };
         $.connection.ollertHub.client.onDisconnected = function (users) {

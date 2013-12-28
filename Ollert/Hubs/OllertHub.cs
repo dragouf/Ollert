@@ -10,12 +10,15 @@ using Newtonsoft.Json;
 using Ollert.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Ollert.Hubs
 {
     public class User
     {
         public string UserName { get; set; }
+        public string EmailMd5 { get; set; }
+        public bool UseGravatar { get; set; }
         public string UserId { get; set; }
         public HashSet<string> ConnectionIds { get; set; }
     }
@@ -27,8 +30,14 @@ namespace Ollert.Hubs
         public override Task OnConnected()
         {
             string userId = Guid.Empty.ToString();
+            OllertUser currentUser = null;
             if (Context.User != null)
+            {
+                var db = new Ollert.DAL.OllertDbContext();
                 userId = Context.User.Identity.GetUserId();
+                currentUser = db.Users.First(u => u.Id == userId);
+            }
+                
 
             string connectionId = Context.ConnectionId;
 
@@ -36,6 +45,8 @@ namespace Ollert.Hubs
             {
                 UserName = Context.User != null ? Context.User.Identity.Name : "<anonyme>",
                 UserId = userId,
+                UseGravatar = currentUser != null ? currentUser.UseGravatar : false,
+                EmailMd5 = currentUser != null ? currentUser.EmailMd5 : string.Empty,
                 ConnectionIds = new HashSet<string>()
             });
 
