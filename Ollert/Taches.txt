@@ -5,6 +5,7 @@
 - wep app iphone (TERMINE)
 
 - positions
+- ouvrir carte par un lien
 - possibilité de deplacer en cliquant sur la roue de la carte
 - possibilité de mettre une etiquette
 
