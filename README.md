@@ -15,12 +15,12 @@ Trello like application with :
 * Knockout
 * Chrome Notification
 
-*** Description
+### Description
 Create rooms and boards and then organize your tasks by pinning cards on appriopriate board.
 
 Everything is replicated instantly on every connected user with websocket connections.
 
-*** Installation
+### Installation
 * In visual studio package manager console restore package files then run :
 
 add-migration Init
@@ -29,7 +29,7 @@ update*database
 start the project.
 Login with david and 123456
 
-*** Screenshot
+### Screenshot
 
 **Room view**
 ![GitHub Logo](/docs/Capture.PNG)
@@ -37,5 +37,5 @@ Login with david and 123456
 **Boards with pinned cards**
 ![GitHub Logo](/docs/Capture2.PNG)
 
-**card edition**
+**Card edition**
 ![GitHub Logo](/docs/Capture3.PNG)
