@@ -231,9 +231,9 @@
     </Compile>
     <Compile Include="Hubs\OllertHub.cs" />
     <Compile Include="Mailers\NotificationMailer.cs" />
-    <Compile Include="Migrations\201501260209291_Init.cs" />
-    <Compile Include="Migrations\201501260209291_Init.Designer.cs">
-      <DependentUpon>201501260209291_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201501260444017_Init.cs" />
+    <Compile Include="Migrations\201501260444017_Init.Designer.cs">
+      <DependentUpon>201501260444017_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MailEventViewModel.cs" />
@@ -411,7 +411,6 @@
     <Content Include="Scripts\trello_token.js" />
     <Content Include="Scripts\trello.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Taches.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -491,8 +490,8 @@
     <TypeScriptCompile Include="Scripts\typings\webkit\webkit.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201501260209291_Init.resx">
-      <DependentUpon>201501260209291_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201501260444017_Init.resx">
+      <DependentUpon>201501260444017_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

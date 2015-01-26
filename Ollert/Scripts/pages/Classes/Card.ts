@@ -136,16 +136,16 @@ class Card {
             return parseInt(this.estimation()) > 0;
         }, this);
         this.timeText = ko.computed(function () {
-            return "Estimation de la carte";
+            return "Card Estimation";
         }, self);
         this.messagesText = ko.computed(function () {
-            return "Cette carte contient " + this.totalUnreadMessages().toString() + " messages";
+            return "This card contains " + this.totalUnreadMessages().toString() + " messages";
         }, this);
         this.unseenFilesOrMsgText = ko.computed(function () {
-            return "Cette carte contient " + this.totalUnreadMessages().toString() + " messages non lu et " + this.totalUnseenFiles() + " nouveaux fichiers";
+            return "This card contains " + this.totalUnreadMessages().toString() + " unread messages and " + this.totalUnseenFiles() + " new files";
         }, this);
         this.attachementsText = ko.computed(function () {
-            return "Cette carte a " + this.totalFiles().toString() + " attachements";
+            return "This card have " + this.totalFiles().toString() + " attachments";
         }, this);
         this.uploadFilePath = ko.computed(function () {
             return '/Api/Fichier/' + self.id;
@@ -185,7 +185,7 @@ class Card {
             var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
             var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
             var output = (numyears > 0 ? numyears + " y " : '') + (numdays > 0 ? numdays + " d" : '') + (numhours > 0 ? numhours + " h" : '') + (numminutes > 0 ? numminutes + " m" : '') + (numseconds > 0 ? numseconds + " s" : '');
-            return output.length == 0 ? '<non estimé>' : output;
+            return output.length == 0 ? '<unestimated>' : output;
         }
         this.uploadId = () => {
             return 'dropzone-' + this.id.toString();

@@ -67,7 +67,7 @@ var Layout = (function () {
             var messageServeur = new Message(message.Id, message.Texte, Converter.toModelUser(message.Utilisateur), moment(message.CreateOn), ko.observable(moment(message.DerniereVueCarte)));
             self.messages.push(messageServeur);
 
-            Global.desktopNotification('Nouveau message', message.Texte, 'NouveauMessage');
+            Global.desktopNotification('New Message', message.Texte, 'NouveauMessage');
         };
         $.connection.ollertHub.client.deleteMessage = function (message) {
             var indexMessage = null;

@@ -11,5 +11,24 @@ Trello like application with :
 
 **FrontEnd**
 * TypeScript
-* SignalR 2.0
+* SignalR 2.0 (HTML5 websocket)
 * Knockout
+* Chrome Notification
+
+*** Description
+Create rooms and boards and then organize your tasks by pinning cards on appriopriate board.
+
+Everything is replicated instantly on every connected user with websocket connections.
+
+*** Installation
+* In visual studio package manager console restore package files then run :
+
+add-migration Init
+update*database
+
+start the project.
+Login with david and 123456
+
+*** Screenshot
+
+

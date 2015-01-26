@@ -1,4 +1,4 @@
-﻿var Global;
+var Global;
 (function (Global) {
     // Helpers
     function ShowConnectionError() {
