@@ -1,0 +1,216 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="maximum-scale=1.0,width=device-width,initial-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" /> 
+    <meta name="description" content="">
+    <meta name="author" content="dragouf">
+    <meta name="robots" content="noarchive">
+
+    <link rel="shortcut icon" href="/Content/images/favicon.png">    
+
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/Content/images/apple-touch-icon-152x152-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Content/images/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/Content/images/apple-touch-icon-120x120-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Content/images/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Content/images/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/Content/images/apple-touch-icon-precomposed.png">
+
+    <title>@ViewBag.Title - Ollert</title>
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/global")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-default" id="navbar">
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="/" class="navbar-brand">
+                    <small>
+                        <i class="icon-align-right"></i>
+                        Ollert
+                    </small>
+
+                    <i class="icon-spinner icon-spin white" id="global-spinner"></i>
+                </a><!-- /.brand -->
+            </div><!-- /.navbar-header -->
+
+            <div class="navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="grey">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-group"></i>
+                            <span class="badge badge-grey" data-bind="text: connectedUsers().length"></span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-ok"></i>
+                                <span data-bind="text: connectedUsers().length"></span> Connected Users
+                            </li>
+
+                            <!-- ko foreach: connectedUsers -->
+                            <li>
+                                <a href="#">
+                                    <img class="msg-photo" alt="Avatar" data-bind="attr: { src: avatarPath() }" />
+                                    <span class="msg-body user-notification">
+                                        <span class="msg-title">
+                                            <span class="blue" data-bind="text: name"></span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- /ko -->
+
+                        </ul>
+                    </li>
+
+                    <li class="purple">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" data-bind="click: declareNotifAsSeen">
+                            <i class="icon-bell-alt" id="notif-icon" data-bind="css: { 'icon-animated-bell': totalNewNotifications() > 0 }"></i>
+                            <span class="badge badge-important" data-bind="text: totalNewNotifications(), valueUpdate: 'afterkeydown'"></span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-warning-sign"></i>
+                                <span data-bind="text: totalNewNotifications, valueUpdate: 'afterkeydown'"></span> Notifications
+                            </li>
+
+                            <!-- ko foreach: lastNotifications() -->
+                            <li data-bind="css: {notification: isNotifViewed()}">
+                                <a href="#">
+                                    <img class="msg-photo" alt="Action" data-bind="attr: {src: notificationImgUrl()}" />
+                                    <span class="msg-body">
+                                        <span class="msg-title">
+                                            <span data-bind="text: text"></span>
+                                        </span>
+
+                                        <span class="msg-time pink2">
+                                            <i class="icon-time"></i>
+                                            <span data-bind="text: formattedDate"></span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- /ko -->
+                            @*<li>
+                                    &nbsp;
+                                </li>*@
+                        </ul>
+                    </li>
+
+                    <li class="green">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-comment" id="comment-icon" data-bind="css: { 'icon-animated-vertical': totalNewMessages() > 0 }"></i>
+                            <span class="badge badge-success" data-bind="text: totalNewMessages"></span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-envelope-alt"></i>
+                                <span data-bind="text: totalNewMessages"></span> Messages
+                            </li>
+                            <!-- ko foreach: lastMessages() -->
+                            <li data-bind="css: {notification: isViewed()}">
+                                <a href="#">
+                                    <img class="msg-photo" alt="Avatar" data-bind="attr: {src: user().avatarPath()}" />
+                                    <span class="msg-body">
+                                        <span class="msg-title">
+                                            <span class="blue" data-bind="text: user().name"></span>
+                                            <span data-bind="text: text"></span>
+                                        </span>
+
+                                        <span class="msg-time">
+                                            <i class="icon-time"></i>
+                                            <span data-bind="text: formattedDate">a moment ago</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- /ko -->
+                            @*<li>
+                                    &nbsp;
+                                </li>*@
+                        </ul>
+                    </li>
+
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="/Board/AvatarImage/@User.Identity.GetUserId()" alt="User Photo" />
+                            <span class="user-info">
+                                <small>Welcome,</small>
+                                @User.Identity.GetUserName()
+                            </span>
+
+                            <i class="icon-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-cog"></i>
+                                    Settings
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="icon-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <div style="display:none">
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                    }
+                                </div>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">
+                                    <i class="icon-off"></i>
+                                    Log out
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul><!-- /.ace-nav -->
+            </div><!-- /.navbar-header -->
+        </div><!-- /.container -->
+    </div>
+
+
+    @RenderBody()
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/libraries")
+
+    @Scripts.Render("~/bundles/ollert-engine")
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        Dropzone.autoDiscover = false;
+        moment.lang('en');
+
+        //$(window).bind("load", function () {
+        //});
+    </script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(window).bind("load", function () { 
+            Ollert.initiliazeMobileApp();
+        });
+    </script>
+
+    <div style="display:none"><img src="/Content/images/connection_error.png" /></div>
+</body>
+
+</html>

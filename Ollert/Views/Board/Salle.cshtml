@@ -1,0 +1,62 @@
+﻿<div id="breadcrumbs" class="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home home-icon"></i>
+            <a href="/Board/List">Room</a>
+        </li>
+        <li class="active">
+            <span>@ViewBag.NomSalle</span>
+        </li>
+    </ul><!-- .breadcrumb -->   
+</div>
+
+<div class="body-content" id="salle-content">
+    @Html.Hidden("SalleId", (int)ViewBag.SalleId)
+
+    @Html.Partial("Salle/_Tables")
+
+    <!-- Modal Ajout -->
+    @Html.Partial("Salle/_AddCardModal")
+    @Html.Partial("Salle/_AddTableModal")
+
+    <!-- Modal Visualisation -->
+    @Html.Partial("Salle/_EditCardModal")
+
+    <div id="ace-settings-container" class="ace-settings-container">
+        <div id="ace-settings-btn" class="btn btn-app btn-xs btn-warning ace-settings-btn">
+            <i class="icon-cog bigger-150"></i>
+        </div>
+        <div id="ace-settings-box" class="ace-settings-box">
+            <table>
+                <tr>
+                    <td class="align-top align-left">
+                        <label>
+                            <input type="checkbox" class="ace ace-checkbox-2" name="form-field-checkbox" data-bind="checked: displayArchive">
+                            <span class="lbl"></span>
+                        </label>
+                    </td>
+                    <td> Display Archive</td>
+                </tr>
+                <tr>
+                    <td><i class="icon-plus"></i>&nbsp;</td>
+                    <td> <a href="#" data-bind="click: modalAddTable">Add board</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+    ////////// CHARGEMENT
+    $(window).bind("load", function () {        
+        //$.connection.hub.logging = true;
+        // Start the connection
+        //$.connection.hub.start().done(function () {
+        //    $.connection.ollertHub.server.newMove();
+        //});
+
+        Ollert.initializeBoard();
+    });
+</script>
+}

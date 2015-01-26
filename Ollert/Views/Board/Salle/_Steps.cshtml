@@ -1,0 +1,55 @@
+﻿<div class="item-red">
+    <form class="form-inline" role="form">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <input id="add-step-input" type="text" name="etape_titre" class="form-control" placeholder="Step Title..." data-bind="value: newStep().title">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <input type="number" name="etape_estimation" class="form-control" placeholder="Estimation" data-bind="value: newStep().estimation">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <button type="button" class="btn btn-sm btn-info no-radius" data-bind="click: addStep">
+                        <i class="icon-plus"></i>
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        
+       
+    </form>
+</div>
+<ul class="item-list ui-sortable" data-bind="foreach: steps">
+    <li class="clearfix" data-bind="css: listCss">
+        <label class="inline">
+            <input type="checkbox" class="ace chkStep" data-bind="checked: isDone, click: toggleInputDone" />
+            <span class="lbl" data-bind="text: ' ' + title(), click: toggleDone"></span>
+        </label>
+
+        <div class="inline pull-right position-relative dropdown-hover">
+            <div class="badge squarebadge">
+                <span class="glyphicon glyphicon-trash red"></span>
+            </div>
+            <ul class="dropdown-menu dropdown-only-icon dropdown-danger dropdown-caret dropdown-close pull-right">
+                <li>
+                    <a title="" href="#" data-bind="click: $parent.deleteStep">
+                        <span>
+                            <i class="icon-trash"></i> Supprimer
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="badge squarebadge pull-right">
+            <span class="glyphicon glyphicon-time"></span>
+            <span class="badge-text" data-bind="text: toReadableTime()"></span>
+        </div>
+    </li>
+</ul>

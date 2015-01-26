@@ -1,0 +1,93 @@
+@model Ollert.Models.MailEventViewModel
+<table width="100%" cellpadding="0" cellspacing="0" border="0" id="background-table">
+    <tbody>
+        <tr>
+            <td align="center" bgcolor="#ececec">
+                <table class="w640" style="margin:0 10px;" width="640" cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr><td class="w640" width="640" height="20"></td></tr>
+                        <tr>
+                            <td id="header" class="w640" width="640" align="center" bgcolor="#425470">
+
+                                <table class="w640" width="640" cellpadding="0" cellspacing="0" border="0">
+                                    <tbody>
+                                        <tr><td class="w30" width="30"></td><td class="w580" width="580" height="30"></td><td class="w30" width="30"></td></tr>
+                                        <tr>
+                                            <td class="w30" width="30"></td>
+                                            <td class="w580" width="580">
+                                                <div align="center" id="headline">
+                                                    <p>
+                                                        <strong><a href="http://ollert.rethorique.net/Board/Salle/@Model.SalleId"><singleline label="Title">Ollert!</singleline></a></strong>
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td class="w30" width="30"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr><td class="w640" width="640" height="30" bgcolor="#ffffff"></td></tr>
+                        <tr id="simple-content-row">
+                            <td class="w640" width="640" bgcolor="#ffffff">
+                                <table class="w640" width="640" cellpadding="0" cellspacing="0" border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="w30" width="30"></td>
+                                            <td class="w580" width="580">
+                                                <repeater>
+                                                    <layout label="Text only">
+                                                        <table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="w580" width="580">
+                                                                        <p align="left" class="article-title"><singleline label="Title">@Model.Titre</singleline></p>
+                                                                        <div align="left" class="article-content">
+                                                                            <multiline label="Description">@Model.Message</multiline>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr><td class="w580" width="580" height="10"></td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </layout>
+                                                </repeater>
+                                            </td>
+                                            <td class="w30" width="30"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr><td class="w640" width="640" height="15" bgcolor="#ffffff"></td></tr>
+
+                        <tr>
+                            <td class="w640" width="640">
+                                <table id="footer" class="w640" width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#425470">
+                                    <tbody>
+                                        <tr><td class="w30" width="30"></td><td class="w580 h0" width="360" height="30"></td><td class="w0" width="60"></td><td class="w0" width="160"></td><td class="w30" width="30"></td></tr>
+                                        <tr>
+                                            <td class="w30" width="30"></td>
+                                            <td class="w580" width="360" valign="top">
+                                                <span class="hide"><p id="permission-reminder" align="left" class="footer-content-left"><span></span></p></span>
+                                                <p align="left" class="footer-content-left"></p>
+                                            </td>
+                                            <td class="hide w0" width="60"></td>
+                                            <td class="hide w0" width="160" valign="top">
+                                                <p id="street-address" align="right" class="footer-content-right"></p>
+                                            </td>
+                                            <td class="w30" width="30"></td>
+                                        </tr>
+                                        <tr><td class="w30" width="30"></td><td class="w580 h0" width="360" height="15"></td><td class="w0" width="60"></td><td class="w0" width="160"></td><td class="w30" width="30"></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr><td class="w640" width="640" height="60"></td></tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

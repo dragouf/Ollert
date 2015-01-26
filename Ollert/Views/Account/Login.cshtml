@@ -1,0 +1,28 @@
+﻿@model Ollert.Models.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h2 class="form-signin-heading">Ollert !</h2>
+    <input type="text" value="" name="UserName" id="UserName" class="form-control" placeholder="Login" required autofocus />
+    <input type="password" name="Password" id="Password" class="form-control" placeholder="Password" required />
+    <label class="checkbox">
+        <input type="checkbox" value="true" name="RememberMe" id="RememberMe" /> Remember me
+    </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+}
+
+@section Scripts {
+    
+}
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+﻿<div class="profile-user-info profile-user-info-striped">
+    <div class="profile-info-row">
+        <div class="profile-info-name"> Estimation </div>
+
+        <div class="profile-info-value">
+            <span class="editable" data-bind="text: toReadableTime(), click: editEstimation">&nbsp;</span>            
+        </div>
+    </div>
+
+    <div class="profile-info-row">
+        <div class="profile-info-name"> Title </div>
+
+        <div class="profile-info-value">
+            <span class="editable" data-bind="text: titre, visible: !editingTitre(), click: editTitre">&nbsp;</span>
+            <div class="editable-container editable-inline" data-bind="visible: editingTitre()">
+                <div>
+                    <div class="editableform-loading" style="display: none;">
+                        <i class="light-blue icon-2x icon-spinner icon-spin"></i>
+                    </div>
+                    <form class="form-inline editableform">
+                        <div class="control-group">
+                            <div>
+                                <div class="editable-input" style="position: relative;">
+                                    <input type="text" style="padding-right: 24px;" class="input-medium" id="edit-titre" data-bind="value: titre">
+                                    <span class="editable-clear-x" data-bind="click:clearTitre"></span>
+                                </div>
+                                <div class="editable-buttons">
+                                    <button class="btn btn-info editable-submit" type="button" data-bind="click:saveTitre">
+                                        <i class="icon-ok icon-white"></i>
+                                    </button>
+                                    <button class="btn editable-cancel" type="button" data-bind="click:cancelTitre">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-info-row">
+        <div class="profile-info-name"> Description </div>
+
+        <div class="profile-info-value">
+            <span class="editable" id="edit-description" data-bind="text: description, visible: !editingDescription(), click: editDescription">&nbsp;</span>
+            <div class="editable-container editable-inline" data-bind="visible: editingDescription()">
+                <div>
+                    <div class="editableform-loading" style="display: none;">
+                        <i class="light-blue icon-2x icon-spinner icon-spin"></i>
+                    </div>
+                    <form class="form-inline editableform" style="">
+                        <div class="control-group">
+                            <div>
+                                <div class="editable-input editable-wysiwyg">
+                                    <input type="hidden">
+                                    <textarea class="autosize-transition form-control" rows="5" data-bind="value: description"></textarea>
+                                    <div class="editable-buttons">
+                                        <button class="btn btn-info editable-submit" type="button" data-bind="click:saveDescription">
+                                            <i class="icon-ok icon-white"></i>
+                                        </button>
+                                        <button class="btn editable-cancel" type="button" data-bind="click:cancelDescription">
+                                            <i class="icon-remove"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-info-row">
+        <div class="profile-info-name"> Files </div>
+
+        <div class="profile-info-value">
+            <form action="/Board/AddFileToCard" class="dropzone" data-bind="attr: {id: uploadId()}"></form>
+        </div>
+    </div>
+</div>

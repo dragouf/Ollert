@@ -1,0 +1,604 @@
+﻿html, body{ margin:0px; padding:0px; background: #F7F7F7; height:100%; }
+
+body {
+    background-color: #F7F7F7;
+}
+
+body.archive {
+    background: rgb(169,3,41); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,3,41,1)), color-stop(44%,rgba(143,2,34,1)), color-stop(100%,rgba(109,0,25,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+}
+    body.archive div.panel-heading,  body.archive div.panel-footer {
+        background: rgb(254,252,252); /* Old browsers */
+        background: -moz-linear-gradient(top,  rgba(254,252,252,1) 0%, rgba(254,248,246,1) 50%, rgba(255,246,243,1) 100%, rgba(253,250,249,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,252,252,1)), color-stop(50%,rgba(254,248,246,1)), color-stop(100%,rgba(255,246,243,1)), color-stop(100%,rgba(253,250,249,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(254,252,252,1) 0%,rgba(254,248,246,1) 50%,rgba(255,246,243,1) 100%,rgba(253,250,249,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcfc', endColorstr='#fdfaf9',GradientType=0 ); /* IE6-9 */
+    }
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/***CARD***/
+.squarebadge.unread-notification {
+    background: none repeat scroll 0 0 #BD2828;
+    border-color: #BD2828;
+}
+
+.squarebadge.unread-notification .glyphicon, .badge.unread-notification .badge-text {
+    color:#FFFFFF;
+}
+
+.squarebadge {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #E6E6E6;
+    border-color: #D9D9D9 #D9D9D9 #D3D3D3;
+    border-image: none;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: default;
+    height: 16px;
+    margin: 0 2px 2px 0;
+    padding: 0 4px;
+    position: relative;
+    text-decoration: none;
+}
+
+.badges {
+    margin: 0;
+    padding: 0 0 2px;
+}
+
+.card-footer {
+    padding: 0 8px;
+}
+
+.card-body .card-labels {
+    margin: 0 6px;
+    position: relative;
+    z-index: 30;
+}
+
+.card-body .card-labels .card-label {
+    border-radius: 0;
+    float: left;
+    height: 4px;
+    margin-bottom: 1px;
+    padding: 0;
+    width: 40px;
+}
+.card-label.red-label {
+    background-color: #CB4D4D;
+}
+.card-label.green-label {
+    background-color: #34B27D;
+}
+.card-label.yellow-label {
+    background-color: #DBDB57;
+}
+.card-label.orange-label {
+    background-color: #E09952;
+}
+.card-label.purple-label {
+    background-color: #9933CC;
+}
+.card-label.blue-label {
+    background-color: #4D77CB;
+}
+.card-label {
+    border-radius: 3px;
+    color: #FFFFFF;
+    display: block;
+    font-weight: bold;
+    margin-right: 3px;
+    overflow: hidden;
+    padding: 3px 6px;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.4), 0 0 3px #000000;
+    white-space: nowrap;
+}
+
+.card-text {
+    display: inline-block;
+    font-size: 12px;
+    padding: 6px 9px;
+}
+
+.panel-body {
+    padding: 6px;
+}
+
+.panel-heading {
+    font-weight: bold;
+    padding: 6px 15px;
+}
+
+.glyphicon {
+    vertical-align: text-top;
+    color: #A9A9A9;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+.squarebadge .badge-text {
+    color: #737373;
+    margin-left:2px;
+    font-size:11px;
+}
+
+.modal-header {
+    padding: 6px 20px;
+}
+
+.modal-title .glyphicon
+{
+    padding: 0 29px 0 0;
+    vertical-align: text-top;
+}
+
+.editable-clear-x {
+    display: block;
+    height: 13px;
+    margin-top: -6px;
+    opacity: 0.6;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 13px;
+    z-index: 100;
+}
+
+.editable-input {
+    white-space: normal;
+}
+
+.editableform .control-group {
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+div.editable-buttons button.btn {
+    border-width: 3px;
+    font-size: 12px;
+    line-height: 19px;
+    margin: 0 -3px 0 0;
+    padding: 0;
+    width: 28px;
+}
+
+div.btn-group-vertical > button.btn, div.btn-group-vertical > button.btn + button.btn {
+    margin: 0 -1px;
+}
+
+.modal-body h4 {
+    margin-bottom: 22px;
+    margin-top: 20px;
+}
+
+.modal-body {
+    padding: 2px 17px;
+}
+
+.widget-box {
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+}
+
+.card-heading {
+    font-size:12px;
+    font-weight: bold;
+    padding: 1px 7px 1px 13px;
+}
+
+form.dropzone div.dz-preview div.dz-details img, .dropzone-previews div.dz-preview div.dz-details img {
+    height: 78px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 78px;
+}
+form.dropzone div.dz-preview div.dz-details, .dropzone-previews div.dz-preview .dz-details {
+    background: none repeat scroll 0 0 #EBEBEB;
+    height: 78px;
+    margin-bottom: 22px;
+    padding: 5px;
+    position: relative;
+    width: 78px;
+}
+form.dropzone div.dz-preview, .dropzone-previews div.dz-preview {
+    font-size: 12px;
+}
+form.dropzone div.dz-preview, .dropzone-previews div.dz-preview {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid #ACACAC;
+    display: inline-block;
+    margin: 3px;
+    padding: 6px;
+    position: relative;
+    vertical-align: top;
+}
+div.progress.progress-small {
+    height: 7px;
+}
+form.dropzone a.dz-remove, form.dropzone-previews a.dz-remove {    
+    margin-top: 8px;
+}
+form.dropzone div.dz-preview .dz-error-mark, .dropzone-previews div.dz-preview div.dz-error-mark, form.dropzone div.dz-preview div.dz-success-mark, .dropzone-previews div.dz-preview div.dz-success-mark {
+    line-height: 35px;
+}
+form.dropzone div.dz-preview div.dz-success-mark, .dropzone-previews div.dz-preview div.dz-success-mark, form.dropzone div.dz-preview div.dz-error-mark, .dropzone-previews div.dz-preview div.dz-error-mark {
+    height: 35px;
+    width: 35px;
+}
+form.dropzone {   
+    min-height: 136px;
+    padding: 5px;
+}
+form.dropzone div.dz-default.dz-message {
+    filter: none;
+    height: 123px;
+    /*left: 50%;
+    margin-left: -214px;*/
+    margin-top: 0;
+    opacity: 1;
+    position: absolute;
+    top: inherit;
+    transition: opacity 0.3s ease-in-out 0s;
+    font-size: 1.3em;
+    /*width: 428px;*/
+}
+
+form.dropzone.dz-started .dz-message {
+    display: none;
+}
+
+form.dropzone div.dz-preview div.progress {
+    display: none;
+}
+
+form.dropzone div.dz-processing div.progress {
+    display: block;
+}
+
+.modal-dialog {
+    /*width: 626px;*/
+}
+
+/*span.msg-title {
+    white-space:normal;
+}
+
+ul.dropdown-navbar > li > a {
+    font-size: 11px;
+    padding: 7px 0;
+}
+ul.dropdown-navbar span.msg-title {
+    display: inline;
+    line-height: 14px;
+}*/
+
+/*ul.dropdown-navbar i.icontype {
+    display: inline-block;
+    font-size: 18px;
+    min-height: 19px;
+    min-width: 19px;
+    vertical-align: top;
+}
+ul.dropdown-navbar span.msg-body {
+    display: inline-block;
+    line-height: 20px;
+    max-width: 192px;
+    vertical-align: middle;
+    white-space: normal;
+}
+ul.dropdown-navbar span.msg-time {
+    text-align:right;
+}
+ul.dropdown-navbar > li > a {
+    padding: 7px 2px;
+}*/
+
+ul.dropdown-navbar {
+    width: 274px;
+}
+ul.dropdown-navbar div.msg-body {
+    max-width: 205px;
+}
+ul.dropdown-navbar > li:last-child > a {
+    border-bottom: inherit;
+    border-top: inherit;
+    color: inherit;
+    font-size: inherit;
+    text-align: inherit;
+}
+ul.dropdown-navbar > li:last-child > a {
+    clear: both;
+    color: #333333;
+    display: block;
+    font-weight: normal;
+    line-height: 1.42857;
+    white-space: nowrap;
+    border-bottom: 1px solid;
+    color: #555555;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+    padding: 10px 2px;
+    border-bottom: 0px solid;
+}
+ul.dropdown-navbar > li:last-child > a:active, ul.dropdown-navbar > li:last-child > a:hover, ul.dropdown-navbar > li:last-child > a:focus {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #555555;
+    text-decoration:none;
+}
+
+ul.dropdown-navbar > li > a > .user-notification, ul.dropdown-navbar > li:last-child > a > .user-notification {
+    color: #555555;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+ ul.dropdown-navbar > li > a > .user-notification .msg-title, ul.dropdown-navbar > li:last-child > a > .user-notification .msg-title {
+    padding-left:10px;
+}
+
+ ul.dropdown-navbar > li.notification {
+    background-color: #FFEADB;
+}
+
+ .clickable {
+  cursor: pointer;
+  font-weight: normal;
+  color:#629CBA;
+}
+
+.clickable:hover {
+  color: #0088CC;
+}
+
+div#gritter-notice-wrapper {
+    right: 12px;
+    top: 46px;
+}
+
+div.gritter-center {
+    left: 33%;
+    position: fixed;
+    right: 49%;
+    top: inherit;
+    background-color:#CB4D4D;
+}
+div.gritter-center .gritter-with-image {
+    float: right;
+    width: auto;
+}
+
+div.gritter-item-wrapper.gritter-info.gritter-center {
+    background-color:#CB4D4D;
+}
+
+div.panel-heading div.widget-toolbar:before {
+    border-color: #D9D9D9;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    left: -1px;
+    position: absolute;
+    top: 1px;
+}
+
+div.panel-heading div.widget-toolbar {
+    display: inline-block;
+    float: right;
+    line-height: 6px;
+    padding: 0 0 0 3px;
+    position: relative;
+}
+
+div.panel-heading div.widget-toolbar > a {
+    display: inline-block;
+    font-size: 13px;
+    line-height: inherit;
+    margin: 0 2px 0 0;
+    padding: 0;
+    position: relative;
+    right: -3px;
+    top: 0;
+}
+
+div.progress {
+    margin-bottom: 0;
+    margin-top: 4px;
+}
+
+ .clickable-red {
+  cursor: pointer;
+  font-weight: normal;
+  color: #B7685F;
+}
+
+.clickable-red:hover {
+  color: #ED6D5E;
+}
+
+div.item-red {
+    border-left-color: #D53F40;
+    border-width: 0 0 0 3px;
+    border-style: solid;
+}
+
+ul.breadcrumb {
+    margin-left: 0.2em;
+}
+
+/*
+div.btn.ace-settings-btn {
+    border-radius: 0 6px 6px 0 !important;
+}
+
+div.ace-settings-container {
+    left: 0;
+    right: inherit;
+    position: absolute;
+    top: 45px;
+    z-index: 12;
+}*/
+
+form.form-inline div.row {
+    margin: 0;
+    padding: 0;
+}
+
+form.form-inline div.row div.col-xs-6, form.form-inline div.row div.col-xs-4, form.form-inline div.row div.col-xs-2{
+    margin: 0;
+    padding: 0;
+}
+
+form.form-inline div.row div.form-group {
+    width:100%;
+}
+
+form.form-inline div.row div.form-group input {
+    width:100%;
+}
+
+form.form-inline div.row div.form-group button {
+    width:100%;
+}
+
+ul.ui-sortable div.squarebadge {
+    margin: 3px 0 0 11px;
+}
+
+div.widget-toolbar ul.dropdown-menu.dropdown-close.pull-right {
+    right: -12px;
+}
+div.widget-toolbar ul.dropdown-menu.dropdown-close {
+    top: 125%;
+}
+div.widget-toolbar ul.dropdown-menu.dropdown-only-icon > li {
+    float: none;
+}
+div.widget-toolbar div.dropdown-hover a {
+    text-decoration:none;
+}
+div.widget-toolbar div.dropdown-hover {
+    margin-left:6px;    
+    float: left;
+}
+
+div.ace-settings-container {
+    top: 46px;
+}
+@media only screen and (max-width: 480px) {
+    div.ace-settings-container {
+        top: 89px;
+    }
+
+    .body-content {
+        margin-top: 20px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+div.pull-right > ul.dropdown-danger {
+    left: 0;
+}
+
+i.icon-font14 {
+    font-size: 14px;
+}
+
+div.panel-heading div.toolbar-main:before {
+    bottom: -4px;
+    left: -3px;
+    top: -2px;
+}
+
+div.padding-8 {
+    padding:0 8px;
+}
+
+ul.dropdown-menu li.success a:hover {
+    background: none repeat scroll 0 0 #87B87F;
+    color: #FFFFFF;
+}
+
+div.modal-dialog div.modal-footer {   
+    padding-bottom: 6px;
+    padding-top: 6px;
+}
+
+.ui-sortable-helper {
+transform:rotate(6deg);
+-ms-transform:rotate(6deg); /* IE 9 */
+-webkit-transform:rotate(6deg); /* Safari and Chrome */
+
+ /*-webkit-transition: all 1s ease-in-out;
+-moz-transition: all 1s ease-in-out;
+-o-transition: all 1s ease-in-out;
+transition: all 1s ease-in-out;*/
+}
+
+div.ui-sortable-placeholder {
+ border:1px dashed #E8E8E8;
+
+
+ background-color: #f3f3f3;
+         padding-right:10px;
+         padding-left:10px;
+         text-align:center;
+         visibility: visible !important;
+ /*-webkit-transition: all 1s ease-in-out;
+-moz-transition: all 1s ease-in-out;
+-o-transition: all 1s ease-in-out;
+transition: all 1s ease-in-out;*/
+}

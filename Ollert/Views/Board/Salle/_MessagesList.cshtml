@@ -1,0 +1,45 @@
+﻿<div class="widget-box ">
+    <div class="widget-body">
+        <div class="widget-main no-padding">
+            <div class="dialogs" data-bind="foreach: messages">
+                <div class="itemdiv dialogdiv">
+                    <div class="user">
+                        <img alt="User Avatar" data-bind="attr: { src: user().avatarPath() }" />
+                    </div>
+
+                    <div class="body">
+                        <div class="time">
+                            <i class="glyphicon glyphicon-time"></i>
+                            <span class="blue" data-bind="text:formattedDate"></span>
+                        </div>
+
+                        <div class="name">
+                            <a href="#" data-bind="text: user().name"></a>
+                        </div>
+                        <div class="text" data-bind="text: text"></div>
+
+                        <div class="tools" data-bind="visible: $parent.isOwner($data)">
+                            <a href="#" class="btn btn-minier btn-info" data-bind="click: $parent.deleteMessage">
+                                <i class="icon-only icon-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-actions">
+                    <div class="input-group">
+                        <input placeholder="Add a Comment ..." type="text" class="form-control" name="message" data-bind="value: newMessage().text" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-sm btn-info no-radius" type="button" data-bind="click: addMessage">
+                                <i class="icon-share-alt"></i>
+                                Send
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /widget-main -->
+    </div><!-- /widget-body -->
+</div><!-- /widget-box -->

@@ -1,0 +1,112 @@
+﻿<div id="breadcrumbs" class="breadcrumbs">
+    <ul class="breadcrumb">
+        <li class="active">
+            <i class="icon-home home-icon"></i>
+            <span>Rooms</span>
+        </li>
+    </ul><!-- .breadcrumb -->
+</div>
+
+<div class="body-content" id="liste-content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div data-bind="template: 'sallesTemplate'"></div>
+
+            <script id="sallesTemplate" type="text/html">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="icon-home"></i>Room</th>
+                            <th class="hidden-480"><i class="icon-key"></i>Owner</th>
+                            <th><i class="icon-group"></i>Participants</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: boards">
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <a class="pull-left" href="/Board/Salle/" data-bind="text: name, attr:{href: salleUrl}"></a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="badges">
+                                            <div class="unread-notification badge squarebadge" title="Unread Messages" data-rel="tooltip" data-bind="visible: unseenMessage() > 0">
+                                                <span class="glyphicon glyphicon-comment"></span>
+                                                <span class="badge-text" data-bind="text: unseenMessage"></span>
+                                            </div>
+                                            <div class="unread-notification badge squarebadge" title="Fichiers non vus" data-rel="tooltip" data-bind="visible: unseenFiles() > 0">
+                                                <span class="glyphicon glyphicon-paperclip"></span>
+                                                <span class="badge-text" data-bind="text: unseenFiles"></span>
+                                            </div>
+                                            <div class="badge squarebadge" title="Remaining Time" data-rel="tooltip" data-bind="visible: timeLeft() > 0">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                                <span class="badge-text" data-bind="text: timeLeftHumanReadable()"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="btn-group pull-right" data-bind="visible: $parent.currentUser.id == proprietaire().id">
+                                            <button class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown">
+                                                Danger
+                                                <i class="icon-angle-down icon-on-right"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-danger">
+                                                <li>
+                                                    <a href="#" data-bind="click: $parent.deleteSalle"><i class="icon-trash"></i> Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden-480" data-bind="text: proprietaire().name"></td>
+                            <td>
+                                <div class="list-participants pull-left" data-bind="foreach: participants">
+                                    <div class="label label-lg label-yellow arrowed-in arrowed-right">
+                                        <span data-bind="text: name"></span>
+                                        <span class="icon-remove clickable-red" data-bind="visible: $parents[1].currentUser.id == $parent.proprietaire().id, click: $parent.removeParticipant"></span>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group pull-right" data-bind="visible: users().length > 0 && $parent.currentUser.id == proprietaire().id">
+                                    <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        Add
+                                        <span class="icon-caret-down icon-on-right"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-info pull-right" data-bind="foreach: users">
+                                        <li>
+                                            <a href="#" data-bind="text: name, click: $parent.addParticipant"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </script>
+        </div>
+    </div>
+
+    <div id="ace-settings-container" class="ace-settings-container">
+        <div id="ace-settings-btn" class="btn btn-app btn-xs btn-warning ace-settings-btn">
+            <i class="icon-cog bigger-150"></i>
+        </div>
+        <div id="ace-settings-box" class="ace-settings-box">
+            <div>
+                <i class="icon-plus blue"></i> <a href="#" data-bind="click: modalAddSalle">Add Room</a>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("List/_AddModal")
+</div>
+
+@section Scripts {    
+    <script type="text/javascript">
+        ////////// CHARGEMENT
+        $(window).bind("load", function () {
+            Ollert.initializeListe();
+        });
+    </script>
+}
