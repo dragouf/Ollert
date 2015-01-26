@@ -5,7 +5,7 @@ Trello like application with :
 
 **Backend**
 * C# 5.0 (using await/async paradigm)
-* MVC 5
+* MVC 5 with Web API 2
 * SignalR 2.0
 * Entity Framework 6 (code first and migrations)
 
