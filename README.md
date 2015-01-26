@@ -31,4 +31,11 @@ Login with david and 123456
 
 *** Screenshot
 
+**Room view**
+![GitHub Logo](/docs/Capture.PNG)
 
+**Boards with pinned cards**
+![GitHub Logo](/docs/Capture2.PNG)
+
+**card edition**
+![GitHub Logo](/docs/Capture3.PNG)
