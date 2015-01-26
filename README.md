@@ -23,8 +23,9 @@ Everything is replicated instantly on every connected user UI with websocket con
 ### Installation
 * In visual studio package manager console restore package files then run :
 
-add-migration Init
-update*database
+>add-migration Init
+
+>update-database
 
 start the project.
 Login with david and 123456
