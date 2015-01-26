@@ -18,7 +18,7 @@ Trello like application with :
 ### Description
 Create rooms and boards and then organize your tasks by pinning cards on appriopriate board.
 
-Everything is replicated instantly on every connected user with websocket connections.
+Everything is replicated instantly on every connected user UI with websocket connections.
 
 ### Installation
 * In visual studio package manager console restore package files then run :
