@@ -45,6 +45,8 @@ namespace Ollert.DAL
             //modelBuilder.Entity<Carte>().HasMany(a => a.CartesVues).WithRequired().WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
+
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<OllertDbContext, Configuration>());
         }
 
         public System.Data.Entity.DbSet<Ollert.Models.CarteEtape> CarteEtapes { get; set; }
