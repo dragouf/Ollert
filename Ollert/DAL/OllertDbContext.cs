@@ -28,7 +28,7 @@ namespace Ollert.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<OllertDbContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<OllertDbContext, Configuration>());
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             //modelBuilder.Entity<Course>()
@@ -38,6 +38,7 @@ namespace Ollert.DAL
             //        .ToTable("CourseInstructor"));
             //var conv = new OneToManyCascadeDeleteConvention();
             //conv.Apply(System.Data.Entity.Core.Metadata.Edm.AssociationType.Create())
+
 
             //modelBuilder.Entity<Carte>().HasMany(a => a.Fichiers).WithRequired().WillCascadeOnDelete(true);
             //modelBuilder.Entity<Carte>().HasMany(a => a.Messages).WithRequired().WillCascadeOnDelete(true);

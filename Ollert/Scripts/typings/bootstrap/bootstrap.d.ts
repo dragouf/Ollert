@@ -86,7 +86,7 @@ interface JQuery {
     tab(command: string): JQuery;
 
     tooltip(options?: TooltipOptions): JQuery;
-    //tooltip(command: string): JQuery;
+    tooltip(command: string): JQuery;
 
     popover(options?: PopoverOptions): JQuery;
     popover(command: string): JQuery;
@@ -94,8 +94,8 @@ interface JQuery {
     alert(): JQuery;
     alert(command: string): JQuery;
 
-    //button(): JQuery;
-    //button(command: string): JQuery;
+    button(): JQuery;
+    button(command: string): JQuery;
 
     collapse(options?: CollapseOptions): JQuery;
     collapse(command: string): JQuery;
@@ -106,4 +106,7 @@ interface JQuery {
     typeahead(options?: TypeaheadOptions): JQuery;
 
     affix(options?: AffixOptions): JQuery;
+}
+
+declare module "bootstrap" {
 }

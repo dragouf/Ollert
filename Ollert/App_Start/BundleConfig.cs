@@ -19,7 +19,7 @@ namespace Ollert
                       "~/Scripts/jquery.slimscroll.js",
                       "~/Scripts/jquery.signalR-{version}.js",
                       "~/Scripts/jquery.cookie.js",
-                      "~/Scripts/moment-with-langs.js",
+                      "~/Scripts/moment-with-locale.js",
                       "~/Scripts/dropzone.js",
                       "~/Scripts/jquery.gritter.js",
                       "~/Scripts/respond.js",

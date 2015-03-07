@@ -60,7 +60,7 @@ namespace Ollert.Hubs
             return base.OnConnected();
         }
 
-        public override Task OnDisconnected()
+        public override Task OnDisconnected(bool stopCalled)
         {
             // Retire l'id de la liste
             foreach (var connectedUser in ConnectedUsers)
@@ -80,7 +80,7 @@ namespace Ollert.Hubs
             // Send to js client
             Clients.Others.onDisconnected(ConnectedUsers.Select(u => u.Value));
 
-            return base.OnDisconnected();
+            return base.OnDisconnected(stopCalled);
         }
     }
 }
