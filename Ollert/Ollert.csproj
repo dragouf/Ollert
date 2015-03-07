@@ -232,10 +232,6 @@
     </Compile>
     <Compile Include="Hubs\OllertHub.cs" />
     <Compile Include="Mailers\NotificationMailer.cs" />
-    <Compile Include="Migrations\201501260444017_Init.cs" />
-    <Compile Include="Migrations\201501260444017_Init.Designer.cs">
-      <DependentUpon>201501260444017_Init.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MailEventViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
