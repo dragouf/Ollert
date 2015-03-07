@@ -35,7 +35,7 @@ namespace Ollert.Migrations
             var admin = context.Users.First(u => u.UserName == "Admin");
 
             var salle = new Salle {
-                Nom = "Developpements",
+                Nom = "Development",
                 Proprietaire = admin
             };
 
@@ -43,14 +43,14 @@ namespace Ollert.Migrations
 
             var carte = new Carte
             {
-                Titre = "Un exemple de carte 1",
-                Description = @"il faut vraiment le faire!",
+                Titre = "Card example 1",
+                Description = @"Do it really!",
                 NumeroDemande = 40,
                 DateCreation = DateTime.Now,
                 Etapes = new List<CarteEtape> { new CarteEtape { Estimation = 1200, Position = 0, Terminee = false, Titre = "Total" } }
             };
 
-            var tableau1 = new Tableau { Nom = "Attente Estimation", Position = 0, Salle = salle };
+            var tableau1 = new Tableau { Nom = "Waiting", Position = 0, Salle = salle };
             tableau1.Cartes.Add(carte);
 
             var message = new Message
@@ -60,30 +60,29 @@ namespace Ollert.Migrations
                 Utilisateur = context.Users.First()
             };
 
-            carte.Messages = new List<Message>();
-            carte.Messages.Add(message);
+            carte.Messages = new List<Message> {message};
 
             context.Tableaux.AddOrUpdate(
               T => T.Nom,
               tableau1,
-              new Tableau { Nom = "Attente Validation", Position = 1, Salle = salle },
-              new Tableau { Nom = "Accept", Position = 2, Salle = salle },
-              new Tableau { Nom = "Developpement", Position = 3, Salle = salle },
-              new Tableau { Nom = "A Tester", Position = 4, Salle = salle },
-              new Tableau { Nom = "TerminÅEet Valid", Position = 5, Salle = salle }
+              new Tableau { Nom = "Pending", Position = 1, Salle = salle },
+              new Tableau { Nom = "Accepted", Position = 2, Salle = salle },
+              new Tableau { Nom = "Development", Position = 3, Salle = salle },
+              new Tableau { Nom = "Tests", Position = 4, Salle = salle },
+              new Tableau { Nom = "Done", Position = 5, Salle = salle }
             );
 
             //var db = new OllertDbContext();
             var david = new OllertUser()
             {
                 UserName = "David",
-                Email = "david-laurent@outlook.com",
+                Email = "david-laurent@yopmail.com",
                 Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/david.png"))
             };
             var yannick = new OllertUser()
             {
                 UserName = "Yannick",
-                Email = "david-laurent@outlook.com",
+                Email = "david-laurent@yopmail.com",
                 Avatar = System.IO.File.ReadAllBytes(this.MapPath("~/Content/images/avatar/yannick.png"))
             };
 
@@ -99,7 +98,7 @@ namespace Ollert.Migrations
 
             var absolutePath = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).AbsolutePath;
             var directoryName = System.IO.Path.GetDirectoryName(absolutePath);
-            var path = System.IO.Path.Combine(directoryName, ".." + seedFile.TrimStart('~').Replace('/', '\\'));
+            var path = System.IO.Path.Combine(directoryName ?? string.Empty, ".." + seedFile.TrimStart('~').Replace('/', '\\'));
 
             return path;
         }
