@@ -22,7 +22,7 @@ namespace Ollert.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull("OK");
         }
     }
 }
