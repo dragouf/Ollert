@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Ollert.Migrations;
 using Ollert.Models;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Ollert.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<OllertDbContext, Configuration>());
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             //modelBuilder.Entity<Course>()
