@@ -8,23 +8,19 @@ namespace Ollert.Migrations
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Data.Entity.Validation;
-    using System.Diagnostics;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Ollert.DAL.OllertDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            //AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Ollert.DAL.OllertDbContext context)
         {
             //  This method will be called after migrating to the latest version.
-
-            var userManager = new UserManager<OllertUser>(new UserStore<OllertUser>(new OllertDbContext()));
+            var userManager = new UserManager<OllertUser>(new UserStore<OllertUser>(context));
             var user = new OllertUser() { UserName = "Admin" };
             var userResult = userManager.Create(user, "123456");
 
@@ -34,7 +30,8 @@ namespace Ollert.Migrations
 
             var admin = context.Users.First(u => u.UserName == "Admin");
 
-            var salle = new Salle {
+            var salle = new Salle
+            {
                 Nom = "Development",
                 Proprietaire = admin
             };
@@ -60,7 +57,7 @@ namespace Ollert.Migrations
                 Utilisateur = context.Users.First()
             };
 
-            carte.Messages = new List<Message> {message};
+            carte.Messages = new List<Message> { message };
 
             context.Tableaux.AddOrUpdate(
               T => T.Nom,

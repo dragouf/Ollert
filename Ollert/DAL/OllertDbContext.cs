@@ -28,7 +28,6 @@ namespace Ollert.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<OllertDbContext, Configuration>());
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             //modelBuilder.Entity<Course>()
@@ -45,8 +44,7 @@ namespace Ollert.DAL
             //modelBuilder.Entity<Carte>().HasMany(a => a.CartesVues).WithRequired().WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
-
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<OllertDbContext, Configuration>());
+            //System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<Ollert.DAL.OllertDbContext, Ollert.Migrations.Configuration>());
         }
 
         public System.Data.Entity.DbSet<Ollert.Models.CarteEtape> CarteEtapes { get; set; }
