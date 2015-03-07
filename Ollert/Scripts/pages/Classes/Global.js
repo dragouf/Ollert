@@ -3,8 +3,8 @@ var Global;
     // Helpers
     function ShowConnectionError() {
         var unique_id = $.gritter.add({
-            title: 'A propos de la requete Ajax',
-            text: 'Il semble y avoir un probleme de connection',
+            title: 'Oups...',
+            text: 'It look likes there is a connection problem',
             image: '/Content/images/connection_error.png',
             sticky: true,
             //time: '',

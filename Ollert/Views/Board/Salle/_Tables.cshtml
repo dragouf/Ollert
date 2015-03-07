@@ -20,7 +20,7 @@
                             <div class="panel-heading card-heading">
                                 <div class="row no-margin">
                                     <div class="col-xs-5 no-padding">
-                                        Demande <span data-bind="text: demande"></span>
+                                        Request <span data-bind="text: demande"></span>
                                     </div>
                                     <div class="col-xs-4 no-padding">
                                         <div class="progress progress-mini progress-striped" data-bind="visible: percentComplete() > 0">
@@ -35,13 +35,13 @@
                                                     <li>
                                                         <a data-action="settings" href="#" data-bind="click: archiveCard">
                                                             <span>
-                                                                <i class="icon-archive"></i> <span data-bind="text: $parents[2].displayArchive() ? 'Récuperer' : 'Archiver'">Archiver</span>
+                                                                <i class="icon-archive"></i> <span data-bind="text: $parents[2].displayArchive() ? 'Récuperer' : 'Archiver'">Archive</span>
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a data-action="settings" href="#">
-                                                            <span> <i class="icon-move"></i> Deplacer...</span>
+                                                            <span> <i class="icon-move"></i> Move...</span>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -53,7 +53,7 @@
                                                     <li>
                                                         <a title="" href="#" data-bind="click: $parent.deleteCard">
                                                             <span>
-                                                                <i class="icon-trash"></i> Supprimer
+                                                                <i class="icon-trash"></i> Delete
                                                             </span>
                                                         </a>
                                                     </li>
@@ -103,16 +103,16 @@
                     <div class="panel-footer align-right">
 
                         <div class="btn-group" data-bind="visible: !parent().displayArchive()">
-                            <button class="btn btn-xs btn-primary" data-bind="click: parent().openCardDetails">Nouvelle Carte</button>
+                            <button class="btn btn-xs btn-primary" data-bind="click: parent().openCardDetails">New Card</button>
                             <button class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
                                 <span class="icon-caret-down icon-only"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-danger align-left">
                                 <li data-bind="click: parent().deleteTable">
-                                    <a href="#"><i class="icon-trash"></i> Supprimer</a>
+                                    <a href="#"><i class="icon-trash"></i> Delete</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="icon-archive"></i> Archiver</a>
+                                    <a href="#"><i class="icon-archive"></i> Archive</a>
                                 </li>
                             </ul>
                         </div>

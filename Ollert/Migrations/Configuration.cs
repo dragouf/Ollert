@@ -67,10 +67,10 @@ namespace Ollert.Migrations
               T => T.Nom,
               tableau1,
               new Tableau { Nom = "Attente Validation", Position = 1, Salle = salle },
-              new Tableau { Nom = "AcceptÈ", Position = 2, Salle = salle },
+              new Tableau { Nom = "Accept", Position = 2, Salle = salle },
               new Tableau { Nom = "Developpement", Position = 3, Salle = salle },
               new Tableau { Nom = "A Tester", Position = 4, Salle = salle },
-              new Tableau { Nom = "TerminÈ et ValidÈ", Position = 5, Salle = salle }
+              new Tableau { Nom = "TerminÅEet Valid", Position = 5, Salle = salle }
             );
 
             //var db = new OllertDbContext();

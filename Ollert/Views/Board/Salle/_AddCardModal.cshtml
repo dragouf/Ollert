@@ -3,34 +3,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span>Ajout d'une tache</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span>Add card</h4>
             </div>
             <div class="modal-body">
                 <!-- ko with: dialogNewCard -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="inputDemande" class="col-sm-2 control-label">Demande<span style="color:red">*</span></label>
+                        <label for="inputDemande" class="col-sm-2 control-label">Request<span style="color:red">*</span></label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inputDemande" placeholder="Numero Demande" data-bind="value:demande" required>
+                            <input type="number" class="form-control" id="inputDemande" placeholder="Request Number" data-bind="value:demande" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputDescription" class="col-sm-2 control-label">Titre<span style="color:red">*</span></label>
+                        <label for="inputDescription" class="col-sm-2 control-label">Title<span style="color:red">*</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitre" placeholder="Titre de la tache" data-bind="value:titre" required>
+                            <input type="text" class="form-control" id="inputTitre" placeholder="Card Title" data-bind="value:titre" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputDescription" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="inputDescription" rows="3" placeholder="Description de la tache" data-bind="value:description"></textarea>
+                            <textarea class="form-control" id="inputDescription" rows="3" placeholder="Card Description" data-bind="value:description"></textarea>
                         </div>
                     </div>
                 </form>
                 <!-- /ko -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bind="click: addCard">Ajouter</button>
+                <button type="button" class="btn btn-primary" data-bind="click: addCard">Add</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

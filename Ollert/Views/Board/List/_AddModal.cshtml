@@ -3,22 +3,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span>Ajout d'une salle</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-plus-sign"></span>Add a Room</h4>
             </div>
             <div class="modal-body">
                 <!-- ko with: dialogNewBoard -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="inputTitle" class="col-sm-2 control-label">Titre<span style="color:red">*</span></label>
+                        <label for="inputTitle" class="col-sm-2 control-label">Title<span style="color:red">*</span></label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inputTitle" placeholder="Nom de la salle" data-bind="value:name" required>
+                            <input type="text" class="form-control" id="inputTitle" placeholder="Room name" data-bind="value:name" required>
                         </div>
                     </div>
                 </form>
                 <!-- /ko -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bind="click: addSalle">Ajouter</button>
+                <button type="button" class="btn btn-primary" data-bind="click: addSalle">Add</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

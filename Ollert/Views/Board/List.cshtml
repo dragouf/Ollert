@@ -2,7 +2,7 @@
     <ul class="breadcrumb">
         <li class="active">
             <i class="icon-home home-icon"></i>
-            <span>Salles</span>
+            <span>Rooms</span>
         </li>
     </ul><!-- .breadcrumb -->
 </div>
@@ -17,8 +17,8 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th><i class="icon-home"></i>Salles</th>
-                            <th class="hidden-480"><i class="icon-key"></i>Proprietaire</th>
+                            <th><i class="icon-home"></i>Room</th>
+                            <th class="hidden-480"><i class="icon-key"></i>Owner</th>
                             <th><i class="icon-group"></i>Participants</th>
                         </tr>
                     </thead>
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="badges">
-                                            <div class="unread-notification badge squarebadge" title="Messages non lus" data-rel="tooltip" data-bind="visible: unseenMessage() > 0">
+                                            <div class="unread-notification badge squarebadge" title="Unread Messages" data-rel="tooltip" data-bind="visible: unseenMessage() > 0">
                                                 <span class="glyphicon glyphicon-comment"></span>
                                                 <span class="badge-text" data-bind="text: unseenMessage"></span>
                                             </div>
@@ -39,7 +39,7 @@
                                                 <span class="glyphicon glyphicon-paperclip"></span>
                                                 <span class="badge-text" data-bind="text: unseenFiles"></span>
                                             </div>
-                                            <div class="badge squarebadge" title="Temps restant" data-rel="tooltip" data-bind="visible: timeLeft() > 0">
+                                            <div class="badge squarebadge" title="Remaining Time" data-rel="tooltip" data-bind="visible: timeLeft() > 0">
                                                 <span class="glyphicon glyphicon-time"></span>
                                                 <span class="badge-text" data-bind="text: timeLeftHumanReadable()"></span>
                                             </div>
@@ -53,7 +53,7 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-danger">
                                                 <li>
-                                                    <a href="#" data-bind="click: $parent.deleteSalle"><i class="icon-trash"></i> Supprimer</a>
+                                                    <a href="#" data-bind="click: $parent.deleteSalle"><i class="icon-trash"></i> Delete</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -71,7 +71,7 @@
 
                                 <div class="btn-group pull-right" data-bind="visible: users().length > 0 && $parent.currentUser.id == proprietaire().id">
                                     <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                                        Ajouter
+                                        Add
                                         <span class="icon-caret-down icon-on-right"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-info pull-right" data-bind="foreach: users">
@@ -94,7 +94,7 @@
         </div>
         <div id="ace-settings-box" class="ace-settings-box">
             <div>
-                <i class="icon-plus blue"></i> <a href="#" data-bind="click: modalAddSalle">Ajouter Salle</a>
+                <i class="icon-plus blue"></i> <a href="#" data-bind="click: modalAddSalle">Add Room</a>
             </div>
         </div>
     </div>

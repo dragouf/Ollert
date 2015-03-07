@@ -50,7 +50,7 @@
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
                                 <i class="icon-ok"></i>
-                                <span data-bind="text: connectedUsers().length"></span> Utilisateurs connectés
+                                <span data-bind="text: connectedUsers().length"></span> Connected Users
                             </li>
 
                             <!-- ko foreach: connectedUsers -->
@@ -143,7 +143,7 @@
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                             <img class="nav-user-photo" src="/Board/AvatarImage/@User.Identity.GetUserId()" alt="User Photo" />
                             <span class="user-info">
-                                <small>Bienvenue,</small>
+                                <small>Welcome,</small>
                                 @User.Identity.GetUserName()
                             </span>
 
@@ -154,14 +154,14 @@
                             <li>
                                 <a href="#">
                                     <i class="icon-cog"></i>
-                                    Parametres
+                                    Settings
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#">
                                     <i class="icon-user"></i>
-                                    Profil
+                                    Profile
                                 </a>
                             </li>
 
@@ -176,7 +176,7 @@
                                 </div>
                                 <a href="javascript:document.getElementById('logoutForm').submit()">
                                     <i class="icon-off"></i>
-                                    Déconnexion
+                                    Log out
                                 </a>
                             </li>
                         </ul>
@@ -198,7 +198,7 @@
     <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
         Dropzone.autoDiscover = false;
-        moment.lang('fr');
+        moment.lang('en');
 
         //$(window).bind("load", function () {
         //});
