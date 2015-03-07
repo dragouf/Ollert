@@ -21,8 +21,8 @@ namespace Ollert.Models
         public byte[] Avatar { get; set; }
         [DataMember]
         public Nullable<DateTime> LastViewed { get; set; }
-        public string Email { get; set; }
-        [DataContract]
+        public  override string Email { get; set; }
+        [DataMember]
         public string EmailMd5
         {
             get 

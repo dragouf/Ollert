@@ -1,4 +1,4 @@
-﻿var Ollert;
+var Ollert;
 (function (Ollert) {
     ///////////////////////////// INITIALIZATION
     function initializeBoard() {
