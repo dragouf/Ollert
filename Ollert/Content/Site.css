@@ -602,3 +602,19 @@ div.ui-sortable-placeholder {
 -o-transition: all 1s ease-in-out;
 transition: all 1s ease-in-out;*/
 }
+
+.navbar-brand {
+    height: auto;
+}
+.panel-default>.panel-heading .badge {
+  background-color: transparent;
+}
+button.btn-sm {
+    padding: 1px 9px;
+}
+.btn-group > button.btn-sm, .btn-group + button.btn-sm {
+    border-width: 1px;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 6px 8px;
+}
