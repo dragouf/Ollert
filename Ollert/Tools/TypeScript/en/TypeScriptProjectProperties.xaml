@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<Rule
+  Name="TypeScriptBuild"
+  DisplayName="TypeScript Build"
+  PageTemplate="generic"
+  Description="TypeScript Build"
+  xmlns="http://schemas.microsoft.com/build/2009/properties">
+
+  <Rule.Categories>
+    <Category Name="TypeScriptBuild" DisplayName="TypeScript Build" />
+  </Rule.Categories>
+
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" Label="Configuration" />
+  </Rule.DataSource>
+
+  <EnumProperty
+    Name="TypeScriptTarget"
+    DisplayName="ECMAScript version"
+    Category="TypeScriptBuild"
+    Description="ECMAScript version to use for generated JavaScript" >
+    <EnumValue Name="ES3" DisplayName="ECMAScript 3" />
+    <EnumValue Name="ES5" DisplayName="ECMAScript 5" />
+    <EnumValue Name="ES6" DisplayName="ECMAScript 6" />
+  </EnumProperty>
+
+  <EnumProperty
+    Name="TypeScriptCompileOnSaveEnabled"
+    DisplayName="Compile on save"
+    Category="TypeScriptBuild"
+    Description="Recompile sources on save" >
+    <EnumValue Name="true" DisplayName="Yes" />
+    <EnumValue Name="false" DisplayName="No" />
+  </EnumProperty>
+
+  <EnumProperty
+    Name="TypeScriptNoImplicitAny"
+    DisplayName="Allow implicit 'any' types"
+    Category="TypeScriptBuild"
+    Description="Suppress warnings on expressions and declarations with an implied Any type" >
+    <EnumValue Name="false" DisplayName="Yes" />
+    <EnumValue Name="true" DisplayName="No" />
+  </EnumProperty>
+
+  <EnumProperty
+    Name="TypeScriptModuleKind"
+    DisplayName="Module system"
+    Category="TypeScriptBuild"
+    Description="External module code generation target" >
+    <EnumValue Name="none" DisplayName="None" />
+    <EnumValue Name="amd" DisplayName="AMD" />
+    <EnumValue Name="commonjs" DisplayName="CommonJS" />
+  </EnumProperty>
+
+  <EnumProperty
+    Name="TypeScriptRemoveComments"
+    DisplayName="Keep comments in JavaScript output"
+    Category="TypeScriptBuild"
+    Description="Emit comments to output" >
+    <EnumValue Name="false" DisplayName="Yes" />
+    <EnumValue Name="true" DisplayName="No" />
+  </EnumProperty>
+
+  <StringProperty
+    Name="TypeScriptOutFile"
+    DisplayName="Combine JavaScript output into file"
+    Category="TypeScriptBuild"
+    Description="Redirect output to a file" />
+
+  <StringProperty
+    Name="TypeScriptOutDir"
+    DisplayName="Redirect JavaScript output to directory"
+    Category="TypeScriptBuild"
+    Description="Redirect output to a different directory than sources" />
+
+  <EnumProperty
+    Name="TypeScriptGeneratesDeclarations"
+    DisplayName="Generate declaration files"
+    Category="TypeScriptBuild"
+    Description="Generate corresponding d.ts file" >
+    <EnumValue Name="true" DisplayName="Yes" />
+    <EnumValue Name="false" DisplayName="No" />
+  </EnumProperty>
+
+  <EnumProperty
+    Name="TypeScriptSourceMap"
+    DisplayName="Generate source maps"
+    Category="TypeScriptBuild"
+    Description="Generates corresponding .map file" >
+    <EnumValue Name="true" DisplayName="Yes" />
+    <EnumValue Name="false" DisplayName="No" />
+  </EnumProperty>
+
+  <StringProperty
+    Name="TypeScriptMapRoot"
+    DisplayName="Specify root directory of source maps"
+    Category="TypeScriptBuild"
+    Description="Emits the sourcemaps such that soucemaps while debugging will be located in the sourcemap root" />
+
+  <StringProperty
+    Name="TypeScriptSourceRoot"
+    DisplayName="Specify root directory of TypeScript files"
+    Category="TypeScriptBuild"
+    Description="Emits the sourcemaps such that sources while debugging will be located in the source root" />
+
+</Rule>
