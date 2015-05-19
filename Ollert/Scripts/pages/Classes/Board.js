@@ -2,24 +2,20 @@ var Board = (function () {
     function Board(data) {
         var _this = this;
         var self = this;
-
         this.id = data.id;
         this.currentUser = ko.observable(data.currentUser);
         this.lists = ko.observableArray(new Array());
-
         this.displayArchive = ko.observable(false);
         this.dialogNewList = ko.observable(Global.emptyList(self)); /*TODO: add parent*/
         this.dialogNewCard = ko.observable(Global.emptyCard(self.currentUser()));
         this.dialogCurrentCard = ko.observable(null);
         this.dialogCurrentList = ko.observable(null);
-
         this.displayArchive.subscribe(function () {
             if (self.displayArchive())
                 $('body').addClass('archive');
             else
                 $('body').removeClass('archive');
         });
-
         // Methods
         // Template helpers
         this.groupedListIndexes = function () {
@@ -27,10 +23,8 @@ var Board = (function () {
             for (var i = 0; i < self.lists().length; i = i + 6) {
                 indexes.push(i);
             }
-
             return indexes;
         };
-
         // Lists
         this.modalAddTable = function () {
             $('#modal-ajout-table').modal('show');
@@ -53,34 +47,26 @@ var Board = (function () {
                     if (table.id == data.id)
                         tableToDeleteIndex = index;
                 });
-
                 if (tableToDeleteIndex >= 0)
                     self.lists.splice(tableToDeleteIndex, 1);
             });
-
             return false;
         };
-
         // Cards
         this.addCard = function () {
             if (self.dialogNewCard().description() == '') {
                 self.dialogNewCard().description('<pas de description>');
             }
-
             OllertApi.addCard(self.dialogNewCard(), self.dialogCurrentList().id, function (cardId) {
                 // Change la date de vue de l' utilisateur pour eviter les alertes
                 self.currentUser().lastViewed(moment());
-
                 // Met a jour l'id de la carte
                 self.dialogNewCard().id = cardId;
-
                 // Ajoute a la liste
                 self.dialogCurrentList().allCards.push(self.dialogNewCard());
-
                 // Rebind avec une nouvelle carte
                 self.dialogNewCard(Global.emptyCard(self.currentUser()));
             });
-
             $('#modal-ajout').modal('hide');
         };
         this.openCardDetails = function (data) {
@@ -90,7 +76,6 @@ var Board = (function () {
         this.editCard = function (data) {
             self.dialogCurrentCard(data);
             self.dialogCurrentCard().lastViewed(moment());
-
             // Change la date de vue de la carte
             OllertApi.updateCard(self.dialogCurrentCard());
             $('#modal-visualisation').modal('show');
@@ -100,7 +85,6 @@ var Board = (function () {
                 fileRemoved: function (file) {
                     // server
                     OllertApi.deleteFile(file.id);
-
                     // model
                     var fileIndex = 0;
                     $.each(data.attachments(), function (index, f) {
@@ -117,22 +101,18 @@ var Board = (function () {
                     formData.append('cardId', data.id);
                 }
             });
-
             // Add files
             $.each(data.attachments(), function (index, f) {
                 var mockFile = {
                     id: f.id,
-                    name: f.name,
-                    size: f.size
+                    name: f.name(),
+                    size: f.size()
                 };
-
                 // Call the default addedfile event handler
                 dropzoneObject.emit("addedfile", mockFile);
-
                 // And optionally show the thumbnail of the file:
                 dropzoneObject.emit("thumbnail", mockFile, "/Board/DownloadFile/" + f.id);
             });
-
             $('.dz-details').click(function () {
                 var alt = $(this).find('img').attr('alt');
                 $(this).find('img').attr('title', alt);
@@ -140,11 +120,10 @@ var Board = (function () {
                 window.open(url, "_blank");
             });
         };
-
         // drag and drop api
         this.movingCard = function (arg) {
             // sauvegarde le deplacement sur el serveur
-            // retire de la source
+            // retire de la source 
             var indexOldCard = -1;
             var ancienTableau = null;
             var nouveauTableau = null;
@@ -155,21 +134,19 @@ var Board = (function () {
                         if (card.id == arg.item.id)
                             indexOldCard = index;
                     });
-                } else if (table.id == arg.targetParent.id) {
+                }
+                else if (table.id == arg.targetParent.id) {
                     nouveauTableau = table;
                 }
             });
             if (indexOldCard >= 0)
                 ancienTableau.allCards().splice(indexOldCard, 1);
-
             // et ajoute a la target
             if (nouveauTableau != null) {
                 nouveauTableau.allCards.push(arg.item);
             }
-
             OllertApi.moveCard(arg.item.id, arg.sourceParent.id, arg.targetParent.id);
         };
-
         // CHARGEMENT
         this.loadData = function (serverLists) {
             var initialTables = new Array();
@@ -178,7 +155,6 @@ var Board = (function () {
             });
             self.lists(initialTables);
         };
-
         // SignalR
         // messages
         $.connection.ollertHub.client.newMessage = function (message) {
@@ -200,14 +176,12 @@ var Board = (function () {
                             if (msg.id == message.Id)
                                 indexMessage = indexMsg;
                         });
-
                         if (indexMessage != null)
                             card.messages.splice(indexMessage, 1);
                     }
                 });
             });
         };
-
         // deplacements
         $.connection.ollertHub.client.newMove = function (move) {
             var carte = null;
@@ -220,19 +194,16 @@ var Board = (function () {
                             carteIndex = indexCard;
                         }
                     });
-
                     // Retire la carte de son ancien emplacement
                     table.allCards.splice(carteIndex, 1);
                 }
             });
-
             $.each(self.lists(), function (indexTable, table) {
                 if (table.id == move.NouveauTableauId) {
                     table.allCards.push(carte);
                 }
             });
         };
-
         // cartes
         $.connection.ollertHub.client.newCard = function (carte) {
             $.each(self.lists(), function (indexTable, table) {
@@ -267,17 +238,15 @@ var Board = (function () {
                     }
                 });
             });
-
             if (indexCarte != null)
                 tableLocal.allCards.splice(indexCarte, 1);
         };
-
         // fichiers
         $.connection.ollertHub.client.addFile = function (fichier) {
             $.each(self.lists(), function (indexTable, table) {
                 $.each(table.cards(), function (indexCard, card) {
                     if (card.id == fichier.CarteId) {
-                        card.files.push(Converter.toModelAttachment(fichier));
+                        card.attachments.push(Converter.toModelAttachment(fichier));
                     }
                 });
             });
@@ -287,18 +256,16 @@ var Board = (function () {
             $.each(self.lists(), function (indexTable, table) {
                 $.each(table.cards(), function (indexCard, card) {
                     if (card.id == fichier.CarteId) {
-                        $.each(card.files(), function (indexFile, file) {
+                        $.each(card.attachments(), function (indexFile, file) {
                             if (file.id == fichier.Id)
                                 indexFichier = indexFile;
                         });
-
                         if (indexFichier != null)
-                            card.files.splice(indexFichier, 1);
+                            card.attachments.splice(indexFichier, 1);
                     }
                 });
             });
         };
-
         // etapes
         $.connection.ollertHub.client.addStep = function (etape) {
             $.each(self.lists(), function (indexTable, table) {
@@ -318,7 +285,6 @@ var Board = (function () {
                             if (step.id == etape.Id)
                                 indexEtape = indexStep;
                         });
-
                         if (indexEtape != null)
                             card.steps.splice(indexEtape, 1);
                     }

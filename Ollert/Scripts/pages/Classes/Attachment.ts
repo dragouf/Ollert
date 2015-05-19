@@ -1,11 +1,11 @@
 class Attachment {
     id: number;
     name: KnockoutObservable<string>;
-    date: KnockoutObservable<Moment>;
+    date: KnockoutObservable<moment.Moment>;
     type: KnockoutObservable<string>;
     size: KnockoutObservable<number>;
 
-    constructor(id: number, name: string, date: Moment, type: string, size: number) {
+    constructor(id: number, name: string, date: moment.Moment, type: string, size: number) {
         this.id = id;
         this.name = ko.observable(name);
         this.date = ko.observable(date);

@@ -154,7 +154,7 @@ module Global {
     export function emptyStep() {
         return new Step(-1, '', null, false);
     }
-    export function emptyMessage(currentUser: User, lastViewed: KnockoutObservable<Moment>) {
+    export function emptyMessage(currentUser: User, lastViewed: KnockoutObservable<moment.Moment>) {
         return new Message(
             1, 
             "", 

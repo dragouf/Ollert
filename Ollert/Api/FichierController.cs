@@ -92,7 +92,9 @@ namespace Ollert.Api
         [ResponseType(typeof(Fichier))]
         public async Task<IHttpActionResult> DeleteFichier(int id)
         {
-            Fichier fichier = await db.Fichiers.Include(f => f.Carte).FirstAsync(f => f.Id == id);
+            Fichier fichier = await db.Fichiers
+                .Include(f => f.Carte.Tableau.Salle)
+                .FirstAsync(f => f.Id == id);
             if (fichier == null)
             {
                 return NotFound();

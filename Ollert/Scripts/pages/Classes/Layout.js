@@ -1,12 +1,10 @@
 var Layout = (function () {
     function Layout(notifications, messages, currentUser) {
         var self = this;
-
         this.notifications = ko.observableArray(notifications);
         this.messages = ko.observableArray(messages);
         this.connectedUsers = ko.observableArray(new Array());
         this.currentUser = ko.observable(currentUser);
-
         // MESSAGES
         this.newMessages = ko.computed(function () {
             var newMsg = new Array();
@@ -14,7 +12,6 @@ var Layout = (function () {
                 if (msg.date() > msg.cardViewed())
                     newMsg.push(msg);
             });
-
             return newMsg;
         }, self);
         this.lastMessages = ko.computed(function () {
@@ -25,7 +22,6 @@ var Layout = (function () {
         this.totalNewMessages = ko.computed(function () {
             return self.newMessages().length;
         }, self);
-
         // NOTIFICATIONS
         this.totalNotifications = ko.computed(function () {
             return self.notifications().length;
@@ -37,13 +33,11 @@ var Layout = (function () {
                 if (notif.date > currentUserDate && notif.creator.id != self.currentUser().id)
                     newNotif++;
             });
-
             return newNotif;
         }, self);
         this.lastNotifications = ko.computed(function () {
             return self.notifications.slice(0, 8);
         }, self);
-
         // SIGNALR
         //notifications
         $.connection.ollertHub.client.newNotification = function (note) {
@@ -54,19 +48,15 @@ var Layout = (function () {
                 if (note.Createur != null)
                     newUser = Converter.toModelUser(note.Createur);
                 self.notifications.unshift(Converter.toModelNotification(note, self.currentUser().lastViewed(), newUser));
-
                 Global.desktopNotification(note.Titre, note.Texte, note.Type);
             }
         };
-
         // messages
         $.connection.ollertHub.client.newMessage = function (message) {
             $('#comment-icon').removeClass('icon-animated-vertical');
             $('#comment-icon').addClass('icon-animated-vertical');
-
             var messageServeur = new Message(message.Id, message.Texte, Converter.toModelUser(message.Utilisateur), moment(message.CreateOn), ko.observable(moment(message.DerniereVueCarte)));
             self.messages.push(messageServeur);
-
             Global.desktopNotification('New Message', message.Texte, 'NouveauMessage');
         };
         $.connection.ollertHub.client.deleteMessage = function (message) {
@@ -78,7 +68,6 @@ var Layout = (function () {
             if (indexMessage != null)
                 self.messages.splice(indexMessage, 1);
         };
-
         // users
         $.connection.ollertHub.client.onConnected = function (users) {
             $.each(users, function (indexU, newUser) {
@@ -106,7 +95,6 @@ var Layout = (function () {
                 self.connectedUsers.splice(userIndex, 1);
             });
         };
-
         // Medthods
         // Notifications
         this.declareNotifAsSeen = function () {

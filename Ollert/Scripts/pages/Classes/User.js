@@ -7,7 +7,6 @@ var User = (function () {
         this.emailMd5 = ko.observable(emailMd5);
         this.useGravatar = ko.observable(useGravatar);
         this.lastViewed = ko.observable(lastViewed);
-
         this.avatarPath = function () {
             return _this.useGravatar ? "http://www.gravatar.com/avatar/" + _this.emailMd5 : "/Board/AvatarImage/" + _this.id;
         };

@@ -146,8 +146,8 @@ class Board {
             $.each(data.attachments(), function (index, f) {
                 var mockFile = {
                     id: f.id,
-                    name: f.name,
-                    size: f.size
+                    name: f.name(),
+                    size: f.size()
                 };
 
                 // Call the default addedfile event handler
@@ -300,7 +300,7 @@ class Board {
             $.each(self.lists(), function (indexTable, table) {
                 $.each(table.cards(), function (indexCard, card) {
                     if (card.id == fichier.CarteId) {
-                        card.files.push(Converter.toModelAttachment(fichier));
+                        card.attachments.push(Converter.toModelAttachment(fichier));
                     }
                 });
             });
@@ -310,13 +310,13 @@ class Board {
             $.each(self.lists(), function (indexTable, table) {
                 $.each(table.cards(), function (indexCard, card) {
                     if (card.id == fichier.CarteId) {
-                        $.each(card.files(), function (indexFile, file) {
+                        $.each(card.attachments(), function (indexFile, file) {
                             if (file.id == fichier.Id)
                                 indexFichier = indexFile;
                         });
 
                         if (indexFichier != null)
-                            card.files.splice(indexFichier, 1);
+                            card.attachments.splice(indexFichier, 1);
                     }
                 });
             });

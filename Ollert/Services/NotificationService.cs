@@ -71,7 +71,11 @@ namespace Ollert.Services
             hubContext.Clients.AllExcept(userConnIds).newNotification(notification);
 
             // Recupere les participants de la salle et envoi l'email sans attendre la fin de la tache
-            var salle = await db.Salles.Include(p => p.ParticipantsSalle).FirstOrDefaultAsync(s => s.Id == salleId);
+            // TODO : reactivate mails
+            /*var salle = await db.Salles
+                .Include(p => p.ParticipantsSalle)
+                .Include(p => p.ParticipantsSalle.Select(ps => ps.Participant))
+                .FirstOrDefaultAsync(s => s.Id == salleId);
             if(salle != null)
             {
                 var participants = salle.Participants.ToList();
@@ -92,7 +96,7 @@ namespace Ollert.Services
                             .SendAsync();
                     }
                 }
-            }
+            }*/
 
             db.Dispose();
         }

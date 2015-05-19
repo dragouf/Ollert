@@ -1,8 +1,7 @@
-﻿var Card = (function () {
+var Card = (function () {
     function Card(data) {
         var _this = this;
         var self = this;
-
         this.id = data.id;
         this.demande = ko.observable(data.demande);
         this.titre = ko.observable(data.titre);
@@ -14,10 +13,8 @@
         this.lastViewed = ko.observable(data.lastViewed);
         this.steps = ko.observableArray(data.steps);
         this.isArchive = ko.observable(data.isArchive);
-
         this.newMessage = ko.observable(Global.emptyMessage(this.currentUser, this.lastViewed));
         this.newStep = ko.observable(Global.emptyStep());
-
         // COMPUTED
         this.UnreadMessages = ko.computed(function () {
             var unread = new Array();
@@ -31,9 +28,8 @@
             var estimationTotale = 0;
             $.each(self.steps(), function (index, step) {
                 if (step.estimation() > 0)
-                    estimationTotale += parseInt(step.estimation());
+                    estimationTotale += step.estimation();
             });
-
             return estimationTotale;
         }, self);
         this.totalFiles = ko.computed(function () {
@@ -53,7 +49,7 @@
         this.totalUnseenFiles = ko.computed(function () {
             var nbNew = 0;
             $.each(self.attachments(), function (index, file) {
-                if (file.date > self.lastViewed())
+                if (file.date() > self.lastViewed())
                     nbNew++;
             });
             return nbNew;
@@ -86,23 +82,20 @@
             if (self.steps().length > 0) {
                 var stepsDone = 0;
                 var stepsTotal = self.estimation();
-
                 $.each(self.steps(), function (index, step) {
                     if (step.isDone())
                         stepsDone += step.estimation();
                 });
-
                 return stepsDone * 100 / stepsTotal;
-            } else
+            }
+            else
                 return 0;
         }, self);
-
         // inline edit
         this.editingTitre = ko.observable(false);
         this.previousTitre = '';
         this.editingDescription = ko.observable(false);
         this.previousDescription = '';
-
         // Methods
         this.isOwner = function (data) {
             return data.user().id == _this.currentUser.id;
@@ -121,12 +114,10 @@
         this.uploadId = function () {
             return 'dropzone-' + _this.id.toString();
         };
-
         // inline edit estimation
         this.editEstimation = function () {
             $('#add-step-input').focus();
         };
-
         // inline edit titre
         this.editTitre = function () {
             _this.previousTitre = _this.titre();
@@ -144,7 +135,6 @@
             _this.titre(null);
             $('#edit-titre').focus();
         };
-
         // inline edit description
         this.editDescription = function () {
             _this.previousDescription = _this.description();
@@ -158,7 +148,6 @@
             _this.description(_this.previousDescription);
             _this.editingDescription(false);
         };
-
         // SERVER
         this.addMessage = function () {
             var currentDate = moment();
@@ -166,16 +155,12 @@
             OllertApi.addMessage(self.newMessage(), self.id, function (messageServer) {
                 // change la date de vue de la carte pour eviter la notification
                 self.lastViewed(moment());
-
                 // Change la date de vue de la carte cote serveur
                 OllertApi.updateCard(self);
-
                 // Met a jour l'id du message
                 self.newMessage().id = messageServer.Id;
-
                 // Ajoute a la liste
                 self.messages.push(self.newMessage());
-
                 // Rebind avec un nouveeau message
                 self.newMessage(Global.emptyMessage(self.currentUser, self.lastViewed));
             });
@@ -188,36 +173,27 @@
                     if (msg.id == data.id)
                         msgToDeleteIndex = index;
                 });
-
                 if (msgToDeleteIndex >= 0)
                     self.messages.splice(msgToDeleteIndex, 1);
             });
-
             return false;
         };
-
         this.saveEditedCard = function () {
             // Sauvegarde le changement sur le serveur
             OllertApi.updateCard(_this);
         };
-
         this.addStep = function () {
             OllertApi.addStep(_this.newStep(), _this.id, function (serverStep) {
                 // change la date de vue de la carte pour eviter la notification
                 self.lastViewed(moment());
-
                 // Change la date de vue de la carte
                 OllertApi.updateCard(self);
-
                 // Met a jour l'id de l'etape
                 self.newStep().id = serverStep.Id;
-
                 // Ajoute a la liste
                 self.steps.push(self.newStep());
-
                 // Rebind avec une nouvelle etape
                 self.newStep(Global.emptyStep());
-
                 // Reapplique le javascript
                 Global.initializeEtapes();
             });
@@ -229,14 +205,11 @@
                     if (step.id == data.id)
                         stepIndex = index;
                 });
-
                 if (stepIndex >= 0)
                     self.steps.splice(stepIndex, 1);
             });
-
             return false;
         };
-
         this.archiveCard = function () {
             _this.isArchive(!_this.isArchive());
             OllertApi.updateCard(_this);

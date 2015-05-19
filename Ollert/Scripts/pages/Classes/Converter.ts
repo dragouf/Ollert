@@ -69,7 +69,7 @@ module Converter {
             serverData.Estimation,
             serverData.Terminee);
     }
-    export function toModelMessage(serverData: Ollert.ServerMessage, cardViewed?: KnockoutObservable<Moment>) {
+    export function toModelMessage(serverData: Ollert.ServerMessage, cardViewed?: KnockoutObservable<moment.Moment>) {
         return new Message(
             serverData.Id,
             serverData.Texte,
@@ -93,7 +93,7 @@ module Converter {
         });
     }
    
-    export function toModelNotification(serverData: Ollert.ServerNotification, lastUserViewed: Moment, creator: User) {
+    export function toModelNotification(serverData: Ollert.ServerNotification, lastUserViewed: moment.Moment, creator: User) {
         return new Notification({
             id: serverData.Id,
             type: serverData.Type,

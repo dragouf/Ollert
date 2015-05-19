@@ -22,7 +22,7 @@ namespace Ollert.Api
         // GET api/Notification
         public IQueryable<Notification> GetNotifications()
         {
-            return db.Notifications.OrderByDescending(n => n.Date).Take(50);
+            return db.Notifications.Include(n => n.Createur).OrderByDescending(n => n.Date).Take(50);
         }
 
         // GET api/Notification/5

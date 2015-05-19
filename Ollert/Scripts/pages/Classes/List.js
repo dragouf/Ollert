@@ -1,20 +1,16 @@
 var List = (function () {
     function List(data) {
         var self = this;
-
         this.id = data.id;
         this.name = data.name;
         this.allCards = ko.observableArray(data.cards);
         this.boardId = data.boardId;
         this.parent = ko.observable(data.parent);
         this.cards = ko.observableArray(new Array());
-
         this.allCards.id = data.id;
         this.cards.id = data.id;
-
         this.listCards = ko.computed(function () {
             var cartes = new Array();
-
             if (self.parent() != null) {
                 $.each(self.allCards(), function (index, card) {
                     if (self.parent().displayArchive() && card.isArchive())
@@ -23,21 +19,17 @@ var List = (function () {
                         cartes.push(card);
                 });
             }
-
             self.cards(cartes);
             //return cartes;
         }, self);
-
         this.hasCards = ko.computed(function () {
             return self.cards().length > 0;
         }, self);
-
         this.totalTime = ko.computed(function () {
             var total = 0;
             $.each(self.cards(), function (index, el) {
-                total += parseInt(el.estimation());
+                total += el.estimation();
             });
-
             var seconds = total;
             var numyears = Math.floor(seconds / 31536000);
             var numdays = Math.floor((seconds % 31536000) / 86400);
@@ -51,7 +43,6 @@ var List = (function () {
     List.prototype.deleteCard = function (data, event) {
         var self = this;
         event.stopImmediatePropagation();
-
         OllertApi.deleteCard(data.id, function () {
             // AJAX CALLBACK
             var indexToRemove = -1;
@@ -59,11 +50,9 @@ var List = (function () {
                 if (card.id == data.id)
                     indexToRemove = index;
             });
-
             if (indexToRemove >= 0)
                 self.allCards.splice(indexToRemove, 1);
         });
-
         return false;
     };
     return List;

@@ -2,13 +2,13 @@ class Message {
     id: number;
     text: KnockoutObservable<string>;
     user: KnockoutObservable<User>;
-    date: KnockoutObservable<Moment>;
-    cardViewed: KnockoutObservable<Moment>; // observable
+    date: KnockoutObservable<moment.Moment>;
+    cardViewed: KnockoutObservable<moment.Moment>; // observable
 
     isViewed: KnockoutComputed<boolean>;
     formattedDate: KnockoutComputed<string>;
 
-    constructor(id: number, text: string, user: User, date: Moment, cardViewed: KnockoutObservable<Moment>) {
+    constructor(id: number, text: string, user: User, date: moment.Moment, cardViewed: KnockoutObservable<moment.Moment>) {
         var self = this;
 
         this.id = id;

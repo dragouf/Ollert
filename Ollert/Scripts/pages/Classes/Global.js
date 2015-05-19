@@ -48,10 +48,8 @@ var Global;
             case 'ModificationEtape':
                 imgUrl = '/Content/images/date_info.png';
                 break;
-            default:
-                imgUrl = '/Content/images/notifyIcon.png';
+            default: imgUrl = '/Content/images/notifyIcon.png';
         }
-
         return imgUrl;
     }
     Global.getNotifyIconUrl = getNotifyIconUrl;
@@ -61,13 +59,13 @@ var Global;
             if (havePermission == 0) {
                 // 0 is PERMISSION_ALLOWED
                 var notification = window.webkitNotifications.createNotification(getNotifyIconUrl(type), titre, message);
-
                 notification.onclick = function () {
                     //window.open("http://stackoverflow.com/a/13328397/1269037");
                     notification.close();
                 };
                 notification.show();
-            } else {
+            }
+            else {
                 // Standard html notification
                 var unique_id = $.gritter.add({
                     title: titre,
@@ -77,10 +75,10 @@ var Global;
                     //time: '',
                     class_name: 'gritter-info'
                 });
-
                 window.webkitNotifications.requestPermission();
             }
-        } else {
+        }
+        else {
             // Standard html notification
             var unique_id = $.gritter.add({
                 title: titre,
@@ -90,13 +88,11 @@ var Global;
                 //time: '',
                 class_name: 'gritter-info'
             });
-
             return false;
         }
     }
     Global.desktopNotification = desktopNotification;
-
-    // Inistialization
+    // Inistialization    
     function initializeDropzone(params) {
         var dropzoneObject = new Dropzone("#dropzone-" + params.cardId, {
             paramName: 'file',
@@ -115,7 +111,6 @@ var Global;
             //change the previewTemplate to use Bootstrap progress bars
             previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n<div class=\"dz-details\">\n<div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
         });
-
         return dropzoneObject;
     }
     Global.initializeDropzone = initializeDropzone;
@@ -147,7 +142,6 @@ var Global;
         //$('.ui-sortable').disableSelection();
     }
     Global.initializeEtapes = initializeEtapes;
-
     // Empty class (for new biding)
     function emptyCard(currentUser) {
         return new Card({

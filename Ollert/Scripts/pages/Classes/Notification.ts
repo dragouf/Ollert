@@ -3,8 +3,8 @@ interface INotification{
     type: string;
     title: string;
     text: string;
-    date: Moment;
-    lastUserViewed: Moment;
+    date: moment.Moment;
+    lastUserViewed: moment.Moment;
     creator: User;
 }
 
@@ -13,8 +13,8 @@ class Notification {
     type: string;
     title: string;
     text: string;
-    date: Moment;
-    lastUserViewed: Moment;
+    date: moment.Moment;
+    lastUserViewed: moment.Moment;
     creator: User;
 
     isNotifViewed: KnockoutComputed<boolean>;

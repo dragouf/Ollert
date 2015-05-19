@@ -24,6 +24,7 @@ namespace Ollert.DAL
 
         public OllertDbContext() : base("DefaultConnection")
         {
+            this.Configuration.ProxyCreationEnabled = false; 
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

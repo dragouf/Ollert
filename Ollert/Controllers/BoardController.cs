@@ -74,7 +74,7 @@ namespace Ollert.Controllers
             var userManager = new UserManager<OllertUser>(new UserStore<OllertUser>(new OllertDbContext()));
             var currentUser = await userManager.FindByIdAsync(this.User.Identity.GetUserId());
 
-            var result = await Newtonsoft.Json.JsonConvert.SerializeObjectAsync(currentUser);
+            var result = await Task.Factory.StartNew(() => Newtonsoft.Json.JsonConvert.SerializeObject(currentUser));
 
             return Content(result, "application/json");
         }
@@ -119,7 +119,10 @@ namespace Ollert.Controllers
                 }
 
                 var db = new OllertDbContext();
-                var carte = await db.Cartes.FirstAsync(c => c.Id == cardId);
+                var carte = await db.Cartes
+                    .Include(c => c.Fichiers)
+                    .Include(c => c.Tableau.Salle.Proprietaire)
+                    .FirstAsync(c => c.Id == cardId);
                 fichier = new Fichier
                 {
                     Data = fileData,
@@ -140,7 +143,7 @@ namespace Ollert.Controllers
                     fichier.Carte.Tableau.Salle.Id);
             }
 
-            var result = await Newtonsoft.Json.JsonConvert.SerializeObjectAsync(fichier);
+            var result = await Task.Factory.StartNew(()=> Newtonsoft.Json.JsonConvert.SerializeObject(fichier));
 
             return Content(result, "application/json");
         }

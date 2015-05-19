@@ -54,7 +54,7 @@ class List {
         this.totalTime = ko.computed(function () {
             var total = 0;
             $.each(self.cards(), function (index, el) {
-                total += parseInt(el.estimation());
+                total += el.estimation();
             });
 
             var seconds = total;

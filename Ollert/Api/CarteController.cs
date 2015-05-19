@@ -44,7 +44,7 @@ namespace Ollert.Api
         public async Task<IHttpActionResult> PutCarte(int id, Carte carte)
         {
             var carteBdd = await db.Cartes
-                .Include(c => c.Tableau)
+                .Include(c => c.Tableau.Salle.Proprietaire)
                 .Include(c => c.CartesVues)
                 .Include(c => c.CartesVues.Select(cv => cv.Utilisateur))
                 .FirstAsync(c => c.Id == id);
@@ -87,7 +87,7 @@ namespace Ollert.Api
 
             // date a laquelle la carte a ete ouverte
             string userId = this.User.Identity.GetUserId();
-            var carteVue = carteBdd.CartesVues.FirstOrDefault(c => c.Utilisateur.Id == userId);
+            var carteVue = carteBdd.CartesVues.SingleOrDefault(c => c.Utilisateur.Id == userId);
             if (carteVue != null)
             {
                 carteVue.DerniereConsultation = carte.LastTimeViewed;
@@ -143,7 +143,9 @@ namespace Ollert.Api
             carte.DateCreation = DateTime.Now;
 
             // find table
-            var tableau = await db.Tableaux.FindAsync(carte.Tableau.Id);
+            var tableau = await db.Tableaux
+                .Include(t => t.Salle)
+                .SingleOrDefaultAsync(c=> c.Id == carte.Tableau.Id);
 
             //if (tableau == null || !ModelState.IsValid)
             //{
@@ -184,7 +186,10 @@ namespace Ollert.Api
         [ResponseType(typeof(Carte))]
         public async Task<IHttpActionResult> DeleteCarte(int id)
         {
-            Carte carte = await db.Cartes.FindAsync(id);
+            var carte = await db.Cartes
+                .Include(c => c.Tableau.Salle.Proprietaire)
+                .SingleOrDefaultAsync(c => c.Id == id);
+
             if (carte == null)
             {
                 return NotFound();

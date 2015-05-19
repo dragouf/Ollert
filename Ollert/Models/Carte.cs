@@ -47,8 +47,8 @@ namespace Ollert.Models
         public virtual ICollection<CarteEtape> Etapes { get; set; }
         [Required]
         public virtual Tableau Tableau { get; set; }
-        [DataMember]
-        public virtual ICollection<TagCarte> Tags { get; set; }
+        //[DataMember]
+        //public virtual ICollection<TagCarte> Tags { get; set; }
 
         [NotMapped]
         [DataMember]

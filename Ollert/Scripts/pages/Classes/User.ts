@@ -4,11 +4,11 @@ class User {
     email: KnockoutObservable<string>;
     emailMd5: KnockoutObservable<string>;
     useGravatar: KnockoutObservable<boolean>;
-    lastViewed: KnockoutObservable<Moment>;
+    lastViewed: KnockoutObservable<moment.Moment>;
 
     avatarPath: () => string;
 
-    constructor(id: number, name: string, lastViewed: Moment, emailMd5: string, useGravatar: boolean, email: string) {
+    constructor(id: number, name: string, lastViewed: moment.Moment, emailMd5: string, useGravatar: boolean, email: string) {
         this.id = id;
         this.name = ko.observable(name);
         this.email = ko.observable(email);

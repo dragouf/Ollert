@@ -5,7 +5,6 @@ var Ollert;
         OllertApi.getCurrentUser(function (user) {
             var currentUser = Converter.toModelUser(user);
             var salleId = $('#SalleId').val();
-
             OllertApi.getLists(salleId, function (serverLists) {
                 // AJAX CALLBACK
                 var vm = new Board({
@@ -15,18 +14,15 @@ var Ollert;
                 vm.loadData(serverLists);
                 ko.bindingHandlers.sortable.afterMove = vm.movingCard;
                 ko.applyBindings(vm, $('#salle-content').get(0));
-
                 Ollert.InitializeLayout();
             });
         });
     }
     Ollert.initializeBoard = initializeBoard;
-
     function initializeListe() {
         OllertApi.getCurrentUser(function (userJson) {
             // AJAX CALLBACK
             var currentUser = Converter.toModelUser(userJson);
-
             OllertApi.getBoards(function (boardsJson) {
                 // AJAX CALLBACK
                 OllertApi.getUsers(function (usersJson) {
@@ -39,49 +35,39 @@ var Ollert;
                             participantsIds.push(userJson.Id);
                             participants.push(Converter.toModelUser(userJson));
                         });
-
                         var users = new Array();
                         $.each(usersJson, function (index, userJson) {
                             if (!inArray(userJson.Id, participantsIds))
                                 users.push(Converter.toModelUser(userJson));
                         });
-
                         var proprietaire = Converter.toModelUser(salle.Proprietaire);
-
                         listeSalles.push(new BoardDetails(salle.Id, salle.Nom, participants, proprietaire, users, salle.MessageNonLu, salle.FichierNonVu, salle.TempsRestant));
                     });
-
                     var users = new Array();
                     $.each(usersJson, function (index, userJson) {
                         users.push(Converter.toModelUser(userJson));
                     });
-
                     var vm = new BoardsList(listeSalles, currentUser, users);
                     ko.applyBindings(vm, $('#liste-content').get(0));
-
                     Ollert.InitializeLayout();
                 });
             });
         });
     }
     Ollert.initializeListe = initializeListe;
-
     function InitializeLayout() {
         // Display right settings
         $('#ace-settings-btn').on('click', function () {
             $(this).toggleClass('open');
             $('#ace-settings-box').toggleClass('open');
         });
-
         // L'utilisateur
         OllertApi.getCurrentUser(function (userJson) {
             var currentUser = Converter.toModelUser(userJson);
-
             // Les notifications
             OllertApi.getNotifications(function (notifs) {
                 var notifications = new Array();
                 var messages = new Array();
-
                 $.each(notifs, function (index, note) {
                     var newUser = new User(-1, 'noname', moment(), null, false, null);
                     if (note.Createur != null)
@@ -90,7 +76,6 @@ var Ollert;
                         notifications.push(Converter.toModelNotification(note, currentUser.lastViewed(), newUser));
                     }
                 });
-
                 // Les messages
                 OllertApi.getMessages(function (jsonMessages) {
                     $.each(jsonMessages, function (index, msg) {
@@ -98,10 +83,8 @@ var Ollert;
                             messages.push(Converter.toModelMessage(msg, ko.observable(moment(msg.DerniereVueCarte))));
                         }
                     });
-
                     var model = new Layout(notifications, messages, currentUser);
                     ko.applyBindings(model, $('#navbar').get(0));
-
                     // Start the connection
                     $.connection.hub.start().done(function () {
                         //$.cookie("signalr-conn-id", $.connection.hub.id);
@@ -111,7 +94,6 @@ var Ollert;
         });
     }
     Ollert.InitializeLayout = InitializeLayout;
-
     function initiliazeMobileApp() {
         if (("standalone" in window.navigator) && window.navigator.standalone) {
             var noddy, remotes = false;
@@ -128,7 +110,6 @@ var Ollert;
         }
     }
     Ollert.initiliazeMobileApp = initiliazeMobileApp;
-
     ///////////////////////////// MODELS
     var ServerBoard = (function () {
         function ServerBoard() {
@@ -154,7 +135,6 @@ var Ollert;
         return ServerMessage;
     })();
     Ollert.ServerMessage = ServerMessage;
-
     var ServerCard = (function () {
         function ServerCard() {
         }
@@ -185,7 +165,6 @@ var Ollert;
         return ServerNotification;
     })();
     Ollert.ServerNotification = ServerNotification;
-
     // TOOLS
     function arrayCompare(a1, a2) {
         if (a1.length != a2.length)
@@ -203,7 +182,8 @@ var Ollert;
             if (typeof haystack[i] == 'object') {
                 if (arrayCompare(haystack[i], needle))
                     return true;
-            } else {
+            }
+            else {
                 if (haystack[i] == needle)
                     return true;
             }

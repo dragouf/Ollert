@@ -49,7 +49,6 @@ var Converter;
         };
     }
     Converter.toServerMessage = toServerMessage;
-
     // TO LOCAL
     function toModelAttachment(serverData) {
         return new Attachment(serverData.Id, serverData.Nom, moment(serverData.DateEnvoi), serverData.Type, serverData.FileSize);
@@ -83,7 +82,6 @@ var Converter;
         });
     }
     Converter.toModelList = toModelList;
-
     function toModelNotification(serverData, lastUserViewed, creator) {
         return new Notification({
             id: serverData.Id,
@@ -103,21 +101,18 @@ var Converter;
                 steps.push(Converter.toModelStep(etape));
             });
         }
-
         var messages = new Array();
         if (serverData.Messages != null) {
             $.each(serverData.Messages, function (index, message) {
                 messages.push(Converter.toModelMessage(message, ko.observable(moment(serverData.LastTimeViewed))));
             });
         }
-
         if (serverData.Fichiers != null) {
             var files = new Array();
             $.each(serverData.Fichiers, function (index, fichier) {
                 files.push(Converter.toModelAttachment(fichier));
             });
         }
-
         return new Card({
             id: serverData.Id,
             demande: serverData.NumeroDemande,

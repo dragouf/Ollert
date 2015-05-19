@@ -1,13 +1,11 @@
 var Message = (function () {
     function Message(id, text, user, date, cardViewed) {
         var self = this;
-
         this.id = id;
         this.text = ko.observable(text);
         this.user = ko.observable(user);
         this.date = ko.observable(date);
         this.cardViewed = cardViewed;
-
         // Computed
         this.isViewed = ko.computed(function () {
             if (self.cardViewed() != null)

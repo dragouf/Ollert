@@ -3,21 +3,18 @@ var OllertApi;
     // Card
     function updateCard(card, done) {
         var carteServeur = Converter.toServerCard(card, -1);
-
         var ajaxSettings = {
             url: '/api/Carte/' + card.id,
             type: 'PUT',
             dataType: 'json',
             data: carteServeur
         };
-
         $.ajax(ajaxSettings).done(done).fail(Global.ShowConnectionError);
     }
     OllertApi.updateCard = updateCard;
     function addCard(card, listId, done) {
         // sauvegarde la nouvelle carte
         var carteServeur = Converter.toServerCard(card, listId);
-
         $.ajax({
             url: '/api/Carte',
             type: 'POST',
@@ -36,7 +33,6 @@ var OllertApi;
         }).done(done).fail(Global.ShowConnectionError);
     }
     OllertApi.deleteCard = deleteCard;
-
     // Deplacement
     function moveCard(cardId, sourceListId, targetListId) {
         var ServerMove = {
@@ -44,7 +40,6 @@ var OllertApi;
             AncienTableauId: sourceListId,
             NouveauTableauId: targetListId
         };
-
         $.ajax({
             url: '/api/Tableau/' + cardId,
             type: 'PUT',
@@ -53,7 +48,6 @@ var OllertApi;
         }).fail(Global.ShowConnectionError);
     }
     OllertApi.moveCard = moveCard;
-
     // List
     function getLists(boardId, done) {
         $.ajax({
@@ -70,7 +64,6 @@ var OllertApi;
             dataType: 'json',
             data: Converter.toServerList(list)
         };
-
         $.ajax(ajaxSettings).done(function (serverData) {
             done(serverData.Id);
         }).fail(Global.ShowConnectionError);
@@ -84,7 +77,6 @@ var OllertApi;
         }).done(done).fail(Global.ShowConnectionError);
     }
     OllertApi.deleteList = deleteList;
-
     // File
     function deleteFile(fileId) {
         $.ajax({
@@ -94,7 +86,6 @@ var OllertApi;
         }).fail(Global.ShowConnectionError);
     }
     OllertApi.deleteFile = deleteFile;
-
     // User
     function getCurrentUser(done) {
         $.ajax({
@@ -120,7 +111,6 @@ var OllertApi;
         }).done(done).fail(Global.ShowConnectionError);
     }
     OllertApi.getUsers = getUsers;
-
     // Step
     function updateStep(step, cardId) {
         var etapeServeur = Converter.toServerStep(step, cardId);
@@ -134,7 +124,6 @@ var OllertApi;
     OllertApi.updateStep = updateStep;
     function addStep(step, cardId, done) {
         var etapeServeur = Converter.toServerStep(step, cardId);
-
         // Sauvegarde le message
         $.ajax({
             url: '/api/Etape',
@@ -152,7 +141,6 @@ var OllertApi;
         }).done(done).fail(Global.ShowConnectionError);
     }
     OllertApi.deleteStep = deleteStep;
-
     // Message
     function deleteMessage(messageId, done) {
         $.ajax({
@@ -164,7 +152,6 @@ var OllertApi;
     OllertApi.deleteMessage = deleteMessage;
     function addMessage(message, cardId, done) {
         var messageServeur = Converter.toServerMessage(message, cardId);
-
         // Sauvegarde le message
         $.ajax({
             url: '/api/Message',
@@ -182,7 +169,6 @@ var OllertApi;
         }).done(done).fail(Global.ShowConnectionError);
     }
     OllertApi.getMessages = getMessages;
-
     // Notification
     function getNotifications(done) {
         $.ajax({
@@ -192,7 +178,6 @@ var OllertApi;
         }).done(done).fail(Global.ShowConnectionError);
     }
     OllertApi.getNotifications = getNotifications;
-
     // Board
     function updateBoard(board, done) {
         var participantsServeur = new Array();
@@ -204,13 +189,11 @@ var OllertApi;
                 }
             });
         });
-
         var salleServeur = {
             Id: board.id,
             Nom: board.name,
             ParticipantsSalle: participantsServeur
         };
-
         // Sauvegarde le message
         $.ajax({
             url: '/api/Salle/' + board.id,
@@ -222,7 +205,6 @@ var OllertApi;
     OllertApi.updateBoard = updateBoard;
     function addBoard(board, currentUser, done) {
         var salleServeur = Converter.toServerBoard(board, currentUser.id);
-
         // Sauvegarde le message
         $.ajax({
             url: '/api/Salle',

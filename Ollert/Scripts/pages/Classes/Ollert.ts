@@ -168,8 +168,8 @@ module Ollert {
         LastTimeViewed: string;
         TableauId: number;
         Etapes: Array<ServerStep>;
-        Messages: Array<ServerStep>;
-        Fichiers: Array<ServerStep>;
+        Messages: Array<ServerMessage>;
+        Fichiers: Array<ServerAttachment>;
     }
     export class ServerMove {
         CarteId: number;

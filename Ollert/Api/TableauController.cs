@@ -33,7 +33,11 @@ namespace Ollert.Api
                 .Where(t => t.Salle.Id == id)
                 .OrderBy(t => t.Position)
                 .Include(i => i.Cartes)
+                .Include(i => i.Cartes.Select(c => c.CartesVues))
+                .Include(i => i.Cartes.Select(c => c.CartesVues.Select(cv => cv.Utilisateur)))
                 .Include(i => i.Cartes.Select(c => c.Messages))
+                .Include(i => i.Cartes.Select(c => c.Etapes))
+                .Include(i => i.Cartes.Select(c => c.Fichiers))
                 .Include(i => i.Cartes.Select(c => c.Messages.Select(m => m.Utilisateur)))
                 .ToListAsync();
 
@@ -94,14 +98,17 @@ namespace Ollert.Api
         public async Task<IHttpActionResult> PutTableau(int id, DeplacementModelView deplacement)
         {
             // Retrouve la carte
-            var carte = await db.Cartes.FirstAsync(c => c.Id == deplacement.CarteId);
+            var carte = await db.Cartes
+                .FirstAsync(c => c.Id == deplacement.CarteId);
             if (carte == null || !TableauExists(deplacement.AncienTableauId) || !TableauExists(deplacement.NouveauTableauId))
             {
                 return NotFound();
             }
 
             // Retrouve le tableau
-            var nouveauTableau = await db.Tableaux.FirstAsync(t => t.Id == deplacement.NouveauTableauId);
+            var nouveauTableau = await db.Tableaux
+                .Include(t => t.Salle)
+                .FirstAsync(t => t.Id == deplacement.NouveauTableauId);
             var ancienTableau = await db.Tableaux.FirstAsync(t => t.Id == deplacement.AncienTableauId);
 
             // Change le tableau de la carte

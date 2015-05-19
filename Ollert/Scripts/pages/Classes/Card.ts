@@ -4,7 +4,7 @@
     titre: string;
     description: string;    
     currentUser: User;
-    lastViewed: Moment;  
+    lastViewed: moment.Moment;  
     isArchive: boolean;
     user?: User;
     messages?: Array<Message>;
@@ -20,7 +20,7 @@ class Card {
     currentUser: User;
     messages: KnockoutObservableArray<Message>;
     attachments: KnockoutObservableArray<Attachment>;
-    lastViewed: KnockoutObservable<Moment>;
+    lastViewed: KnockoutObservable<moment.Moment>;
     steps: KnockoutObservableArray<Step>;
     isArchive: KnockoutObservable<boolean>;
 
@@ -99,7 +99,7 @@ class Card {
             var estimationTotale = 0;
             $.each(self.steps(), function (index, step) {
                 if (step.estimation() > 0)
-                    estimationTotale += parseInt(step.estimation());
+                    estimationTotale += step.estimation();
             });
 
             return estimationTotale;
@@ -121,7 +121,7 @@ class Card {
         this.totalUnseenFiles = ko.computed(function () {
             var nbNew = 0;
             $.each(self.attachments(), function (index, file) {
-                if (file.date > self.lastViewed())
+                if (file.date() > self.lastViewed())
                     nbNew++;
             });
             return nbNew;

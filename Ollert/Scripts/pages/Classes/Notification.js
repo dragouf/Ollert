@@ -1,7 +1,6 @@
 var Notification = (function () {
     function Notification(data) {
         var self = this;
-
         this.id = data.id;
         this.type = data.type;
         this.title = data.title;
@@ -9,11 +8,11 @@ var Notification = (function () {
         this.date = data.date;
         this.lastUserViewed = data.lastUserViewed;
         this.creator = data.creator;
-
         this.isNotifViewed = ko.computed(function () {
             if (self.lastUserViewed != null) {
                 return self.date > self.lastUserViewed;
-            } else
+            }
+            else
                 return true;
         }, self);
         this.formattedDate = ko.computed(function () {

@@ -8,16 +8,13 @@ var BoardDetails = (function () {
         this.proprietaire = ko.observable(proprietaire);
         this.participants = ko.observableArray(participants);
         this.isShow = ko.observable(false);
-
         this.unseenMessage = ko.observable(unseenMessage);
         this.unseenFiles = ko.observable(unseenFiles);
         this.timeLeft = ko.observable(timeLeft);
-
         // Computed
         this.salleUrl = ko.computed(function () {
             return "/Board/Salle/" + self.id.toString();
         }, self);
-
         // Methods
         this.showUsers = function () {
             _this.isShow(!_this.isShow());
@@ -32,12 +29,10 @@ var BoardDetails = (function () {
             var output = (numyears > 0 ? numyears + " y " : '') + (numdays > 0 ? numdays + " d" : '') + (numhours > 0 ? numhours + " h" : '') + (numminutes > 0 ? numminutes + " m" : '') + (numseconds > 0 ? numseconds + " s" : '');
             return output;
         };
-
         // SERVEUR
         this.addParticipant = function (data) {
             // Ajoute aux participants
             self.participants.push(data);
-
             // Retire au dispoibles
             var indexUser = -1;
             $.each(self.users(), function (index, user) {
@@ -46,13 +41,10 @@ var BoardDetails = (function () {
             });
             if (indexUser >= 0)
                 self.users.splice(indexUser, 1);
-
             self.isShow(false);
-
             // Ajoute au serveur
             OllertApi.updateBoard(self);
         };
-
         this.removeParticipant = function (data) {
             // Retire aux participants
             var indexParticipant = -1;
@@ -62,13 +54,10 @@ var BoardDetails = (function () {
             });
             if (indexParticipant >= 0)
                 self.participants.splice(indexParticipant, 1);
-
             // Ajoute aux disponibles
             self.users.push(data);
-
             // MAJ serveur
             OllertApi.updateBoard(_this);
-
             return false;
         };
     }

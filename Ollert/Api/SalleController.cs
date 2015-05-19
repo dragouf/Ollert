@@ -28,6 +28,8 @@ namespace Ollert.Api
 
             var salles = db.Salles
                 .Include(s => s.ParticipantsSalle)
+                .Include(s => s.ParticipantsSalle.Select(p => p.Participant))
+                .Include(s => s.ParticipantsSalle.Select(p => p.Salle))
                 .Include(s => s.Proprietaire)
                 .Where(s => s.Proprietaire.Id == currentUserId || s.ParticipantsSalle.Count(p => p.Participant.Id == currentUserId) > 0);
 
@@ -50,7 +52,11 @@ namespace Ollert.Api
         // PUT api/Salle/5
         public async Task<IHttpActionResult> PutSalle(int id, Salle salle)
         {
-            var salleBdd = await db.Salles.Include(s => s.ParticipantsSalle).FirstOrDefaultAsync(s => s.Id == id);
+            var salleBdd = await db.Salles
+                .Include(s => s.Proprietaire)
+                .Include(s => s.ParticipantsSalle)
+                .Include(s => s.ParticipantsSalle.Select(p => p.Participant))
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             if (id != salle.Id || salleBdd == null)
                 return BadRequest();

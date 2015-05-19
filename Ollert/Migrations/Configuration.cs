@@ -20,6 +20,7 @@ namespace Ollert.Migrations
         protected override void Seed(Ollert.DAL.OllertDbContext context)
         {
             //  This method will be called after migrating to the latest version.
+            
             var userManager = new UserManager<OllertUser>(new UserStore<OllertUser>(context));
             var user = new OllertUser() { UserName = "Admin" };
             var userResult = userManager.Create(user, "123456");

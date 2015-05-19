@@ -46,7 +46,9 @@ namespace Ollert.Api
             //    return BadRequest(ModelState);
             //}
 
-            var etapeBdd = await db.CarteEtapes.Include(c => c.Carte).FirstAsync(c => c.Id == id);
+            var etapeBdd = await db.CarteEtapes
+                .Include(c => c.Carte.Tableau.Salle)
+                .FirstAsync(c => c.Id == id);
 
             if (id != carteetape.Id || etapeBdd == null)
             {
@@ -95,7 +97,9 @@ namespace Ollert.Api
             //}
 
             // find corresponding card
-            var carte = await db.Cartes.FindAsync(carteEtape.Carte.Id);
+            var carte = await db.Cartes
+                .Include(c => c.Tableau.Salle.Proprietaire)
+                .SingleOrDefaultAsync(c => c.Id == carteEtape.Carte.Id);
             carteEtape.Carte = carte;
 
             db.CarteEtapes.Add(carteEtape);
@@ -115,7 +119,9 @@ namespace Ollert.Api
         [ResponseType(typeof(CarteEtape))]
         public async Task<IHttpActionResult> DeleteCarteEtape(int id)
         {
-            CarteEtape carteetape = await db.CarteEtapes.FindAsync(id);
+            var carteetape = await db.CarteEtapes
+                .Include(c => c.Carte.Tableau.Salle)
+                .SingleOrDefaultAsync(c => c.Id == id);
             if (carteetape == null)
             {
                 return NotFound();

@@ -1,13 +1,10 @@
 var BoardsList = (function () {
     function BoardsList(boards, currentUser, users) {
         var self = this;
-
         this.boards = ko.observableArray(boards);
         this.currentUser = currentUser;
         this.users = users;
-
         this.dialogNewBoard = ko.observable(new BoardDetails(-1, '', null, self.currentUser, self.users, 0, 0, 0));
-
         // Methods
         this.modalAddSalle = function () {
             $('#modal-ajout').modal('show');

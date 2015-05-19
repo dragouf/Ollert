@@ -24,7 +24,7 @@ namespace Ollert.Api
         // GET api/Message
         public async Task<IEnumerable<Message>> GetMessages()
         {
-            return await db.Messages.ToListAsync();
+            return await db.Messages.Include(m => m.Utilisateur).ToListAsync();
         }
 
         // GET api/Message/5
@@ -85,7 +85,9 @@ namespace Ollert.Api
             message.Utilisateur = currentUser;
 
             // find corresponding card
-            var carte = await db.Cartes.FindAsync(message.Carte.Id);
+            var carte = await db.Cartes
+                .Include(c => c.Tableau.Salle.Proprietaire)
+                .SingleOrDefaultAsync(c => c.Id == message.Carte.Id);
             message.Carte = carte;
 
             //if (carte== null || !ModelState.IsValid)
@@ -111,7 +113,9 @@ namespace Ollert.Api
         [ResponseType(typeof(Message))]
         public async Task<IHttpActionResult> DeleteMessage(int id)
         {
-            Message message = await db.Messages.FindAsync(id);
+            Message message = await db.Messages
+                .Include(m => m.Carte.Tableau.Salle)
+                .SingleOrDefaultAsync(c => c.Id == id);
             if (message == null)
             {
                 return NotFound();
