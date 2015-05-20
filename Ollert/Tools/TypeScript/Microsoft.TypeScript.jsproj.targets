@@ -28,17 +28,17 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </PropertyGroup>
 
   <ItemGroup>
-    <PropertyPageSchema Include=" $(MSBuildThisFileDirectory)\$(LocaleFolder)\ProjectItemsSchema.xaml;"/>
+    <PropertyPageSchema Include=" .\Tools\TypeScript\en\ProjectItemsSchema.xaml;"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)\$(LocaleFolder)\TypeScriptProjectProperties.xaml;">
+    <PropertyPageSchema Include=".\Tools\TypeScript\en\TypeScriptProjectProperties.xaml;">
       <Context>Project;BrowseObject</Context>
     </PropertyPageSchema>
   </ItemGroup>
   
   <ItemGroup>
-    <PropertyPageSchema Include=" $(MSBuildThisFileDirectory)\$(LocaleFolder)\TypeScriptCompile.xaml;">
+    <PropertyPageSchema Include=" .\Tools\TypeScript\en\TypeScriptCompile.xaml;">
       <Context>File;BrowseObject</Context>
     </PropertyPageSchema>
   </ItemGroup>

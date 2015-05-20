@@ -18,6 +18,8 @@ class List {
     hasCards: KnockoutComputed<boolean>;
     totalTime: KnockoutComputed<string>;
 
+    deleteCard: (data, event) => boolean;
+
     constructor(data: IList) {
         var self = this;
 
@@ -65,25 +67,18 @@ class List {
             var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
             return (numyears > 0 ? numyears + " y " : '') + (numdays > 0 ? numdays + " d" : '') + (numhours > 0 ? numhours + " h" : '') + (numminutes > 0 ? numminutes + " m" : '') + (numseconds > 0 ? numseconds + " s" : '');
         }, self);
-    }
 
-    // SERVER
-    deleteCard(data, event) {
-        var self = this;
-        event.stopImmediatePropagation();
+        // SERVER
+        this.deleteCard = (data, event) => {
+            var self = this;
+            event.stopImmediatePropagation();
 
-        OllertApi.deleteCard(data.id, function () {
-            // AJAX CALLBACK
-            var indexToRemove = -1;
-            $.each(self.cards(), function (index, card) {
-                if (card.id == data.id)
-                    indexToRemove = index;
+            OllertApi.deleteCard(data.id, function () {
+                // AJAX CALLBACK
+                self.cards.remove(data);
             });
 
-            if (indexToRemove >= 0)
-                self.allCards.splice(indexToRemove, 1);
-        });
-
-        return false;
+            return false;
+        }
     }
 } 

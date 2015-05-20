@@ -1,5 +1,6 @@
 var List = (function () {
     function List(data) {
+        var _this = this;
         var self = this;
         this.id = data.id;
         this.name = data.name;
@@ -38,23 +39,17 @@ var List = (function () {
             var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
             return (numyears > 0 ? numyears + " y " : '') + (numdays > 0 ? numdays + " d" : '') + (numhours > 0 ? numhours + " h" : '') + (numminutes > 0 ? numminutes + " m" : '') + (numseconds > 0 ? numseconds + " s" : '');
         }, self);
-    }
-    // SERVER
-    List.prototype.deleteCard = function (data, event) {
-        var self = this;
-        event.stopImmediatePropagation();
-        OllertApi.deleteCard(data.id, function () {
-            // AJAX CALLBACK
-            var indexToRemove = -1;
-            $.each(self.cards(), function (index, card) {
-                if (card.id == data.id)
-                    indexToRemove = index;
+        // SERVER
+        this.deleteCard = function (data, event) {
+            var self = _this;
+            event.stopImmediatePropagation();
+            OllertApi.deleteCard(data.id, function () {
+                // AJAX CALLBACK
+                self.cards.remove(data);
             });
-            if (indexToRemove >= 0)
-                self.allCards.splice(indexToRemove, 1);
-        });
-        return false;
-    };
+            return false;
+        };
+    }
     return List;
 })();
 //# sourceMappingURL=List.js.map
