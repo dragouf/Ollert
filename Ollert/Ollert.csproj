@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project=".\Tools\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('.\Tools\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -384,6 +384,12 @@
     <Content Include="Scripts\trello.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Taches.txt" />
+    <Content Include="Tools\TypeScript\1.4\en\diagnosticMessages.generated.json" />
+    <Content Include="Tools\TypeScript\1.4\License.htm" />
+    <Content Include="Tools\TypeScript\1.4\tsc.exe" />
+    <Content Include="Tools\TypeScript\1.4\tsc.js" />
+    <Content Include="Tools\TypeScript\1.4\tschost.dll" />
+    <Content Include="Tools\TypeScript\TypeScript.Tasks.dll" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -423,10 +429,12 @@
     <Content Include="Views\NotificationMailer\_Layout.cshtml" />
     <Content Include="Views\NotificationMailer\NewEvent.cshtml" />
     <Content Include="Views\Member\Profil.cshtml" />
+    <Content Include="Tools\TypeScript\Microsoft.TypeScript.Default.props" />
+    <Content Include="Tools\TypeScript\Microsoft.TypeScript.jsproj.targets" />
+    <Content Include="Tools\TypeScript\Microsoft.TypeScript.targets" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Tools\" />
     <Folder Include="Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
@@ -462,12 +470,17 @@
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.ollert.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\webkit\webkit.d.ts" />
+    <TypeScriptCompile Include="Tools\TypeScript\1.4\lib.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+  </PropertyGroup>
   <Import Project=".\Tools\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('.\Tools\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
