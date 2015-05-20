@@ -17,7 +17,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <VsToolsPath Condition="'$(VsToolsPath)' == ''">.\Tools</VsToolsPath>
   </PropertyGroup>
 
-  <UsingTask TaskName="TypeScript.Tasks.VsTsc" AssemblyFile="$(VSToolsPath)\TypeScript\TypeScript.tasks.dll" />
+  <UsingTask TaskName="TypeScript.Tasks.VsTsc" AssemblyFile="TypeScript.Tasks.dll" />
 
   <PropertyGroup>
     <CompileDependsOn>
@@ -89,9 +89,9 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <PropertyGroup>
     <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
-    <TscToolPath Condition="'$(TscToolPath)' == ''">.\Tools\TypeScript</TscToolPath>
+    <TscToolPath>.\Tools\TypeScript</TscToolPath>
     <TscToolPath Condition="'$(TypeScriptToolsVersion)' != ''">$(TscToolPath)\$(TypeScriptToolsVersion)</TscToolPath>
-    <TscToolExe Condition="'$(TscToolExe)' == ''">tsc.exe</TscToolExe>
+    <TscToolExe>tsc.exe</TscToolExe>
     <TscYieldDuringToolExecution Condition="'$(TscYieldDuringToolExecution)' == ''">true</TscYieldDuringToolExecution>
   </PropertyGroup>
 
@@ -110,7 +110,6 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       OutDir="$(TypeScriptOutDir)"
       ProjectDir="$(ProjectDir)"
       ToolsVersion ="$(TypeScriptToolsVersion)">
-      
       <Output TaskParameter="GeneratedJavascript" ItemName="GeneratedJavascript" />
     </VsTsc>
     <AssignTargetPath Files="@(GeneratedJavascript)" RootFolder="$(MSBuildProjectDirectory)">
@@ -134,7 +133,6 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       OutDir="$(TypeScriptOutDir)"
       ProjectDir="$(ProjectDir)"
       ToolsVersion ="$(TypeScriptToolsVersion)">
-      
       <Output TaskParameter="GeneratedJavascript" ItemName="GeneratedJavascript" />
     </VsTsc>
   </Target>
