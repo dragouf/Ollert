@@ -88,7 +88,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </PropertyGroup>
 
   <PropertyGroup>
-    <TypeScriptToolsVersion Condition="'$(TypeScriptToolsVersion)'==''">1.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
     <TscToolPath Condition="'$(TscToolPath)' == ''">.\Tools\TypeScript</TscToolPath>
     <TscToolPath Condition="'$(TypeScriptToolsVersion)' != ''">$(TscToolPath)\$(TypeScriptToolsVersion)</TscToolPath>
     <TscToolExe Condition="'$(TscToolExe)' == ''">tsc.exe</TscToolExe>
@@ -109,8 +109,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       OutFile="$(TypeScriptOutFile)"
       OutDir="$(TypeScriptOutDir)"
       ProjectDir="$(ProjectDir)"
-      ToolsVersion ="$(TypeScriptToolsVersion)"
-      >
+      ToolsVersion ="$(TypeScriptToolsVersion)">
+      
       <Output TaskParameter="GeneratedJavascript" ItemName="GeneratedJavascript" />
     </VsTsc>
     <AssignTargetPath Files="@(GeneratedJavascript)" RootFolder="$(MSBuildProjectDirectory)">
@@ -133,8 +133,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       OutFile="$(TypeScriptOutFile)"
       OutDir="$(TypeScriptOutDir)"
       ProjectDir="$(ProjectDir)"
-      ToolsVersion ="$(TypeScriptToolsVersion)"
-      >
+      ToolsVersion ="$(TypeScriptToolsVersion)">
+      
       <Output TaskParameter="GeneratedJavascript" ItemName="GeneratedJavascript" />
     </VsTsc>
   </Target>
