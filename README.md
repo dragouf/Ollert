@@ -27,15 +27,17 @@ Everything is replicated instantly on every connected user UI with websocket con
 
 >update-database
 
+start the project.
+
+Login with david and 123456
+
 ### Developement
 - ./api folder contains most of the backend API code 
-- ./Scripts/pages/Classes folder contains nost of the javascript (typescript) frontend code
+- ./Scripts/pages/Classes folder contains most of the javascript (typescript) frontend code
 - ./Hubs folder contains backend websocket (SignalR) code
 - ./Views folder contains html parts (Razor)
 - ./Controllers contains contains basic response to url request but most of the UI is generate through javascript/REST API
 
-start the project.
-Login with david and 123456
 
 ### Screenshot
 
